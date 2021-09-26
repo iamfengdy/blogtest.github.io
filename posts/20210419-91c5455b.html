@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="3-垃圾收集器与内存分配策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3-垃圾收集器与内存分配策略">
+<meta property="og:url" content="http://example.com/posts/20210419-91c5455b.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="3-垃圾收集器与内存分配策略">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-19T07:59:53.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.698Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20210419-91c5455b.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>3-垃圾收集器与内存分配策略 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210419-91c5455b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3-垃圾收集器与内存分配策略
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-19 15:59:53" itemprop="dateCreated datePublished" datetime="2021-04-19T15:59:53+08:00">2021-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/java-understanding-the-jvm/" itemprop="url" rel="index"><span itemprop="name">java-understanding-the-jvm</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">3-垃圾收集器与内存分配策略</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="对象状态判断"><a class="markdownIt-Anchor" href="#对象状态判断"></a> 对象状态判断</h2>
+<h3 id="对象状态判断-2"><a class="markdownIt-Anchor" href="#对象状态判断-2"></a> 对象状态判断</h3>
+<h4 id="引用计数算法"><a class="markdownIt-Anchor" href="#引用计数算法"></a> 引用计数算法</h4>
+<ul>
+<li>
+<p>给对象添加一个引用极计数器，每引用一次+1，引用失效-1，当值为0时，表示对象不再被应引用；</p>
+</li>
+<li>
+<p>但对于互相引用的对象无效；</p>
+</li>
+</ul>
+<h4 id="可达性分析算法"><a class="markdownIt-Anchor" href="#可达性分析算法"></a> 可达性分析算法</h4>
+<p>通过一系列的称为“GC Roots”的对象作为起点，从这些起点开始向下搜索，所走过的路径称为“引用链”，当一个对象到GC Roots没有引用链时，表示对象不用；</p>
+<p>可作为GC Roots的对象：</p>
+<pre><code>* 虚拟机栈（栈帧中的局部变量表）中引用的对象；
+* 方法区中类静态属性引用的对象；
+* 方法区中常量引用的对象
+* 本地方法栈中JNI（即一般的Native方法）引用的对象；
+</code></pre>
+<h4 id="再谈引用"><a class="markdownIt-Anchor" href="#再谈引用"></a> 再谈引用</h4>
+<p>对象除了“被引用”和“未被引用”两种状态外，还应该有第三种状态：缓存状态，即当内存空间足够时，保留在内存中，否则抛弃；因此引用可分为4中，分别是：</p>
+<ol>
+<li>
+<p>强引用</p>
+<p>类似new操作的引用，只要存在，该对象不会被回收；</p>
+</li>
+<li>
+<p>软引用</p>
+<p>描述一些还有用但并非必需的对象。在系统要发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收；如果还没有足够内存则抛出异常；</p>
+</li>
+<li>
+<p>弱引用</p>
+<p>强度比软引用更弱；</p>
+<p>当发生垃圾回收时，会回收这些对象；</p>
+</li>
+<li>
+<p>虚引用</p>
+<p>最弱引用；一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得对象实例。该引用的唯一目的就是能在这个对象呗收集器回收时收到一个系统通知；</p>
+</li>
+</ol>
+<h4 id="生存还是死亡"><a class="markdownIt-Anchor" href="#生存还是死亡"></a> 生存还是死亡</h4>
+<ol>
+<li>
+<p>当通过可达性分析算法发现对象无引用链时，将进行第一次标记，此时还没有真正的回收；</p>
+</li>
+<li>
+<p>标记之后进行一次筛选，条件是对象是否有必要执行finalize()方法，当该对象没有覆盖finalze(0方法或finalize()方法已经调用过时，称之为“没有必要执行”；</p>
+</li>
+<li>
+<p>有必要执行时</p>
+<p>将对象放置在一个叫做F-Queue的队列中，并在稍后由JVM自动创建的、低优先级的Finalizer线程去执行它，但不保证会等待它允许结束；原因是当对象的finalze()方法执行缓慢或异常时会导致F-Queue其他对象永久处于等待甚至整个内存回收系统崩溃；</p>
+<p>稍后GC Root会对F-Queue中的对象进行第二次小规模的标记，如果没有重新引用；</p>
+</li>
+<li>
+<p>将对象放入“即将回收”集合，等待回收；</p>
+</li>
+</ol>
+<h4 id="回收方法区"><a class="markdownIt-Anchor" href="#回收方法区"></a> 回收方法区</h4>
+<p>方法区一般不要求实现垃圾回收，如果实现，主要回收两部分：</p>
+<ol>
+<li>
+<p>废弃常量</p>
+<p>没有引用时，回收；常量池中的其他类（接口）、方法、字段的符号引用也类似；</p>
+</li>
+<li>
+<p>无用的类</p>
+<p>满足无用类的条件是</p>
+<ol>
+<li>该类所有的实例都已经被回收，即Java堆中没有该类的实例；</li>
+<li>加载该列的ClassLoader已经被回收；</li>
+<li>该类对应的java.lang.Class读写没有在任何地方被引用，无法在任何地方通过放射访问该类的方法；</li>
+</ol>
+<p>是否对类回收，JVM提供了参数进行配置；</p>
+</li>
+</ol>
+<h2 id="垃圾回收算法"><a class="markdownIt-Anchor" href="#垃圾回收算法"></a> 垃圾回收算法</h2>
+<h2 id="hotspot算法实现"><a class="markdownIt-Anchor" href="#hotspot算法实现"></a> HotSpot算法实现</h2>
+<h2 id="垃圾回收器"><a class="markdownIt-Anchor" href="#垃圾回收器"></a> 垃圾回收器</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210415-e4f0f04f.html" rel="prev" title="2-内存区域与内存溢出异常">
+      <i class="fa fa-chevron-left"></i> 2-内存区域与内存溢出异常
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210507-bf389a0f.html" rel="next" title="描述符">
+      描述符 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%8A%B6%E6%80%81%E5%88%A4%E6%96%AD"><span class="nav-number">1.</span> <span class="nav-text"> 对象状态判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%8A%B6%E6%80%81%E5%88%A4%E6%96%AD-2"><span class="nav-number">1.1.</span> <span class="nav-text"> 对象状态判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 引用计数算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 可达性分析算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 再谈引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%AD%98%E8%BF%98%E6%98%AF%E6%AD%BB%E4%BA%A1"><span class="nav-number">1.1.4.</span> <span class="nav-text"> 生存还是死亡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">1.1.5.</span> <span class="nav-text"> 回收方法区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text"> 垃圾回收算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hotspot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text"> HotSpot算法实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text"> 垃圾回收器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

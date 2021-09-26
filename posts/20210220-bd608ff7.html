@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="链路层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链路层">
+<meta property="og:url" content="http://example.com/posts/20210220-bd608ff7.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="链路层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/images/82714dc4dab047048cc0d6623bbe2c73.jpg">
+<meta property="og:image" content="http://example.com/assets/images/1e881edeb5714d4f9151d8c19463bc5f.jpg">
+<meta property="og:image" content="evernotecid://B62E03A7-9855-4E89-8AE8-17FEFD3A3510/appyinxiangcom/3147905/ENResource/p573">
+<meta property="og:image" content="http://example.com/assets/images/1c2539ea0f7c4d41a1802a9a9554a407.jpg">
+<meta property="og:image" content="http://example.com/assets/images/eda7c990a4b642c0afd76a38d6a71084.jpg">
+<meta property="og:image" content="http://example.com/assets/images/7868b46843c34d9588b81d3ad2345815.jpg">
+<meta property="og:image" content="http://example.com/assets/images/ba0a46fe385945e8a91a28be3e94998c.jpg">
+<meta property="article:published_time" content="2021-02-20T01:23:20.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.712Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/images/82714dc4dab047048cc0d6623bbe2c73.jpg">
+
+<link rel="canonical" href="http://example.com/posts/20210220-bd608ff7.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>链路层 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210220-bd608ff7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          链路层
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 09:23:20" itemprop="dateCreated datePublished" datetime="2021-02-20T09:23:20+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/general/" itemprop="url" rel="index"><span itemprop="name">general</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">链路层</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="以太网和ieee-802封装"><a class="markdownIt-Anchor" href="#以太网和ieee-802封装"></a> 以太网和IEEE 802封装</h2>
+<h3 id="以太网"><a class="markdownIt-Anchor" href="#以太网"></a> 以太网</h3>
+<blockquote>
+<p>一般是指数字设备公司（Digital Equipment Corp.）、英特尔公司（Intel Corp.）和Xerox公司在1982年联合公布的一个标准</p>
+</blockquote>
+<blockquote>
+<p>采用一种称作CSMA/CD的媒体接入方法，其意思是带冲突检测的载波侦听多路接入（Carrier Sense, Multiple Access with Collision Detection）。它的速率为10 Mb/s，地址为48 bit。</p>
+</blockquote>
+<h3 id="ieee-802封装"><a class="markdownIt-Anchor" href="#ieee-802封装"></a> IEEE 802封装</h3>
+<blockquote>
+<p>IEEE（电子电气工程师协会）802委员会发布</p>
+</blockquote>
+<ul>
+<li>802.3针对整个CSMA/CD网络</li>
+<li>802.4针对令牌总线网络</li>
+<li>802.5针对令牌环网络</li>
+</ul>
+<blockquote>
+<p>这三者的共同特性由802.2标准来定义，那就是802网络共有的逻辑链路控制（LLC）</p>
+</blockquote>
+<blockquote>
+<p>802.2和802.3定义了一个与以太网不同的帧格式</p>
+</blockquote>
+<h3 id="格式区别"><a class="markdownIt-Anchor" href="#格式区别"></a> 格式区别</h3>
+<p><img src="/assets/images/82714dc4dab047048cc0d6623bbe2c73.jpg" alt="82714dc4dab047048cc0d6623bbe2c73" /></p>
+<ol>
+<li>
+<p>字段区别</p>
+<ol>
+<li>802标准
+<ul>
+<li>长度字段：指它后续数据的字节长度，但不包括CRC检验码</li>
+<li>3字节的802.2LLC
+<ul>
+<li>1个字节的目的服务访问点（Destination Service Access Point, DSAP），值设为0xaa</li>
+<li>1个字节的源服务访问点（Source Service Access Point, SSAP），值设为0xaa</li>
+<li>1个字节的ctrl字段，值设为3</li>
+</ul>
+</li>
+<li>5字节的802.2SNAP
+<ul>
+<li>3个字节org code值设为0</li>
+<li>2个字节的类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以太网
+<ul>
+<li>类型字段：定义了后续数据的类型</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>CRC字段<br />
+用于帧内后续字节差错的循环冗余码检验（检验和）（它也被称为FCS或帧检验序列）</p>
+</li>
+<li>
+<p>最小长度</p>
+<ol>
+<li>802.3规定数据部分必须至少为38字节</li>
+<li>以太网要求最少要有46字节</li>
+</ol>
+<blockquote>
+<p>必须在不足的空间插入填充（pad）字节</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="以太网帧格式ieee8023"><a class="markdownIt-Anchor" href="#以太网帧格式ieee8023"></a> 以太网帧格式–IEEE802.3</h2>
+<blockquote>
+<p>按照顺序</p>
+</blockquote>
+<p><img src="/assets/images/1e881edeb5714d4f9151d8c19463bc5f.jpg" alt="1e881edeb5714d4f9151d8c19463bc5f" /></p>
+<blockquote>
+<p>LSB（ Last（Least） Significant Bit，最低有效位，或低位前导）</p>
+</blockquote>
+<blockquote>
+<p>MSB（Most Significant Bit，最高有效位）</p>
+</blockquote>
+<ol>
+<li>
+<p>前导码（preamble）<strong>一般不计入帧头部</strong></p>
+<ul>
+<li>让接收设备能够跟踪到来的比特流</li>
+<li>7字节，交替的0和1，即7个1字节的‘10101010’，</li>
+<li>数据是从低比特开始传送，因此在代码中为方便阅读的前导码数值为0x55555555555555</li>
+<li><img src="evernotecid://B62E03A7-9855-4E89-8AE8-17FEFD3A3510/appyinxiangcom/3147905/ENResource/p573" alt="2d7ecb513db01df9a9de1950afc3fce4.png" /></li>
+</ul>
+</li>
+<li>
+<p>帧开始符（SFD，Start frame delimiter）</p>
+<ul>
+<li>表示帧数据的开始</li>
+<li>1字节，值为‘10101011’，最后两个1让接收方能够识别中间的 0 和 1 交替模式，进而同步并检查到数据开头</li>
+<li>数据是从低比特开始传送，所以数值为0xd5</li>
+</ul>
+<blockquote>
+<p>‘10101011’ 传送为 ‘11010101’</p>
+</blockquote>
+</li>
+<li>
+<p>目的地址（DA,Destination Address）</p>
+<ul>
+<li>LSB优先</li>
+<li>6B</li>
+<li>不是目的主机的MAC地址，而下一跳的MAC地址</li>
+<li>回程的数据的目的地址不是源主机的私有IP地址，而经过转换的公网地址，转换的对应关系在NAT设备上有转换表，回程数据查表后改变目的IP地址，发给目的主机</li>
+</ul>
+</li>
+<li>
+<p>原地址（SA）</p>
+<ul>
+<li>LSB优先</li>
+<li>6B</li>
+<li>当前设备的MAC地址</li>
+</ul>
+</li>
+<li>
+<p>长度/类型</p>
+<ul>
+<li>当有效数据量（Length）小于46字节时需要用0对数据进行填充，保证数据和填充字段总和不低于46字节，注意，填充0并不会改变Length字段值。</li>
+</ul>
+</li>
+<li>
+<p>数据</p>
+</li>
+<li>
+<p>帧校验序列（FCS）</p>
+<ul>
+<li>存储 CRC(Cyclic Redundancy Check，循环冗余校验)</li>
+</ul>
+</li>
+<li>
+<p>帧间距 <strong>一般不计入帧头部</strong></p>
+<ul>
+<li>当一个帧发送出去之后，发送方在下次发送帧之前，需要再发送至少12个octet的空闲线路状态码</li>
+</ul>
+</li>
+</ol>
+<h2 id="尾部封装"><a class="markdownIt-Anchor" href="#尾部封装"></a> 尾部封装</h2>
+<blockquote>
+<p>RFC 893[Leffler and Karels 1984]描述了另一种用于以太网的封装格式，称作尾部封装（trailer encapsulation）。这是一个早期BSD系统在DEC VA X机上运行时的试验格式，它通过调整IP数据报中字段的次序来提高性能。在以太网数据帧中，开始的那部分是变长的字段（IP首部和TCP首部）。把它们移到尾部（在CRC之前），这样当把数据复制到内核时，就可以把数据帧中的数据部分映射到一个硬件页面，节省内存到内存的复制过程。TCP数据报的长度是512字节的整数倍，正好可以用内核中的页表来处理。两台主机通过协商使用ARP扩展协议对数据帧进行尾部封装。这些数据帧需定义不同的以太网帧类型值。</p>
+</blockquote>
+<p>现在，尾部封装已遭到反对，因此我们不对它举任何例子。有兴趣的读者请参阅RFC 893以及文献[Leffler et al.1989]的11.8节。</p>
+<h2 id="slip串行线路ip"><a class="markdownIt-Anchor" href="#slip串行线路ip"></a> SLIP：串行线路IP</h2>
+<p>全称是Serial Line IP,它是一种在串行线路上对IP数据报进行封装的简单形式;</p>
+<blockquote>
+<p>在RFC 1055[Romkey 1988]中有详细描述。</p>
+</blockquote>
+<blockquote>
+<p>SLIP适用于家庭中每台计算机几乎都有的RS-232串行端口和高速调制解调器接入Internet</p>
+</blockquote>
+<h3 id="帧格式"><a class="markdownIt-Anchor" href="#帧格式"></a> 帧格式</h3>
+<ol>
+<li>IP数据报以一个称作END（0xc0）的特殊字符结束。同时，为了防止数据报到来之前的线路噪声被当成数据报内容，大多数实现在数据报的开始处也传一个END字符</li>
+</ol>
+<blockquote>
+<p>如果有线路噪声，那么END字符将结束这份错误的报文。这样当前的报文得以正确地传输，而前一个错误报文交给上层后，会发现其内容毫无意义而被丢弃</p>
+</blockquote>
+<ol start="2">
+<li>
+<p>如果IP报文中某个字符为END，那么就要连续传输两个字节0xdb和0xdc来取代它。0xdb这个特殊字符被称作SLIP的ESC字符，但是它的值与ASCII码的ESC字符（0x1b）不同</p>
+</li>
+<li>
+<p>如果IP报文中某个字符为SLIP的ESC字符，那么就要连续传输两个字节0xdb和0xdd来取代它</p>
+</li>
+</ol>
+<p><img src="/assets/images/1c2539ea0f7c4d41a1802a9a9554a407.jpg" alt="1c2539ea0f7c4d41a1802a9a9554a407" /></p>
+<h3 id="缺陷"><a class="markdownIt-Anchor" href="#缺陷"></a> 缺陷</h3>
+<ol>
+<li>
+<p>每一端必须知道对方的IP地址。没有办法把本端的IP地址通知给另一端。</p>
+</li>
+<li>
+<p>数据帧中没有类型字段（类似于以太网中的类型字段）。如果一条串行线路用于SLIP，那么它不能同时使用其他协议。</p>
+</li>
+<li>
+<p>SLIP没有在数据帧中加上检验和（类似于以太网中的CRC字段）。如果SLIP传输的报文被线路噪声影响而发生错误，只能通过上层协议或新型的调制解调器检测并纠正错误报</p>
+</li>
+<li>
+<p>性能</p>
+<ol>
+<li>
+<p>速率通常较低（19200 b/s或更低）</p>
+</li>
+<li>
+<p>通信经常是交互式的（如Telnet和Rlogin，二者都使用TCP），因此在SLIP线路上有许多小的TCP分组进行交换</p>
+<blockquote>
+<p>为了传送1个字节的数据需要20个字节的IP首部和20个字节的TCP首部，总数超过40个字节,比如Rlogin命令</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="cslip压缩的slip"><a class="markdownIt-Anchor" href="#cslip压缩的slip"></a> CSLIP：压缩的SLIP</h2>
+<blockquote>
+<p>在RFC 1144[Jacobson 1990a]中被详细描述</p>
+</blockquote>
+<p>为了解决SLIP的性能问题；</p>
+<p>一般能把上面的40个字节压缩到3或5个字节。它能在CSLIP的每一端维持多达16个TCP连接，并且知道其中每个连接的首部中的某些字段一般不会发生变化。对于那些发生变化的字段，大多数只是一些小的数字和的改变。</p>
+<h2 id="ppp点对点协议"><a class="markdownIt-Anchor" href="#ppp点对点协议"></a> PPP：点对点协议</h2>
+<h3 id="内容"><a class="markdownIt-Anchor" href="#内容"></a> 内容</h3>
+<ol>
+<li>
+<p>在串行链路上封装IP数据报的方法。PPP既支持数据为8位和无奇偶检验的异步模式（如大多数计算机上都普遍存在的串行接口），还支持面向比特的同步链接。</p>
+</li>
+<li>
+<p>建立、配置及测试数据链路的链路控制协议（LCP：Link Control Protocol）。它允许通信双方进行协商，以确定不同的选项。</p>
+</li>
+<li>
+<p>针对不同网络层协议的网络控制协议（NCP：Network Control Protocol）体系。</p>
+<blockquote>
+<p>当前RFC定义的网络层有IP、OSI网络层、DECnet以及AppleTalk</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>RFC 1548[Simpson 1993]描述了报文封装的方法和链路控制协议。<br />
+RFC 1332[McGregor 1992]描述了针对IP的网络控制协议</p>
+</blockquote>
+<h3 id="数据帧格式"><a class="markdownIt-Anchor" href="#数据帧格式"></a> 数据帧格式</h3>
+<p><img src="/assets/images/eda7c990a4b642c0afd76a38d6a71084.jpg" alt="eda7c990a4b642c0afd76a38d6a71084" /></p>
+<ol>
+<li>每一帧都以标志字符0x7e开始和结束</li>
+<li>紧接着是一个地址字节，值始终是0xff</li>
+<li>然后是一个值为0x03的控制字节</li>
+<li>接下来是协议字段，类似于以太网中类型字段的功能。当它的值为0x0021时，表示信息字段是一个IP数据报；值为0xc021时，表示信息字段是链路控制数据；值为0x8021时，表示信息字段是网络控制数据</li>
+<li>CRC字段（或FCS，帧检验序列）是一个循环冗余检验码，以检测数据帧中的错误</li>
+</ol>
+<h3 id="字符转义"><a class="markdownIt-Anchor" href="#字符转义"></a> 字符转义</h3>
+<blockquote>
+<p>比如标志字符的值0x7e</p>
+</blockquote>
+<ol>
+<li>
+<p>在同步链路中，该过程是通过一种称作比特填充(bit stuffing)的硬件技术来完成的[Tanenbaum 1989]。</p>
+</li>
+<li>
+<p>在异步链路中，特殊字符0x7d用作转义字符。当它出现在PPP数据帧中时，那么紧接着的字符的第6个比特要取其补码，具体实现过程如下：</p>
+<ol>
+<li>当遇到字符0x7e时，需连续传送两个字符：0x7d和0x5e，以实现标志字符的转义。</li>
+<li>当遇到转义字符0x7d时，需连续传送两个字符：0x7d和0x5d，以实现转义字符的转义。</li>
+<li>默认情况下，如果字符的值小于0x20（比如，一个ASCII控制字符），一般都要进行转义。例如，遇到字符0x01时需连续传送0x7d和0x21两个字符（这时，第6个比特取补码后变为1，而前面两种情况均把它变为0）。</li>
+</ol>
+<blockquote>
+<p>这样做的原因是防止它们出现在双方主机的串行接口驱动程序或调制解调器中，因为有时它们会把这些控制字符解释成特殊的含义。<br />
+另一种可能是用链路控制协议来指定是否需要对这32个字符中的某一些值进行转义。默认情况下是对所有的32个字符都进行转义</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="相比slip优点"><a class="markdownIt-Anchor" href="#相比slip优点"></a> 相比SLIP优点</h3>
+<ol>
+<li>PPP支持在单根串行线路上运行多种协议，不只是IP协议；</li>
+<li>每一帧都有循环冗余检验；</li>
+<li>通信双方可以进行IP地址的动态协商(使用IP网络控制协议)；</li>
+<li>与CSLIP类似，对TCP和IP报文首部进行压缩；</li>
+<li>链路控制协议可以对多个数据链路选项进行设置。</li>
+</ol>
+<blockquote>
+<p>为这些优点付出的代价是在每一帧的首部增加3个字节，当建立链路时要发送几帧协商数据，以及更为复杂的实现。</p>
+</blockquote>
+<h2 id="环回接口loopback-interface"><a class="markdownIt-Anchor" href="#环回接口loopback-interface"></a> 环回接口（Loopback Interface）</h2>
+<p>允许运行在同一台主机上的客户程序和服务器程序通过TCP/IP进行通信；<br />
+A类网络号127就是为环回接口预留的；<br />
+一个传给环回接口的IP数据报不能在任何网络上出现；</p>
+<h3 id="处理流程"><a class="markdownIt-Anchor" href="#处理流程"></a> 处理流程</h3>
+<p><img src="/assets/images/7868b46843c34d9588b81d3ad2345815.jpg" alt="7868b46843c34d9588b81d3ad2345815" /></p>
+<p>关键点：</p>
+<ol>
+<li>任何传给该主机IP地址的数据均送到环回接口。</li>
+<li>传给环回地址（一般是127.0.0.1）的任何数据（交给环回驱动程序）均作为IP输入。</li>
+<li>传给广播地址或多播地址的数据报复制一份传给环回接口，然后送到以太网上。这是因为广播传送和多播传送的定义包含主机本身。</li>
+</ol>
+<h2 id="最大传输单元mtu"><a class="markdownIt-Anchor" href="#最大传输单元mtu"></a> 最大传输单元（MTU）</h2>
+<blockquote>
+<p>超过时，数据需要分片（fragmentation）</p>
+</blockquote>
+<p><img src="/assets/images/ba0a46fe385945e8a91a28be3e94998c.jpg" alt="ba0a46fe385945e8a91a28be3e94998c" /></p>
+<h2 id="路径mtu"><a class="markdownIt-Anchor" href="#路径mtu"></a> 路径MTU</h2>
+<p>两台通信主机路径中的最小MTU，被称作路径MTU；</p>
+<ul>
+<li>两台主机之间的路径MTU不一定是个常数，它取决于当时所选择的路由。</li>
+<li>选路不一定是对称的（从A到B的路由可能与从B到A的路由不同），因此路径MTU在两个方向上不一定是一致的</li>
+</ul>
+<blockquote>
+<p>RFC 1191[Mogul and Deering 1990]描述了路径MTU的发现机制</p>
+</blockquote>
+<h2 id="串行线路吞吐量计算"><a class="markdownIt-Anchor" href="#串行线路吞吐量计算"></a> 串行线路吞吐量计算</h2>
+<p>略</p>
+<h2 id="答疑"><a class="markdownIt-Anchor" href="#答疑"></a> 答疑</h2>
+<h3 id="以太网数据帧最小-大长度"><a class="markdownIt-Anchor" href="#以太网数据帧最小-大长度"></a> 以太网数据帧最小、大长度</h3>
+<p><em><strong>关于最小发送间隙和最小帧长的规定也是为了避免冲突</strong></em></p>
+<ol>
+<li>
+<p>前提条件<br />
+CSMA/CD冲突避免的方法：先听后发、边听边发、随机延迟后重发。一旦发生冲突，必须让每台主机都能检测到。</p>
+</li>
+<li>
+<p>案例分析<br />
+考虑如下的情况，主机发送的帧很小，而两台冲突主机相距很远。在主机A发送的帧传输到B的前一刻，B开始发送帧。这样，当A的帧到达B时，B检测到冲突，于是发送冲突信号。假如在B的冲突信号传输到A之前，A的帧已经发送完毕，那么A将检测不到冲突而误认为已发送成功。由于信号传播是有时延的，因此检测冲突也需要一定的时间。这也是为什么必须有个最小帧长的限制</p>
+</li>
+<li>
+<p>解决<br />
+按照标准，10Mbps以太网采用中继器时，连接的最大长度是2500米，最多经过4个中继器，因此规定对10Mbps以太网一帧的最小发送时间为51.2微秒。这段时间所能传输的数据为512位，因此也称该时间为512位时。这个时间定义为以太网时隙，或冲突时槽。512位＝64字节，这就是<strong>以太网帧最小64字节的原因</strong></p>
+<blockquote>
+<p>512位时是主机捕获信道的时间。如果某主机发送一个帧的64字节仍无冲突，以后也就不会再发生冲突了，称此主机捕获了信道</p>
+</blockquote>
+<blockquote>
+<p><code>64-（6+6+2+4）=64-18=46</code>，所以<strong>IP数据包长度最小为46</strong></p>
+</blockquote>
+</li>
+<li>
+<p>结论</p>
+<p>由于信道是所有主机共享的，如果数据帧太长就会出现有的主机长时间不能发送数据，而且有的发送数据可能超出接收端的缓冲区大小，造成缓冲溢出。为避免单一主机占用信道时间过长，规定了<strong>以太网帧的最大帧数据长为1500</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>100Mbps以太网的时隙仍为512位时，以太网规定一帧的最小发送时间必须为5.12μs</p>
+</blockquote>
+<h3 id="抓包得到的最大帧是1514字节不是1526"><a class="markdownIt-Anchor" href="#抓包得到的最大帧是1514字节不是1526"></a> 抓包得到的最大帧是1514字节，不是1526</h3>
+<p>当数据帧到达网卡时，在物理层上网卡要先去掉<code>前导同步码</code>和<code>帧开始定界符</code>，然后对帧进行<code>CRC检验</code>，如果帧校验和错，就丢弃此帧。如果校验和正确，就判断帧的目的硬件地址是否符合自己的接收条件（目的地址是自己的物理硬件地址、广播地址、可接收的多播硬件地址等），如果符合，就将帧交“设备驱动程序”做进一步处理。这时我们的抓包软件才能抓到数据去掉前导同步码、帧开始分界符、FCS之外的数据，其最大值是<code>6＋6＋2＋1500＝1514</code>。</p>
+<h3 id="目的-源地址"><a class="markdownIt-Anchor" href="#目的-源地址"></a> 目的、源地址</h3>
+<p>每经过一台路由器，数据帧的源、目IP不会改变，但<strong>源、目MAC都会变化</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mrow><mi>B</mi><mi>o</mi><mi>t</mi><mi>h</mi><mtext> </mtext><mi>S</mi><mi mathvariant="normal">.</mi><mi>A</mi><mtext> </mtext><mi>a</mi><mi>n</mi><mi>d</mi><mtext> </mtext><mi>D</mi><mi mathvariant="normal">.</mi><mi>A</mi><mtext> </mtext><mi>c</mi><mi>h</mi><mi>a</mi><mi>n</mi><mi>g</mi><mi>e</mi></mrow></mstyle></mrow><annotation encoding="application/x-tex">\color{red}{Both\ S.A\ and\ D.A\ change}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord" style="color:red;"><span class="mord mathdefault" style="margin-right:0.05017em;color:red;">B</span><span class="mord mathdefault" style="color:red;">o</span><span class="mord mathdefault" style="color:red;">t</span><span class="mord mathdefault" style="color:red;">h</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord mathdefault" style="margin-right:0.05764em;color:red;">S</span><span class="mord" style="color:red;">.</span><span class="mord mathdefault" style="color:red;">A</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord mathdefault" style="color:red;">a</span><span class="mord mathdefault" style="color:red;">n</span><span class="mord mathdefault" style="color:red;">d</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord mathdefault" style="margin-right:0.02778em;color:red;">D</span><span class="mord" style="color:red;">.</span><span class="mord mathdefault" style="color:red;">A</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord mathdefault" style="color:red;">c</span><span class="mord mathdefault" style="color:red;">h</span><span class="mord mathdefault" style="color:red;">a</span><span class="mord mathdefault" style="color:red;">n</span><span class="mord mathdefault" style="margin-right:0.03588em;color:red;">g</span><span class="mord mathdefault" style="color:red;">e</span></span></span></span></span>，所有设备都只知道与自己直连设备的MAC地址。</p>
+<h3 id="链路层如何知道目标mac地址"><a class="markdownIt-Anchor" href="#链路层如何知道目标mac地址"></a> 链路层如何知道目标mac地址</h3>
+<blockquote>
+<p>假设网络拓扑结构为：A-R1-R2-B</p>
+</blockquote>
+<blockquote>
+<p>目的MAC为广播MAC(FF:FF:FF:FF:FF:FF)</p>
+</blockquote>
+<pre class="mermaid">graph TD
+A_find_in_same_segment[主机A发现目标IP是否在统一网段] -->|不在| A2R(需要经过路由器转发)
+A2R --> A_get_R{查路由表获得R1的IP地址及出接口?}
+A_get_R --> |N| A_arp_request[发起ARP请求,目的IP为R1,目的MAC为广播MAC,源IP和源MAC为主机A网卡的IP和MAC]
+A_arp_request --> A_arp_response[R1收到ARP请求,将主机A的IP和MAC加入自己的ARP缓存表,用自身IP和MAC响应主机A的ARP请求]
+A_arp_response --> A_save_arp[主机A收到ARP响应,将R1的IP和MAC加入自己的ARP缓存表]
+A_save_arp --> A2R_data[用自身IP和MAC为源,主机B的IP和R1的MAC为目的,封装数据帧,并将其转发给R1,此时此时数据帧源IP为主机A,目的IP为主机B,源MAC为主机A,目的MAC为R1]
+A[模块A] -->|A1| B(模块B)
+B --> C{判断条件C}
+C -->|条件C1| D[模块D]
+C -->|条件C2| E[模块E]
+C -->|条件C3| F[模块F]</pre>
+<p>用自身IP和MAC为源,主机B的IP和R1的MAC为目的,封装数据帧,并将其转发给R1(此时数据帧源IP为主机A,目的IP为主机B,源MAC为主机A，目的MAC为R1)</p>
+<pre class="mermaid">sequenceDiagram
+A->>A: 目标IP是否在同一网段？
+A-->>A: 不在（需要经过路由器转发），
+B-->>A: 已收到消息</pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210220-de3e3a54.html" rel="prev" title="网络设备">
+      <i class="fa fa-chevron-left"></i> 网络设备
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210220-5e568bb.html" rel="next" title="socket">
+      socket <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%92%8Cieee-802%E5%B0%81%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text"> 以太网和IEEE 802封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="nav-number">1.1.</span> <span class="nav-text"> 以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ieee-802%E5%B0%81%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text"> IEEE 802封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text"> 格式区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E6%A0%BC%E5%BC%8Fieee8023"><span class="nav-number">2.</span> <span class="nav-text"> 以太网帧格式–IEEE802.3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E9%83%A8%E5%B0%81%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text"> 尾部封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slip%E4%B8%B2%E8%A1%8C%E7%BA%BF%E8%B7%AFip"><span class="nav-number">4.</span> <span class="nav-text"> SLIP：串行线路IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text"> 帧格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7"><span class="nav-number">4.2.</span> <span class="nav-text"> 缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cslip%E5%8E%8B%E7%BC%A9%E7%9A%84slip"><span class="nav-number">5.</span> <span class="nav-text"> CSLIP：压缩的SLIP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ppp%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AE"><span class="nav-number">6.</span> <span class="nav-text"> PPP：点对点协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">6.1.</span> <span class="nav-text"> 内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B8%A7%E6%A0%BC%E5%BC%8F"><span class="nav-number">6.2.</span> <span class="nav-text"> 数据帧格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89"><span class="nav-number">6.3.</span> <span class="nav-text"> 字符转义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%AF%94slip%E4%BC%98%E7%82%B9"><span class="nav-number">6.4.</span> <span class="nav-text"> 相比SLIP优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%9B%9E%E6%8E%A5%E5%8F%A3loopback-interface"><span class="nav-number">7.</span> <span class="nav-text"> 环回接口（Loopback Interface）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">7.1.</span> <span class="nav-text"> 处理流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%A0%E8%BE%93%E5%8D%95%E5%85%83mtu"><span class="nav-number">8.</span> <span class="nav-text"> 最大传输单元（MTU）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84mtu"><span class="nav-number">9.</span> <span class="nav-text"> 路径MTU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B2%E8%A1%8C%E7%BA%BF%E8%B7%AF%E5%90%9E%E5%90%90%E9%87%8F%E8%AE%A1%E7%AE%97"><span class="nav-number">10.</span> <span class="nav-text"> 串行线路吞吐量计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%94%E7%96%91"><span class="nav-number">11.</span> <span class="nav-text"> 答疑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%95%B0%E6%8D%AE%E5%B8%A7%E6%9C%80%E5%B0%8F-%E5%A4%A7%E9%95%BF%E5%BA%A6"><span class="nav-number">11.1.</span> <span class="nav-text"> 以太网数据帧最小、大长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E5%BE%97%E5%88%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E5%B8%A7%E6%98%AF1514%E5%AD%97%E8%8A%82%E4%B8%8D%E6%98%AF1526"><span class="nav-number">11.2.</span> <span class="nav-text"> 抓包得到的最大帧是1514字节，不是1526</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-%E6%BA%90%E5%9C%B0%E5%9D%80"><span class="nav-number">11.3.</span> <span class="nav-text"> 目的、源地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E7%9B%AE%E6%A0%87mac%E5%9C%B0%E5%9D%80"><span class="nav-number">11.4.</span> <span class="nav-text"> 链路层如何知道目标mac地址</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

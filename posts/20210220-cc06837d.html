@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="io多路复用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="io多路复用">
+<meta property="og:url" content="http://example.com/posts/20210220-cc06837d.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="io多路复用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-20T07:02:38.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.716Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20210220-cc06837d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>io多路复用 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210220-cc06837d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          io多路复用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 15:02:38" itemprop="dateCreated datePublished" datetime="2021-02-20T15:02:38+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/primary/" itemprop="url" rel="index"><span itemprop="name">primary</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/primary/os/" itemprop="url" rel="index"><span itemprop="name">os</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">io多路复用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<p>水平触发（Level Triggered）：将就绪的fd告诉进程后，若进程没有对其进行IO操作，则下次执行检测时会再次报告这些fd，select、poll、epoll均支持；</p>
+<p>边缘触发（Edge Triggered）：只告诉一遍，下次就不在告诉了，仅epoll支持；</p>
+<h2 id="select"><a class="markdownIt-Anchor" href="#select"></a> select</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span>  </span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">    maxfd：一个整数值，是指集合中所有文件描述符的范围，即所有文件描述符的最大值加1</span></span><br><span class="line"><span class="comment">    rdset、wrset、exset：要监视的读、写、异常文件描述符的集合</span></span><br><span class="line"><span class="comment">    timeout:超时时间</span></span><br><span class="line"><span class="comment">        NULL：将select置于阻塞状态，一定等到监视文件描述符集合中某个文件描述符发生变化为止；</span></span><br><span class="line"><span class="comment">        0：不管文件描述符是否有变化，都立刻返回继续执行，文件无变化返回0，有变化返回一个正值；</span></span><br><span class="line"><span class="comment">        &gt;0：等待的超时时间，即在timeout时间内阻塞，之内有事件到来就返回了，否则在超时后返回，返回值同上述</span></span><br><span class="line"><span class="comment">返回值：</span></span><br><span class="line"><span class="comment">    &lt;0：错误，并设置errorno</span></span><br><span class="line"><span class="comment">    0：等待超时</span></span><br><span class="line"><span class="comment">    &gt;0：可读写或异常的文件描述符的个数</span></span><br><span class="line"><span class="comment">fd_set</span></span><br><span class="line"><span class="comment">    是一个数组的宏定义，实际上是一long类型的数组，每一个数组元素都能与一打开的文件句柄(socket、文件、管道、设备等)建立联系，建立联系的工作由程序员完成，当调用select()时，由内核根据IO状态修改fd_set的内容，由此来通知执行了select()的进程哪个句柄可读，其中每一bit对应一个文件描述符id，</span></span><br><span class="line"><span class="comment">    FD_SET(int fd, fd_set *fdset);       //将fd加入set集合 </span></span><br><span class="line"><span class="comment">    FD_CLR(int fd, fd_set *fdset);       //将fd从set集合中清除 </span></span><br><span class="line"><span class="comment">    FD_ISSET(int fd, fd_set *fdset);     //检测fd是否在set集合中，不在则返回0 </span></span><br><span class="line"><span class="comment">    FD_ZERO(fd_set *fdset);              //将set清零使集合中不含任何fd</span></span><br><span class="line"><span class="comment">    FD_SETSIZE，它是数据类型fd_set的描述字数量，其值通常是1024</span></span><br><span class="line"><span class="comment">    fd_set的大小决定了select可操作fd的大小；</span></span><br><span class="line"><span class="comment">    fd的最大值必须&lt;FD_SETSIZE</span></span><br><span class="line"><span class="comment">    为方便理解，去fd_set为1字节长度即8bit：</span></span><br><span class="line"><span class="comment">        1）执行fd_set set; FD_ZERO(&amp;set);则set用位表示是0000,0000。</span></span><br><span class="line"><span class="comment">        2）若fd＝5,执行FD_SET(fd,&amp;set);后set变为0001,0000(第5位置为1)</span></span><br><span class="line"><span class="comment">        3）若再加入fd＝2，fd=1,则set变为0001,0011</span></span><br><span class="line"><span class="comment">        4）执行select(6,&amp;set,0,0,0)阻塞等待</span></span><br><span class="line"><span class="comment">        5）若fd=1,fd=2上都发生可读事件，则select返回，此时set变为0000,0011。注意：没有事件发生的fd=5被清空。</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfd,fd_set *rdset,fd_set *wrset,fd_set *exset,struct timeval *timeout)</span></span>; </span><br><span class="line"><span class="comment">//select返回时会将处理rdset、wrset、exset，即将未有时间发生的fd从fd_set中清除；</span></span><br></pre></td></tr></table></figure>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>对所有的fd进行线性扫描，即轮询一次</p>
+<h3 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点</h3>
+<ol>
+<li>
+<p>单个进程可监视的fd数量被限制，即能监听端口的大小有限</p>
+<p>一般来说这个数目和系统内存关系很大，具体数目可以<code>cat /proc/sys/fs/file-max</code>查看。32位机默认是1024个。64位机默认是2048</p>
+</li>
+<li>
+<p>对socket进行扫描时是线性扫描，即采用轮询的方法，效率较低</p>
+<p>当套接字比较多的时候，每次select()都要通过遍历FD_SETSIZE个Socket来完成调度,不管哪个Socket是活跃的,都遍历一遍。这会浪费很多CPU时间</p>
+</li>
+<li>
+<p>每次调用select，需要把fd集合从用户态拷贝到内核态，然后在内核遍历fd集合，当fd集合很大时，开销会比较大</p>
+</li>
+</ol>
+<h2 id="poll"><a class="markdownIt-Anchor" href="#poll"></a> poll</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">    fds[]：要监视的文件描述符数组</span></span><br><span class="line"><span class="comment">    nfds：数组fds中结构体元素的总数量</span></span><br><span class="line"><span class="comment">    timeouts，同select</span></span><br><span class="line"><span class="comment">pollfd：</span></span><br><span class="line"><span class="comment">    struct pollfd &#123;</span></span><br><span class="line"><span class="comment">        int fd; //文件描述符</span></span><br><span class="line"><span class="comment">        short events; // 等待的需要测试事件</span></span><br><span class="line"><span class="comment">        short revents; // 实际发生了的事件，也就是返回结果</span></span><br><span class="line"><span class="comment">    &#125;;</span></span><br><span class="line"><span class="comment">events、revents:</span></span><br><span class="line"><span class="comment">    POLLIN 有数据可读。</span></span><br><span class="line"><span class="comment">    POLLRDNORM   有普通数据可读。</span></span><br><span class="line"><span class="comment">    POLLRDBAND　 有优先数据可读。</span></span><br><span class="line"><span class="comment">    POLLPRI 有紧迫数据可读。</span></span><br><span class="line"><span class="comment">    POLLOUT      写数据不会导致阻塞。</span></span><br><span class="line"><span class="comment">    POLLWRNORM　  写普通数据不会导致阻塞。</span></span><br><span class="line"><span class="comment">    POLLWRBAND　   写优先数据不会导致阻塞。</span></span><br><span class="line"><span class="comment">    POLLMSGSIGPOLL 消息可用。</span></span><br><span class="line"><span class="comment">revents域中还可能返回下列事件：</span></span><br><span class="line"><span class="comment">    POLLER   指定的文件描述符发生错误。</span></span><br><span class="line"><span class="comment">    POLLHUP 指定的文件描述符挂起事件。</span></span><br><span class="line"><span class="comment">    POLLNVAL指定的文件描述符非法。</span></span><br><span class="line"><span class="comment">返回值：同select</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd fds[], <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//poll执行后，当指定fd的有事件发生时，会设置其对应的结构体的revents</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h3>
+<p>poll本质上和select没有区别，但它没有最大连接数的限制，原因是它是基于链表来存储的</p>
+<h3 id="缺点-2"><a class="markdownIt-Anchor" href="#缺点-2"></a> 缺点</h3>
+<ol>
+<li>它没有最大连接数的限制，原因是它是基于链表来存储的</li>
+<li>poll还有一个特点是“水平触发”，如果报告了fd后，没有被处理，那么下次poll时会再次报告该fd</li>
+</ol>
+<h2 id="epoll"><a class="markdownIt-Anchor" href="#epoll"></a> epoll</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="comment">/*创建内核事件表</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">    size：并不起作用，只是给内核一个提示，告诉它事件表需要多大</span></span><br><span class="line"><span class="comment">返回值：</span></span><br><span class="line"><span class="comment">    &gt;0，文件描述符，指定要访问的内核事件表，是其他所有epoll系统调用的句柄。</span></span><br><span class="line"><span class="comment">    -1，失败</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="comment">/*操作内核事件表</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">    epfd：epoll_create返回值</span></span><br><span class="line"><span class="comment">    op：操作类型</span></span><br><span class="line"><span class="comment">        EPOLL_CTL_ADD， 往事件表中注册fd上的事件；</span></span><br><span class="line"><span class="comment">        EPOLL_CTL_MOD， 修改fd上注册的事件；</span></span><br><span class="line"><span class="comment">        EPOLL_CTL_DEL， 删除fd上注册的事件</span></span><br><span class="line"><span class="comment">    fd：需要监控的fd</span></span><br><span class="line"><span class="comment">    event：指定事件数组</span></span><br><span class="line"><span class="comment">epoll_event：</span></span><br><span class="line"><span class="comment">    struct epoll_event</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        __int32_t events;       //epoll事件</span></span><br><span class="line"><span class="comment">        epoll_data_t data;      //用户数据</span></span><br><span class="line"><span class="comment">    &#125;;</span></span><br><span class="line"><span class="comment">    typedef union epoll_data</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        void *ptr;</span></span><br><span class="line"><span class="comment">        int  fd;</span></span><br><span class="line"><span class="comment">        uint32_t u32;</span></span><br><span class="line"><span class="comment">        uint64_t u64;</span></span><br><span class="line"><span class="comment">    &#125;epoll_data;</span></span><br><span class="line"><span class="comment">返回值：</span></span><br><span class="line"><span class="comment">    0，成功</span></span><br><span class="line"><span class="comment">    -1，失败</span></span><br><span class="line"><span class="comment">在使用epoll_ctl时，是把fd添加、修改到内核事件表中，或从内核事件表中删除fd的事件。如果是添加事件到事件表中，可以往data中的fd上添加事件events，或者不用data中的fd，而把fd放到用户数据ptr所指的内存中（因为epoll_data是一个联合体，只能使用其中一个数据）,再设置events。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br><span class="line"><span class="comment">/*一段时间内等待一个组文件描述符上的事件</span></span><br><span class="line"><span class="comment">参数：</span></span><br><span class="line"><span class="comment">    epfd：epoll_create返回值</span></span><br><span class="line"><span class="comment">    events：一个epoll_event*的指针，当epoll_wait这个函数操作成功之后，epoll_events里面将储存所有的读写事件</span></span><br><span class="line"><span class="comment">    maxevents：当前需要监听的所有fd数</span></span><br><span class="line"><span class="comment">    timeout:</span></span><br><span class="line"><span class="comment">        0，马上返回</span></span><br><span class="line"><span class="comment">        -1，阻塞，直到有事件发生</span></span><br><span class="line"><span class="comment">        &gt;0，超时时间</span></span><br><span class="line"><span class="comment">返回值：</span></span><br><span class="line"><span class="comment">    &gt;0，成功，就绪文件fd的个数</span></span><br><span class="line"><span class="comment">    -1：失败</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="思路-3"><a class="markdownIt-Anchor" href="#思路-3"></a> 思路</h3>
+<p>epoll支持水平触发和边缘触发，会把监控的fd放在内核中的一个事件表中，使用“事件”的就绪通知方式，通过epoll_ctl注册fd，一旦该fd就绪，内核将触发回调函数，该回调函数将就绪的文件描述符和事件拷贝到用户空间events所管理的内存，epoll_wait便可以收到通知</p>
+<h3 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点</h3>
+<ol>
+<li>没有最大并发连接的限制</li>
+<li>效率提升</li>
+<li>内存拷贝，利用mmap()文件映射内存加速与内核空间的消息传递；即epoll使用mmap减少复制开销</li>
+</ol>
+<h2 id="三种比较"><a class="markdownIt-Anchor" href="#三种比较"></a> 三种比较</h2>
+<table>
+<thead>
+<tr>
+<th>比较点</th>
+<th>select</th>
+<th>poll</th>
+<th>epoll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个进程最大连接数</td>
+<td>由FD_SETSIZE宏定义，其大小是32个整数的大小，可以对进行修改，然后重新编译内核，但是性能可能会受到影响，这需要进一步的测试</td>
+<td>基于链接存储，无限制</td>
+<td>上限很大，1G内存的可以打开10万左右的连接</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>因为每次调用时都会对连接进行线性遍历，所以随着FD的增加会造成遍历速度慢的“线性下降性能问题”。</td>
+<td>同select</td>
+<td>不是轮询的方式，不会随着FD数目的增加效率下降。只有活跃可用的FD才会调用callback函数；即Epoll最大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll的效率就会远远高于select和poll</td>
+</tr>
+<tr>
+<td>消息传递方式</td>
+<td>内核需要将消息传递到用户空间，都需要内核拷贝动作</td>
+<td>同select</td>
+<td>内核需要将消息传递到用户空间，都需要内核拷贝动作</td>
+</tr>
+<tr>
+<td>事件集合</td>
+<td>内核会修改fd_set，五哦一每次调用都需要重置fd_set</td>
+<td>events传入revents反馈</td>
+<td>使用内核事件表管理；epoll_eait的events仅用来保存就绪事件</td>
+</tr>
+<tr>
+<td>索引就绪fd的时间复杂度</td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+</tr>
+<tr>
+<td>内核实现</td>
+<td>轮询</td>
+<td>轮询</td>
+<td>回调</td>
+</tr>
+<tr>
+<td>工作模式</td>
+<td>LT</td>
+<td>LT</td>
+<td>LT和ET</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210220-94d11844.html" rel="prev" title="tcpdump">
+      <i class="fa fa-chevron-left"></i> tcpdump
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210220-38bb6713.html" rel="next" title="io模式">
+      io模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#select"><span class="nav-number">1.</span> <span class="nav-text"> select</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text"> 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text"> 缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poll"><span class="nav-number">2.</span> <span class="nav-text"> poll</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">2.1.</span> <span class="nav-text"> 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="nav-number">2.2.</span> <span class="nav-text"> 缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll"><span class="nav-number">3.</span> <span class="nav-text"> epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">3.1.</span> <span class="nav-text"> 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">3.2.</span> <span class="nav-text"> 优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%AF%94%E8%BE%83"><span class="nav-number">4.</span> <span class="nav-text"> 三种比较</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim">
+<meta property="og:url" content="http://example.com/posts/20210220-280100fb.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="vim">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="evernotecid://B62E03A7-9855-4E89-8AE8-17FEFD3A3510/appyinxiangcom/3147905/ENResource/p300">
+<meta property="article:published_time" content="2021-02-20T06:33:43.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.727Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="evernotecid://B62E03A7-9855-4E89-8AE8-17FEFD3A3510/appyinxiangcom/3147905/ENResource/p300">
+
+<link rel="canonical" href="http://example.com/posts/20210220-280100fb.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vim | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210220-280100fb.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vim
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 14:33:43" itemprop="dateCreated datePublished" datetime="2021-02-20T14:33:43+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">vim</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h1 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h1>
+<h2 id="升级8"><a class="markdownIt-Anchor" href="#升级8"></a> 升级8</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ncurses-devel</span><br><span class="line">wget https://github.com/vim/vim/archive/master.zip</span><br><span class="line">unzip master.zip</span><br><span class="line"><span class="built_in">cd</span> vim-master/src</span><br><span class="line">./configure  --prefix=/centos/install/vim8 --with-features=huge --enable-multibyte=yes --enable-cscope=yes --enable-python3interp=dynamic --with-python3-config-dir=/centos/install/python3.5.4/lib/python3.5/config-3.5m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h1>
+<p><img src="evernotecid://B62E03A7-9855-4E89-8AE8-17FEFD3A3510/appyinxiangcom/3147905/ENResource/p300" alt="47625f6b5a17145ee9bcccdc53436302.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">############# &#123;&#125; 表示的需要替换</span></span><br><span class="line"><span class="comment">############# | 表示或</span></span><br><span class="line"><span class="comment">############# [,] 表示或</span></span><br><span class="line"><span class="comment">############# &#123;N&#125; 表示数字</span></span><br><span class="line"><span class="comment">############# &#123;A&#125; 表示字符</span></span><br><span class="line">&#123;N&#125;cc    <span class="comment">#删除N行，并插入</span></span><br><span class="line">&#123;N&#125;dd  <span class="comment">#删除N行，默认为1</span></span><br><span class="line">d$  <span class="comment">#删除至行尾</span></span><br><span class="line">db  <span class="comment">#删除光标前单词，符号和空格</span></span><br><span class="line">dG  <span class="comment">#删除到文尾</span></span><br><span class="line">dw  <span class="comment">#删除单词、标点符号或空格</span></span><br><span class="line">F/f&#123;A[,N]&#125;    <span class="comment">#搜索A或N</span></span><br><span class="line">gg  <span class="comment">#文首</span></span><br><span class="line">gf  <span class="comment">#打开光标处的文件名</span></span><br><span class="line">&#123;N&#125;J    <span class="comment">#将后面的N行合并到当前行</span></span><br><span class="line">&#123;N&#125;yy  <span class="comment">#复制N行，默认为1</span></span><br><span class="line">&#123;N&#125;p <span class="comment">#重复复制N次，默认为1</span></span><br><span class="line">T/t+要搜索的&#123;A|N&#125;，将焦点移动到行内A|N的t（前）面或T（后）</span><br><span class="line">ZZ  <span class="comment">#保存退出中间</span></span><br><span class="line">ZQ  <span class="comment">#不保存退出</span></span><br><span class="line">&#123;N&#125;zt|z|b  <span class="comment">#将第N行置为屏幕顶|中间|底行，默认是当前行</span></span><br><span class="line">    <span class="comment">#其中t == Enter; - == b</span></span><br><span class="line">V   <span class="comment">#可视化模式，按行操作</span></span><br><span class="line">v   <span class="comment">#可视化模式，按字符操作</span></span><br><span class="line">ctrl+v  <span class="comment">#成列操作</span></span><br><span class="line"><span class="comment">#命令行模式下，即先冒号:进入命令行模式，然后输入命令</span></span><br><span class="line">&#123;N&#125;r filename   <span class="comment">#读入filename内容，并在第N行插入</span></span><br><span class="line">&#123;N1&#125;,&#123;N2&#125;s/old/new/|g   <span class="comment">##替换 第N1-第N2行 第一个或所有 old 为 new</span></span><br><span class="line">    <span class="comment">#N1默认为1，N2默认为当前行，$表示最后一行</span></span><br><span class="line">    <span class="comment">#N1可以小于N2</span></span><br><span class="line">    <span class="comment">#.表示当前行</span></span><br><span class="line">    <span class="comment">#当前分隔符是/，当使用+，#作为分隔符时，字符中出现的/会被视作普通字符</span></span><br><span class="line">%s/old/new/|g   <span class="comment"># 等同于 1,$s/old/new/|g</span></span><br><span class="line">g &#123;NA&#125;  <span class="comment">#搜索字符串</span></span><br><span class="line">g/old/ss/new/|g   <span class="comment">#等同于 %s/old/new/|g</span></span><br><span class="line"></span><br><span class="line"><span class="comment">################滚动</span></span><br><span class="line">Ctrl+y  <span class="comment">#上滚一行</span></span><br><span class="line">Ctrl+u  <span class="comment">#上滚半页</span></span><br><span class="line">Ctrl+d  <span class="comment">#下滚半页</span></span><br><span class="line">Ctrl+b  <span class="comment">#上滚一页</span></span><br><span class="line">Ctrl+f  <span class="comment">#下滚一页</span></span><br><span class="line">&#123;N&#125;H    <span class="comment">#将光标移动到屏幕顶行下的第N行，默认为1</span></span><br><span class="line">&#123;N&#125;L    <span class="comment">#将光标移动到屏幕底行上的第N行，默认为1</span></span><br><span class="line">z+Enter <span class="comment">#</span></span><br><span class="line"><span class="comment">###################保存退出</span></span><br><span class="line">:w  |filename   <span class="comment">#保存为filename（默认是当前文件），不退出</span></span><br><span class="line">:wq | ZZ |x <span class="comment">#保存并退出</span></span><br><span class="line">:q! <span class="comment">#不保存退出</span></span><br><span class="line">:e! <span class="comment">#放弃所有修改，从上次保存文件开始再编辑</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h1>
+<h2 id="支持python3"><a class="markdownIt-Anchor" href="#支持python3"></a> 支持python3</h2>
+<ol>
+<li><code>./configure --enable-python3interp=dynamic --with-python3-config-dir=python对应版本的配置路径</code></li>
+<li>在对应vimrc配置文件中 <code>set pythonthreedll=/python-path/libpython3.so</code></li>
+</ol>
+<h2 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码</h2>
+<p>encoding、fileencoding、fileencodings、termercoding（终端）</p>
+<h2 id="流程"><a class="markdownIt-Anchor" href="#流程"></a> 流程</h2>
+<ol>
+<li>vim启动，根据vimrc设置的encoding来设置buffer、菜单、消息等</li>
+<li>读取文件时，根据fileencodings的编码方式列表，解码文件，直到解码无错误，并设置此时的编码方式为fileencoding</li>
+<li>对比步骤2》的fileencoding的值与encoding的值，若不同则调用iconc将内容由fileencoding转为encoding，此时需要iconv</li>
+<li>保存文件时，再次对比fileencoding和encoding，若不同再次调用iconv进行转换，最后保存为fileencoding编码；</li>
+</ol>
+<h1 id="插件"><a class="markdownIt-Anchor" href="#插件"></a> 插件</h1>
+<h2 id="vundle"><a class="markdownIt-Anchor" href="#vundle"></a> vundle</h2>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim/blob/master/doc/vundle.txt">安装</a></p>
+<ul>
+<li>
+<p>可以将vundle安装到任何位置，只要在配置文件中即<code>set rtp=</code>能够指定即可</p>
+</li>
+<li>
+<p>当在配置文件中设置了插件安装路径时，尽量不要与下载的vundle在同一目录，因为执行vundle的PluginClean时，它默认从安装目录中删除在配置文件中无效的插件（即插件文件夹），这里的无效是指配置文件中已注释的插件和在安装目录中无效的文件夹（即在配置文件中没有出现的文件夹），其实简单的说就是在安装目录中只保留在配置文件中有效插件对应的文件夹，其余的全删掉</p>
+</li>
+<li>
+<p>尽量将插件安装在$HOME下，因为有时会因为用户没有权限而造成插件使用失败；</p>
+</li>
+</ul>
+</li>
+<li>
+<p>vimrc配置</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> nocompatible  <span class="string">&quot; 去除VI一致性,必须要添加</span></span><br><span class="line"><span class="string">filetype off  &quot;</span> 必须要添加</span><br><span class="line"><span class="string">&quot; 设置包括vundle和初始化相关的runtime path</span></span><br><span class="line"><span class="string">set rtp+=~/.vim/bundle/Vundle.vim</span></span><br><span class="line"><span class="string">call vundle#begin() &quot;</span> 请将安装插件的命令放在vundle<span class="comment">#begin和vundle#end之间.</span></span><br><span class="line"><span class="string">&quot; 另一种选择, 指定一个vundle安装插件的路径</span></span><br><span class="line"><span class="string">&quot;</span>call vundle<span class="comment">#begin(&#x27;~/some/path/here&#x27;)</span></span><br><span class="line"><span class="string">&quot; 让vundle管理插件版本,必须</span></span><br><span class="line"><span class="string">Plugin &#x27;VundleVim/Vundle.vim&#x27;</span></span><br><span class="line"><span class="string">&quot;</span> 以下范例用来支持不同格式的插件安装.</span><br><span class="line"><span class="string">&quot; Github上的插件</span></span><br><span class="line"><span class="string">&quot;</span> 格式为 Plugin <span class="string">&#x27;用户名/插件仓库名&#x27;</span></span><br><span class="line">Plugin <span class="string">&#x27;tpope/vim-fugitive&#x27;</span></span><br><span class="line"><span class="string">&quot; 来自 http://vim-scripts.org/vim/scripts.html 的插件</span></span><br><span class="line"><span class="string">&quot;</span> Plugin <span class="string">&#x27;插件名称&#x27;</span> 实际上是 Plugin <span class="string">&#x27;vim-scripts/插件仓库名&#x27;</span> 只是此处的用户名可以省略</span><br><span class="line">Plugin <span class="string">&#x27;L9&#x27;</span></span><br><span class="line"><span class="string">&quot; 由Git支持但不再github上的插件仓库 Plugin &#x27;git clone 后面的地址&#x27;</span></span><br><span class="line"><span class="string">Plugin &#x27;git://git.wincent.com/command-t.git&#x27;</span></span><br><span class="line"><span class="string">&quot;</span> 本地的Git仓库(例如自己的插件) Plugin <span class="string">&#x27;file:///+本地插件仓库绝对路径&#x27;</span></span><br><span class="line">Plugin <span class="string">&#x27;file:///home/gmarik/path/to/plugin&#x27;</span></span><br><span class="line"><span class="string">&quot; 插件在仓库的子目录中.</span></span><br><span class="line"><span class="string">&quot;</span> 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下</span><br><span class="line">Plugin <span class="string">&#x27;rstacruz/sparkup&#x27;</span>, &#123;<span class="string">&#x27;rtp&#x27;</span>: <span class="string">&#x27;vim/&#x27;</span>&#125;</span><br><span class="line"><span class="string">&quot; 安装L9，如果已经安装过这个插件，可利用以下格式避免命名冲突</span></span><br><span class="line"><span class="string">Plugin &#x27;ascenator/L9&#x27;, &#123;&#x27;name&#x27;: &#x27;newL9&#x27;&#125;</span></span><br><span class="line"><span class="string">&quot;</span> 你的所有插件需要在下面这行之前</span><br><span class="line">call vundle<span class="comment">#end()            &quot; 必须</span></span><br><span class="line">filetype plugin indent on    <span class="string">&quot; 必须 加载vim自带和插件相应的语法和文件类型相关脚本</span></span><br><span class="line"><span class="string">&quot;</span> 忽视插件改变缩进,可以使用以下替代:</span><br><span class="line"><span class="string">&quot;filetype plugin on</span></span><br><span class="line"><span class="string">查阅 :h vundle 获取更多细节和wiki以及FAQ</span></span><br><span class="line"><span class="string">将你自己对非插件片段放在这行之后</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>基本命令</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:PluginList       - 列出所有已配置的插件</span><br><span class="line">:PluginList       - 更新插件</span><br><span class="line">:PluginInstall     - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate</span><br><span class="line">:PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存</span><br><span class="line">:PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件，需要在vimrc中移除想要清除的插件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>
+<p>插件管理</p>
+<ol>
+<li>将插件按照规则写在vimrc文件中</li>
+<li>保存退出之后，有两种安装方式：
+<ol>
+<li>运行vim，再运行 :PluginInstall</li>
+<li>命令行运行直接安装，<code>vim +PluginInstall +qall</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>pass</p>
+</li>
+</ol>
+<h2 id="jedi"><a class="markdownIt-Anchor" href="#jedi"></a> jedi</h2>
+<p><code>Plugin 'davidhalter/jedi-vim'</code></p>
+<blockquote>
+<p><code>&lt;leader&gt;</code> 是 \</p>
+</blockquote>
+<ul>
+<li><code>ctrl+space</code> 自动补全</li>
+<li><code>\+d</code> jump to define</li>
+<li><code>\+g</code> jump to declaration</li>
+<li><code>K</code> display documents</li>
+<li><code>\+n</code> display the call list</li>
+<li><code>ctrl+o</code> a backward jump when a function jumps</li>
+<li><code>ctrl+i</code> a forward jump when a function jumps</li>
+</ul>
+<h2 id="nerdcomment"><a class="markdownIt-Anchor" href="#nerdcomment"></a> nerdcomment</h2>
+<p>目录树</p>
+<ol>
+<li>
+<p>安装<br />
+<code>Plugin 'scrooloose/nerdtree'</code></p>
+</li>
+<li>
+<p>vimrc配置</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#F3 快捷键 显示或隐藏 目录</span></span><br><span class="line">map &lt;F3&gt; :NERDTreeMirror&lt;CR&gt;</span><br><span class="line">map &lt;F3&gt; :NERDTreeToggle&lt;CR&gt;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>?</code> 弹出、关闭帮助窗口</li>
+</ol>
+<h2 id="taglist-or-tagbar"><a class="markdownIt-Anchor" href="#taglist-or-tagbar"></a> taglist or tagbar</h2>
+<ol>
+<li>
+<p>install<br />
+<code>Plugin 'taglist.vim'</code></p>
+</li>
+<li>
+<p>config</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> Tlist_Show_One_File=1     <span class="string">&quot;不同时显示多个文件的tag，只显示当前文件的    </span></span><br><span class="line"><span class="string">let Tlist_Exit_OnlyWindow=1   &quot;</span>如果taglist窗口是最后一个窗口，则退出vim   </span><br><span class="line"><span class="built_in">let</span> Tlist_Ctags_Cmd=<span class="string">&quot;/usr/bin/ctags&quot;</span> <span class="string">&quot;将taglist与ctags关联  </span></span><br><span class="line"><span class="string">let Tlist_Sort_Type=&quot;</span>name<span class="string">&quot;  &quot;</span>按名称排序，默认为按所属类</span><br><span class="line"><span class="built_in">let</span> Tlist_Use_Right_Window=1 <span class="string">&quot;窗口出现在右侧</span></span><br><span class="line"><span class="string">let Tlist_Show_Menu=1 &quot;</span>显示菜单，Tlist_Max_Submenu_Items和Tlist_Max_Tag_Length来控制菜单条目数和所显示tag名字的长度；</span><br><span class="line"><span class="built_in">let</span> Tlist_Use_SingleClick=1 <span class="string">&quot;单击tag跳转，默认是双击</span></span><br><span class="line"><span class="string">let Tlist_Auto_Open=1 &quot;</span>随着vim启动打开tag</span><br><span class="line"><span class="built_in">let</span> Tlist_Close_On_Select=1 <span class="string">&quot;选中tag后关闭</span></span><br><span class="line"><span class="string">let Tlist_File_Fold_Auto_Close=1 &quot;</span>同时显示多个文件的taglist</span><br><span class="line"><span class="built_in">let</span> Tlist_GainFocus_On_ToggleOpen=1 <span class="string">&quot;在使用:TlistToggle打开taglist窗口时，如果希望输入焦点在taglist窗口中</span></span><br><span class="line"><span class="string">let Tlist_Process_File_Always=1 &quot;</span>taglist始终解析文件中的tag，不管taglist窗口有没有打开，设置为1；</span><br><span class="line"><span class="string">&quot;Tlist_WinHeight和Tlist_WinWidth可以设置taglist窗口的高度和宽度。Tlist_Use_Horiz_Window为１设置taglist窗口横向显示；</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>command</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;CR&gt;      跳到光标下tag所定义的位置，用鼠标双击此tag功能也一样</span><br><span class="line">o         在一个新打开的窗口中显示光标下tag </span><br><span class="line">&lt;Space&gt;   显示光标下tag的原型定义会在最底部的状态栏显示, 函数的原型</span><br><span class="line">u         更新taglist窗口中的tag</span><br><span class="line">s         更改排序方式，在按名字排序和按出现顺序排序间切换  </span><br><span class="line">x         taglist窗口放大和缩小，方便查看较长的tag </span><br><span class="line">+         打开一个折叠，同zo</span><br><span class="line">-         将tag折叠起来，同zc</span><br><span class="line">*         打开所有的折叠，同zR</span><br><span class="line">=         将所有tag折叠起来，同zM     // 上面这些就是折叠的操作了</span><br><span class="line">[[        跳到前一个文件</span><br><span class="line">]]        跳到后一个文件 </span><br><span class="line">q         关闭taglist窗口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210220-92374b12.html" rel="prev" title="vmware">
+      <i class="fa fa-chevron-left"></i> vmware
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210220-94d11844.html" rel="next" title="tcpdump">
+      tcpdump <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text"> 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A78"><span class="nav-number">1.1.</span> <span class="nav-text"> 升级8</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text"> 基本命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text"> 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81python3"><span class="nav-number">3.1.</span> <span class="nav-text"> 支持python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text"> 编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text"> 流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text"> 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vundle"><span class="nav-number">4.1.</span> <span class="nav-text"> vundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jedi"><span class="nav-number">4.2.</span> <span class="nav-text"> jedi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nerdcomment"><span class="nav-number">4.3.</span> <span class="nav-text"> nerdcomment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#taglist-or-tagbar"><span class="nav-number">4.4.</span> <span class="nav-text"> taglist or tagbar</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

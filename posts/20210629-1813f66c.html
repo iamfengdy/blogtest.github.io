@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="笔试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔试题">
+<meta property="og:url" content="http://example.com/posts/20210629-1813f66c.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="笔试题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-29T03:28:59.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.708Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20210629-1813f66c.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>笔试题 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210629-1813f66c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          笔试题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-29 11:28:59" itemprop="dateCreated datePublished" datetime="2021-06-29T11:28:59+08:00">2021-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">笔试题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="python基础"><a class="markdownIt-Anchor" href="#python基础"></a> python基础</h2>
+<h3 id="类型"><a class="markdownIt-Anchor" href="#类型"></a> 类型</h3>
+<ul>
+<li>
+<p><code>a=(1)</code>, <code>int</code></p>
+</li>
+<li>
+<p><code>b=(1,)</code>,<code>str</code></p>
+</li>
+<li>
+<p><code>c=(&quot;1&quot;)</code>,<code>tuple</code></p>
+</li>
+<li>
+<p>列表推导式转生成器,<code>[i for i in [1,2]]</code>变更为<code>(i, for i in [1,2])</code></p>
+</li>
+</ul>
+<h3 id="集合"><a class="markdownIt-Anchor" href="#集合"></a> 集合</h3>
+<ol>
+<li>set是一个无序、不重复元素序列；</li>
+<li>创建一个空集合必须是<code>set()</code>，因为<code>&#123;&#125;</code>是一个字典；</li>
+<li>不可索引、不可切片、不可修改元素；</li>
+<li>可遍历</li>
+<li>与<strong>字典</strong>一样，即使用hash，不可放入可变对象，因为是使用hash计算存储，无法判断两个可变对象是否相等；</li>
+<li>元素必须是可哈希的，即不可变对象；</li>
+<li><code>set()</code>参数为字符串时，默认变更为集合；</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">s1 = <span class="built_in">set</span>()</span><br><span class="line">s2 = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">#交</span></span><br><span class="line">s3 = s1 &amp; s2</span><br><span class="line"><span class="comment">#并</span></span><br><span class="line">s3 = s1 | s2</span><br><span class="line">s3 = s1.union(s2)</span><br><span class="line"><span class="comment">#差</span></span><br><span class="line">s3 = s1.difference(s2)</span><br><span class="line">s3.add(<span class="number">1</span>)</span><br><span class="line">s3.pop()</span><br><span class="line">s3.clear()</span><br><span class="line">s3.remove(<span class="number">2</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
+<ul>
+<li><code>extend()</code>两个列表合并，<strong>无返回值</strong></li>
+<li>多列表合并</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span>([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]], [])</span><br><span class="line"><span class="comment"># [1,2,3,4,5,6]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>打乱列表元素,<code>random.shuffle(list)</code></li>
+<li>通过切片获取列表可以超出长度，但通过索引获取元素不可以超过长度</li>
+</ul>
+<h3 id="元祖"><a class="markdownIt-Anchor" href="#元祖"></a> 元祖</h3>
+<p>不可变数据类型，不是真的不可变，是元素的地址不可变，比如如果元素是list，可以进行list的变更</p>
+<h3 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h3>
+<ul>
+<li>sort，会改变原对象，但会<code>None</code></li>
+<li>sorted，不改变原有对象，返回排序好的</li>
+</ul>
+<blockquote>
+<p>其中key参数可以返回元祖，元祖的元素个数基本代表排序次数，默认小到大</p>
+<p>key的元素或值：</p>
+<p>​	True表示大值（要放后面），</p>
+<p>​	False表示小值（要放前面）,</p>
+<p>​	其他可排序的比如数字、字母就按照指定顺序排序</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="字典"><a class="markdownIt-Anchor" href="#字典"></a> 字典</h3>
+<ul>
+<li>空间换时间，本质是数组，根据hash和偏移来存储和查询吗，当达到数2/3（不确定）时，会扩容</li>
+<li>查询快</li>
+<li>自定义key对象需要支持以下：
+<ul>
+<li>支持<code>hash()</code>函数</li>
+<li>支持通过``方法检测相等</li>
+<li>若值相等，则<code>hash()</code>也相等；</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么样的语言能够用装饰器"><a class="markdownIt-Anchor" href="#什么样的语言能够用装饰器"></a> 什么样的语言能够用装饰器</h3>
+<p>函数可以作为参数传递的语言；</p>
+<h3 id="2和3的区别"><a class="markdownIt-Anchor" href="#2和3的区别"></a> 2和3的区别</h3>
+<ol>
+<li>python3的<code>print()</code>是内置函数，pyhton</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>列项</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>print</td>
+<td>语法结构</td>
+<td>内置函数</td>
+</tr>
+<tr>
+<td>range()返回值</td>
+<td>列表</td>
+<td>迭代器</td>
+</tr>
+<tr>
+<td>默认编码</td>
+<td>ascii</td>
+<td>utf-8</td>
+</tr>
+<tr>
+<td>字符串序列</td>
+<td>unicode</td>
+<td>str</td>
+</tr>
+<tr>
+<td>字节序列</td>
+<td>str</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>int</td>
+<td>长度取决于系统位数</td>
+<td>长整型</td>
+</tr>
+<tr>
+<td>long</td>
+<td>不受限制</td>
+<td>没有，只有无限长度的长整型</td>
+</tr>
+<tr>
+<td>类继承即<code>__mro__</code>顺序</td>
+<td>深度优先</td>
+<td>广度优先</td>
+</tr>
+</tbody>
+</table>
+<h3 id="正则"><a class="markdownIt-Anchor" href="#正则"></a> 正则</h3>
+<ol>
+<li><code>re.compile()</code>作用，编译成一个对象，加快速度，重复利用；</li>
+<li><code>(.*)</code> 贪婪匹配，尽可能多的匹配；<code>(.*?)</code>非贪婪匹配，尽可能少的匹配；</li>
+</ol>
+<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
+<ul>
+<li>
+<p><code>x.join()</code>，参数是可迭代对象，<code>x</code>插入可迭代对象中间，形成字符串；</p>
+</li>
+<li>
+<p><code>zip()</code>，</p>
+<ul>
+<li>以一个或多个序列（可迭代对象）做为参数，返回一个元组的列表。同时将这些序列中并排的元素配对。</li>
+<li>参数可以接受任何类型的序列，同时也可以有两个以上的参数;当传入参数的长度不同时，zip能自动以最短序列长度为准进行截取，获得元组。</li>
+</ul>
+</li>
+<li>
+<p><code>sort</code>和<code>sorted</code></p>
+<ul>
+<li><code>sort</code>，属于列表成员方法；无返回值，会更改列表</li>
+<li>sorted，可以对可迭代对象进行排序，返回新的有序列表</li>
+</ul>
+</li>
+</ul>
+<h3 id="编解码"><a class="markdownIt-Anchor" href="#编解码"></a> 编解码</h3>
+<p>字符串在python中是<code>unicode</code>编码，编码转换时是以<code>unicode</code>作为中间编码</p>
+<ul>
+<li><code>encode</code>，将<code>unicode</code>编码转换成其他编码的字符串</li>
+<li><code>decode</code>，将其他编码的字符串转换成<code>unicode</code>编码</li>
+</ul>
+<h3 id="字符串比较"><a class="markdownIt-Anchor" href="#字符串比较"></a> 字符串比较</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;123&#x27;</span></span><br><span class="line">b = <span class="string">&#x27;456&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">a和b为不可变类型，所以指向相同地址；</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>is</code>指地址相同</li>
+<li><code>==</code>指值相同</li>
+<li>字符串相加还是字符串</li>
+<li>字符串不能与数字相加</li>
+</ul>
+<h3 id="legb"><a class="markdownIt-Anchor" href="#legb"></a> LEGB</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">a</span>):</span></span><br><span class="line">  x += <span class="number">1</span></span><br><span class="line">  <span class="built_in">print</span>(x)</span><br><span class="line">add(x)</span><br></pre></td></tr></table></figure>
+<p>会报错，因为LEGB规定了查找一个名称的顺序为</p>
+<ul>
+<li>L：local，即函数内部命名空间</li>
+<li>E：encloseing function locals，外部嵌套函数的空间</li>
+<li>G：global（module），模块空间</li>
+<li>B：builtin，内置模块空间</li>
+</ul>
+<blockquote>
+<p>如果不修改x，只去访问x，是合法的</p>
+</blockquote>
+<h3 id="类实例关系"><a class="markdownIt-Anchor" href="#类实例关系"></a> 类实例关系</h3>
+<ul>
+<li><code>isinstance(object, classinfo)</code>,用于判断object是否是classinfo的一个实例，或者object是否是classinfo类的子类的一个实例，如果是返回True.</li>
+<li><code>issubclass(class, class)</code>,用于判断class是否是classinfo类的子类，如果是返回True.</li>
+</ul>
+<h3 id="__name__"><a class="markdownIt-Anchor" href="#__name__"></a> <code>__name__</code></h3>
+<ol>
+<li>定义在一个模块中，执行这个py文件时，值是<code>__main__</code></li>
+<li>该模块被其他模块<code>import</code>时，其值是运行的py文件的名称</li>
+</ol>
+<h3 id="性能指标"><a class="markdownIt-Anchor" href="#性能指标"></a> 性能指标</h3>
+<ul>
+<li>QPS，每秒请求数</li>
+<li>TPS，服务器每秒处理的事务数
+<ul>
+<li>平均</li>
+<li>峰值</li>
+<li>最低</li>
+</ul>
+</li>
+<li>响应时间
+<ul>
+<li>平均</li>
+<li>最大</li>
+<li>平均</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="迭代器和生成器"><a class="markdownIt-Anchor" href="#迭代器和生成器"></a> 迭代器和生成器</h3>
+<p>生成器是通过函数的形式中调用yield或()的形式创建的。迭代器可以通过iter()内置函数创建。用法上：生成器在调用next()函数或for循环中，所有过程被执行，且返回值。而迭代器，所有值被返回，没有其他过程或动作</p>
+<h3 id="迭代器和迭代对象"><a class="markdownIt-Anchor" href="#迭代器和迭代对象"></a> 迭代器和迭代对象</h3>
+<ol>
+<li>
+<p>迭代器是这样一个对象，实现了无参数<code>__next__</code>方法，返回序列中的下一个元素，如果没有元素了，那么抛出StopIteration异常。</p>
+</li>
+<li>
+<p>迭代对象</p>
+<p>如果对象实现了能返回迭代器的<code>__iter__</code>方法，那么对象就是可迭代的。</p>
+<p>根据可迭代协议，<code>__iter__</code>方法实例化并返回一个迭代器，</p>
+<p>Python 中的迭代器还实现了<code>__iter__</code>方法，因此迭代器也可以迭代。</p>
+</li>
+</ol>
+<ul>
+<li>python迭代对象的流程<br />
+在对一个可迭代对象迭代时，具体流程如下</li>
+</ul>
+<ol>
+<li>
+<p>检查对象是否实现了 <code>__iter__</code>方法，如果实现了就调用它，获取一个迭代器</p>
+</li>
+<li>
+<p>如果没有实现<code>__iter__</code>方法，但是实现了<code>__getitem__</code>方法，<br />
+python 会创建一个迭代器，尝试按顺序（从索引 0 开始）获取元素</p>
+</li>
+<li>
+<p>如果尝试失败，python 抛出 TypeError 异常，通常会提示&quot;x object is not iterable&quot;</p>
+</li>
+</ol>
+<p>迭代器与可迭代对象的关系<br />
+python是通过可迭代对象来获取迭代器的。</p>
+<h3 id="闭包"><a class="markdownIt-Anchor" href="#闭包"></a> 闭包</h3>
+<p>在一个外函数中定义了一个内函数，内函数里运用了外函数的临时变量，并且外函数的返回值是内函数的引用。这样就构成了一个闭包。</p>
+<p>一般情况下，在我们认知当中，如果一个函数结束，函数的内部所有东西都会释放掉，还给内存，局部变量都会消失。但是闭包是一种特殊情况，如果外函数在结束的时候发现有自己的临时变量将来会在内部函数中用到，就把这个临时变量绑定给了内部函数，然后自己再结束。</p>
+<blockquote>
+<p>变量作用域请参考 LEGB</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mult</span>():</span></span><br><span class="line">  <span class="keyword">return</span> [<span class="keyword">lambda</span> x:x*i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>([m(<span class="number">3</span>) <span class="keyword">for</span> m <span class="keyword">in</span> mult()])</span><br><span class="line"><span class="comment"># [9, 9, 9, 9]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>比好的后期绑定，闭包中的变量时在内部函数被调用的时候查找的</p>
+</blockquote>
+<h3 id="匿名函数"><a class="markdownIt-Anchor" href="#匿名函数"></a> 匿名函数</h3>
+<ul>
+<li>通过lambda关键字来定义的函数称为匿名函数</li>
+<li>简化代码复杂性，提高代码可读性</li>
+</ul>
+<h3 id="提高效率"><a class="markdownIt-Anchor" href="#提高效率"></a> 提高效率</h3>
+<ul>
+<li>使用生成器，减少内存使用</li>
+<li>关键功能用其他编写，比如C</li>
+<li>使用多进程、多线程</li>
+<li>等等</li>
+</ul>
+<h3 id="pep8"><a class="markdownIt-Anchor" href="#pep8"></a> pep8</h3>
+<p>代码格式建议,增强代码可读性以及规范性</p>
+<p>pylint，flake8， autopep8</p>
+<h3 id="python之禅"><a class="markdownIt-Anchor" href="#python之禅"></a> python之禅</h3>
+<p>交互模式下<code>import this</code></p>
+<h3 id="类型注解"><a class="markdownIt-Anchor" href="#类型注解"></a> 类型注解</h3>
+<p>因为python是解释型语言，没有参数等的类型声明，类比java等编译型语言，增加代码可读性</p>
+<h3 id="对象命名规则"><a class="markdownIt-Anchor" href="#对象命名规则"></a> 对象命名规则</h3>
+<ul>
+<li>模板，小写+下划线</li>
+<li>类，大写驼峰</li>
+<li>函数：小写、下划线</li>
+<li>全局变量：全大写，下划线</li>
+<li><code>_xxx</code>：表明是一个受保护对象，原则上不允许直接访问，外部类还是可以访问，是一个约定：警告这是一个私有变量，不要去访问他</li>
+<li><code>__xxx</code>:双下划线开头，表示私有变量，只允许类本身访问，子类也不可以；
+<ul>
+<li>直接调用是报错</li>
+<li>解释器会做名称修饰，防止被子类重写：可以使用_{ClassName}__xxx来访问</li>
+</ul>
+</li>
+<li><code>__xxx__</code>：内置变量，可以直接访问</li>
+<li><code>xxx_</code>：避免于关键字冲突</li>
+<li><code>_xxx()</code>：私有方法</li>
+<li><code>__xxx()</code>：同<code>__xxx</code></li>
+</ul>
+<h3 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h3>
+<ul>
+<li>单行</li>
+<li>多行</li>
+</ul>
+<h3 id="import可以同时导入多个库但不推荐"><a class="markdownIt-Anchor" href="#import可以同时导入多个库但不推荐"></a> import可以同时导入多个库，但不推荐</h3>
+<h3 id="zip"><a class="markdownIt-Anchor" href="#zip"></a> zip</h3>
+<p>​	zip用户将元素打包，已长度小的为准</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="built_in">zip</span>((<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>),(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line">r = <span class="built_in">zip</span>((<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>),(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line">r = <span class="built_in">zip</span>((<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>),<span class="string">&#x27;1234&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>)]</span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>)]</span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;1&#x27;</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+<h3 id="对生成器实现列表的切片操作"><a class="markdownIt-Anchor" href="#对生成器实现列表的切片操作"></a> 对生成器实现列表的切片操作</h3>
+<p><code>itertools.islice(生成器对象，start_index, end_index)</code></p>
+<h3 id="类继承顺序"><a class="markdownIt-Anchor" href="#类继承顺序"></a> 类继承顺序</h3>
+<p>请参考 2和3的区别</p>
+<p>2是深度优先，3是广度优先</p>
+<h3 id="reduce"><a class="markdownIt-Anchor" href="#reduce"></a> reduce</h3>
+<p>一句话解决阶乘<code>reduce(lambda x,y:x*y, rnage(1, 10))</code></p>
+<h3 id="描述符"><a class="markdownIt-Anchor" href="#描述符"></a> 描述符</h3>
+<p><a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210507-bf389a0f.html">https://iamfengdy.github.io/posts/20210507-bf389a0f.html</a></p>
+<h3 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h3>
+<ul>
+<li>类介绍，类方法、变量获取顺序等 <a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210507-687f2a8f.html">https://iamfengdy.github.io/posts/20210507-687f2a8f.html</a></li>
+<li>tcp握手以及状态：<a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210219-b26c50c6.html">https://iamfengdy.github.io/posts/20210219-b26c50c6.html</a></li>
+</ul>
+<h2 id="网络"><a class="markdownIt-Anchor" href="#网络"></a> 网络</h2>
+<ol>
+<li>tcp握手</li>
+</ol>
+<h2 id="redis"><a class="markdownIt-Anchor" href="#redis"></a> redis</h2>
+<h3 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h3>
+<ul>
+<li>键的类型只能为字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合</li>
+<li></li>
+</ul>
+<h3 id="为什么快"><a class="markdownIt-Anchor" href="#为什么快"></a> 为什么快</h3>
+<ul>
+<li>完全基于内存，类似于HashMap</li>
+<li>数据结构简单</li>
+<li>采用单线程，避免了上下文切换和竞争等带来的消耗
+<ul>
+<li>是执行 Redis 命令的核心模块是单线程的，而不是整个 Redis 实例就一个线程，Redis 其他模块还有各自模块的线程的。</li>
+</ul>
+</li>
+<li>使用非阻塞IO</li>
+</ul>
+<h3 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> 持久化</h3>
+<p>​	同时使用时AOP优先RDB进行恢复；</p>
+<ul>
+<li>RDB模式（默认），redis-database
+<ul>
+<li>一定时间将数据以快照(某一时刻的状态记录）的形式保存到硬盘，生成dumo.rdb</li>
+<li>优点
+<ul>
+<li>只有一个文件，方便持久化</li>
+<li>性能最大化，fork子进程完成写，主进程继续处理命令（单独的子进程来进行持久化）</li>
+<li>比AOF的启动效率高</li>
+</ul>
+</li>
+<li>数据安全性低，发生故障时会发生数据丢失，适合数据不严谨的时候；</li>
+<li></li>
+</ul>
+</li>
+<li>AOF，append-only-file
+<ul>
+<li>将每次执行的写命令记录到单独日志中，重启时恢复</li>
+<li>缺点
+<ul>
+<li>文件大，恢复慢</li>
+<li>启动效率低</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="过期删除策略"><a class="markdownIt-Anchor" href="#过期删除策略"></a> 过期删除策略</h3>
+<ul>
+<li>
+<p>定时</p>
+<p>将数据创建一个定时器，会占用大量CPU资源去处理，从而影响效率</p>
+</li>
+<li>
+<p>惰性定期</p>
+<p>查询的时候才判断，过期则删除</p>
+</li>
+<li>
+<p>定期</p>
+<p>每隔一段时间清楚</p>
+</li>
+</ul>
+<h3 id="内存用完会发生写错误但读不影响"><a class="markdownIt-Anchor" href="#内存用完会发生写错误但读不影响"></a> 内存用完，会发生写错误，但读不影响</h3>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
+<h2 id="8大算法"><a class="markdownIt-Anchor" href="#8大算法"></a> 8大算法</h2>
+<p><a target="_blank" rel="noopener" href="https://iamfengdy.github.io/categories/algorithm/sorting/">https://iamfengdy.github.io/categories/algorithm/sorting/</a></p>
+<h2 id="设计模式"><a class="markdownIt-Anchor" href="#设计模式"></a> 设计模式</h2>
+<p><a target="_blank" rel="noopener" href="https://iamfengdy.github.io/categories/design/java-design-patterns/">https://iamfengdy.github.io/categories/design/java-design-patterns/</a></p>
+<h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
+<h3 id="树"><a class="markdownIt-Anchor" href="#树"></a> 树</h3>
+<p><a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210218-7b216a3b.html">https://iamfengdy.github.io/posts/20210218-7b216a3b.html</a></p>
+<p>红黑树 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012414189/article/details/83832161">https://blog.csdn.net/u012414189/article/details/83832161</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210604-3553bd31.html" rel="prev" title="流畅的python">
+      <i class="fa fa-chevron-left"></i> 流畅的python
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210709-18e3776e.html" rel="next" title="week1">
+      week1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text"> python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text"> 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text"> 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text"> 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%A5%96"><span class="nav-number">1.4.</span> <span class="nav-text"> 元祖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text"> 排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8"><span class="nav-number">1.6.</span> <span class="nav-text"> 字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%AF%AD%E8%A8%80%E8%83%BD%E5%A4%9F%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text"> 什么样的语言能够用装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E5%92%8C3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.8.</span> <span class="nav-text"> 2和3的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-number">1.9.</span> <span class="nav-text"> 正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.10.</span> <span class="nav-text"> 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-number">1.11.</span> <span class="nav-text"> 编解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="nav-number">1.12.</span> <span class="nav-text"> 字符串比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#legb"><span class="nav-number">1.13.</span> <span class="nav-text"> LEGB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%85%B3%E7%B3%BB"><span class="nav-number">1.14.</span> <span class="nav-text"> 类实例关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__name__"><span class="nav-number">1.15.</span> <span class="nav-text"> __name__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.16.</span> <span class="nav-text"> 性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.17.</span> <span class="nav-text"> 迭代器和生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.18.</span> <span class="nav-text"> 迭代器和迭代对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">1.19.</span> <span class="nav-text"> 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.20.</span> <span class="nav-text"> 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87"><span class="nav-number">1.21.</span> <span class="nav-text"> 提高效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pep8"><span class="nav-number">1.22.</span> <span class="nav-text"> pep8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E4%B9%8B%E7%A6%85"><span class="nav-number">1.23.</span> <span class="nav-text"> python之禅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.24.</span> <span class="nav-text"> 类型注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.25.</span> <span class="nav-text"> 对象命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.26.</span> <span class="nav-text"> 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%AF%BC%E5%85%A5%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%BD%86%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">1.27.</span> <span class="nav-text"> import可以同时导入多个库，但不推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">1.28.</span> <span class="nav-text"> zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%94%9F%E6%88%90%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.29.</span> <span class="nav-text"> 对生成器实现列表的切片操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BB%A7%E6%89%BF%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.30.</span> <span class="nav-text"> 类继承顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-number">1.31.</span> <span class="nav-text"> reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">1.32.</span> <span class="nav-text"> 描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.33.</span> <span class="nav-text"> 链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text"> 网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">3.</span> <span class="nav-text"> redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text"> 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB"><span class="nav-number">3.2.</span> <span class="nav-text"> 为什么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text"> 持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="nav-number">3.4.</span> <span class="nav-text"> 过期删除策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%94%A8%E5%AE%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%86%99%E9%94%99%E8%AF%AF%E4%BD%86%E8%AF%BB%E4%B8%8D%E5%BD%B1%E5%93%8D"><span class="nav-number">3.5.</span> <span class="nav-text"> 内存用完，会发生写错误，但读不影响</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E5%A4%A7%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text"> 8大算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text"> 设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text"> 数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">7.1.</span> <span class="nav-text"> 树</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

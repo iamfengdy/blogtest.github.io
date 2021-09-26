@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="tcp-ip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp-ip">
+<meta property="og:url" content="http://example.com/posts/20210220-40733714.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="tcp-ip">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/images/ee71066731fc426587e6ca0a0458b02a.jpg">
+<meta property="og:image" content="http://example.com/assets/images/7350542e589c4154a285e66c07d6dfd1.jpg">
+<meta property="og:image" content="http://example.com/assets/images/eabfee1f115e4ceebcc45c16c7d92632.jpg">
+<meta property="og:image" content="http://example.com/assets/images/febf39f5b6ef46dcaa7fc9b6c1c639c1.jpg">
+<meta property="article:published_time" content="2021-02-20T01:13:03.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.714Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/images/ee71066731fc426587e6ca0a0458b02a.jpg">
+
+<link rel="canonical" href="http://example.com/posts/20210220-40733714.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>tcp-ip | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210220-40733714.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          tcp-ip
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 09:13:03" itemprop="dateCreated datePublished" datetime="2021-02-20T09:13:03+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/tcp/" itemprop="url" rel="index"><span itemprop="name">tcp</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">tcp-ip</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="分层"><a class="markdownIt-Anchor" href="#分层"></a> 分层</h2>
+<h3 id="7层分法"><a class="markdownIt-Anchor" href="#7层分法"></a> 7层分法</h3>
+<p>应表会传网链物</p>
+<blockquote>
+<p>见Library</p>
+</blockquote>
+<h3 id="4层分法"><a class="markdownIt-Anchor" href="#4层分法"></a> 4层分法</h3>
+<h4 id="应用层"><a class="markdownIt-Anchor" href="#应用层"></a> 应用层</h4>
+<p>各种应用，比如FTP等</p>
+<h4 id="运输层"><a class="markdownIt-Anchor" href="#运输层"></a> 运输层</h4>
+<p>端到端的通信；</p>
+<ul>
+<li>TCP（传输控制协议）</li>
+<li>UDP（用户数据报协议）</li>
+</ul>
+<h4 id="网络层"><a class="markdownIt-Anchor" href="#网络层"></a> 网络层</h4>
+<p>处理分组等；</p>
+<ul>
+<li>IP协议（网际协议）</li>
+<li>ICMP协议（Internet互联网控制报文协议）
+<ul>
+<li>IP层用它来与其他主机或路由器交换错误报文和其他重要信息</li>
+<li>IP协议的附属协议</li>
+<li>比如：Ping和Tracetoute</li>
+</ul>
+</li>
+<li>IGMP协议（Internet组管理协议）
+<ul>
+<li>用来把一个UDP数据报多播到多个主机</li>
+</ul>
+</li>
+</ul>
+<h4 id="链路层"><a class="markdownIt-Anchor" href="#链路层"></a> 链路层</h4>
+<p>数据链路层或网络接口层，通常包括操作系统中的设备驱动程序和计算机中对应的网络接口卡。</p>
+<blockquote>
+<p>它们一起处理与电缆（或其他任何传输媒介）的物理接口细节。</p>
+</blockquote>
+<ul>
+<li>ARP（地址解析协议）</li>
+<li>RARP（逆地址解析协议）</li>
+<li>发送和接收IP数据报</li>
+</ul>
+<h3 id="网关和路由器"><a class="markdownIt-Anchor" href="#网关和路由器"></a> 网关和路由器</h3>
+<h4 id="网关"><a class="markdownIt-Anchor" href="#网关"></a> 网关</h4>
+<p>网关这个术语只用来表示应用层网关：一个连接两种不同协议族的进程（例如，TCP/IP和IBM的SNA），它为某个特定的应用程序服务（常常是电子邮件或文件传输）。</p>
+<h4 id="路由器"><a class="markdownIt-Anchor" href="#路由器"></a> 路由器</h4>
+<p>一个路由器具有两个或多个网络接口层（因为它连接了两个或多个网络）</p>
+<blockquote>
+<p>任何具有多个接口的系统，英文都称作是多接口的(multihomed)</p>
+</blockquote>
+<ul>
+<li>
+<p>一个主机也可以有多个接口，但一般不称作路由器,除非它的功能只是单纯地把分组从一个接口传送到另一个接口。</p>
+</li>
+<li>
+<p>路由器并不一定指那种在互联网中用来转发分组的特殊硬件盒。大多数的TCP/IP实现也允许一个多接口主机来担当路由器的功能，但是主机为此必须进行特殊的配置。</p>
+</li>
+</ul>
+<h2 id="ip地址"><a class="markdownIt-Anchor" href="#ip地址"></a> IP地址</h2>
+<h3 id="地址分类"><a class="markdownIt-Anchor" href="#地址分类"></a> 地址分类</h3>
+<p><img src="/assets/images/ee71066731fc426587e6ca0a0458b02a.jpg" alt="ee71066731fc426587e6ca0a0458b02a" /></p>
+<h3 id="范围"><a class="markdownIt-Anchor" href="#范围"></a> 范围</h3>
+<p><img src="/assets/images/7350542e589c4154a285e66c07d6dfd1.jpg" alt="7350542e589c4154a285e66c07d6dfd1" /></p>
+<h3 id="类型"><a class="markdownIt-Anchor" href="#类型"></a> 类型</h3>
+<ol>
+<li>单播地址（目的为单个主机）</li>
+<li>广播地址（目的端为给定网络上的所有主机）</li>
+<li>多播地址（目的端为同一组内的所有主机）</li>
+</ol>
+<h2 id="封装"><a class="markdownIt-Anchor" href="#封装"></a> 封装</h2>
+<p><img src="/assets/images/eabfee1f115e4ceebcc45c16c7d92632.jpg" alt="eabfee1f115e4ceebcc45c16c7d92632" /></p>
+<h2 id="分用"><a class="markdownIt-Anchor" href="#分用"></a> 分用</h2>
+<p><img src="/assets/images/febf39f5b6ef46dcaa7fc9b6c1c639c1.jpg" alt="febf39f5b6ef46dcaa7fc9b6c1c639c1" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210219-b26c50c6.html" rel="prev" title="tcp连接以及状态">
+      <i class="fa fa-chevron-left"></i> tcp连接以及状态
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210220-4a1ac349.html" rel="next" title="max和ip地址的变更">
+      max和ip地址的变更 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text"> 分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E5%B1%82%E5%88%86%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text"> 7层分法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E5%B1%82%E5%88%86%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text"> 4层分法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 运输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">1.2.4.</span> <span class="nav-text"> 链路层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text"> 网关和路由器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E5%85%B3"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 网关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text"> 路由器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">2.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text"> 地址分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4"><span class="nav-number">2.2.</span> <span class="nav-text"> 范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text"> 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text"> 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text"> 分用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

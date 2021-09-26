@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="类介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类介绍">
+<meta property="og:url" content="http://example.com/posts/20210507-687f2a8f.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="类介绍">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-07T11:06:42.000Z">
+<meta property="article:modified_time" content="2021-08-19T13:03:09.706Z">
+<meta property="article:author" content="fengdy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20210507-687f2a8f.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>类介绍 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210507-687f2a8f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          类介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-07 19:06:42" itemprop="dateCreated datePublished" datetime="2021-05-07T19:06:42+08:00">2021-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">类介绍</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>经典类</th>
+<th>新式类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>python2</td>
+<td>默认</td>
+<td>需要显式继承object</td>
+</tr>
+<tr>
+<td>python3</td>
+<td>不支持</td>
+<td>默认</td>
+</tr>
+<tr>
+<td><code>__new__</code></td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><code>type()</code></td>
+<td><code>&lt;type 'instance'&gt;</code></td>
+<td>class类</td>
+</tr>
+<tr>
+<td><code>__class__</code></td>
+<td>class类</td>
+<td>class类</td>
+</tr>
+<tr>
+<td><code>__slots__</code></td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><code>__getattribute__</code></td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>相同父类构造函数</td>
+<td>重复执行多次</td>
+<td>只执行一次</td>
+</tr>
+<tr>
+<td>基类搜索顺序</td>
+<td>深度优先</td>
+<td>广度优先</td>
+</tr>
+</tbody>
+</table>
+<h2 id="类方法"><a class="markdownIt-Anchor" href="#类方法"></a> 类方法</h2>
+<p><strong>一个类在使用时，需要先实例化，再初始化</strong></p>
+<h3 id="__new__"><a class="markdownIt-Anchor" href="#__new__"></a> <code>__new__</code></h3>
+<p>该方法是一个实例化方法（静态方法，因为所有新式类都继承object类，而object类中该方法设置为静态方法）<br />
+一个对象实例化时调用的第一个方法；</p>
+<ul>
+<li>
+<p>返回创建的实例</p>
+</li>
+<li>
+<p>当有父类时先执行父类的<code>new</code></p>
+</li>
+<li>
+<p>不常用，但当继承一个不可改变的类型比如tuple 或 string时，一般返回实例化对象，最后会调用<code>__init__</code>,除非重写</p>
+</li>
+<li>
+<p><strong><code>如果返回的不是该类的实例化对象，则不执行__init__方法</code></strong></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">super</span>().__new__(cls, *args, **kwargs)</span><br></pre></td></tr></table></figure>
+<h3 id="__init__"><a class="markdownIt-Anchor" href="#__init__"></a> <code>__init__</code></h3>
+<p>初始化方法，构造函数被调用时任何参数都传递给他；</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __init__(self, *args, **kwargs):pass</code></p>
+<h3 id="__call__"><a class="markdownIt-Anchor" href="#__call__"></a> <code>__call__</code></h3>
+<p>让类的实例对象可以象函数一样调用</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __call__(self, *args, **kwargs):pass</code></p>
+<h3 id="__del__"><a class="markdownIt-Anchor" href="#__del__"></a> <code>__del__</code></h3>
+<p>相当于析构函数<br />
+当一个对象在删除的时候进行清理工作，但当解释器退出时，如对象还在，不保证执行</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __del__(self):pass</code></p>
+<h3 id="__repr__"><a class="markdownIt-Anchor" href="#__repr__"></a> <code>__repr__</code></h3>
+<p>当对象要输出时，用来整理其属性及方法为可输出的格式</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __repr__(self):pass</code></p>
+<h3 id="__str__"><a class="markdownIt-Anchor" href="#__str__"></a> <code>__str__</code></h3>
+<p>可读性更好的obj==eval(repr(obj))的</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __str__(self):pass</code></p>
+<h3 id="__dict__"><a class="markdownIt-Anchor" href="#__dict__"></a> <s><code>__dict__</code></s></h3>
+<p>好像是python3之后就没了</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __dict__(self):pass</code></p>
+<h3 id="__setattr__"><a class="markdownIt-Anchor" href="#__setattr__"></a> <code>__setattr__</code></h3>
+<p>添加属性，并赋值</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __setattr__(self, key, value):pass</code></p>
+<h3 id="__super__"><a class="markdownIt-Anchor" href="#__super__"></a> <code>__super__</code></h3>
+<p><code>super(B, self)</code>首先找到B的父类A,然后把B的对象self转换为A的对象（通过某种方式），然后“被转换”的A对象调用自己的__init__；</p>
+<blockquote>
+<p><em>无返回值</em><br />
+<code>def __super__(self):pass</code></p>
+</blockquote>
+<h3 id="__getattr__"><a class="markdownIt-Anchor" href="#__getattr__"></a> <code>__getattr__</code></h3>
+<p>只有当__getattribute__抛出AttributeError时才调用</p>
+<blockquote>
+<p><em>无返回值</em></p>
+</blockquote>
+<p><code>def __setattr__(self, name):pass</code></p>
+<h3 id="__getattribute__"><a class="markdownIt-Anchor" href="#__getattribute__"></a> <code>__getattribute__</code></h3>
+<p><strong>这个方法很重要，会用于属性访问、super、类继承等</strong></p>
+<p>访问某个属性时，无条件默认调用，找不到时会抛出AttributeError提示找不到这个属性；</p>
+<blockquote>
+<p>为了避免无限递归，应该把获取属性的方法指向其父类，即<code>super().__getattribute__(self, name)</code></p>
+</blockquote>
+<p><code>def __getattribute__(self, name):pass</code></p>
+<h2 id="类属性"><a class="markdownIt-Anchor" href="#类属性"></a> 类属性</h2>
+<p><strong>不论所属类是否实例化都会执行，使用时作为类的静态变量</strong></p>
+<h3 id="__slots__"><a class="markdownIt-Anchor" href="#__slots__"></a> <code>__slots__</code></h3>
+<p>用于限定属性，即外部能访问的属性<br />
+<code>__slots__ = ['var', ...]</code></p>
+<h3 id="__doc__"><a class="markdownIt-Anchor" href="#__doc__"></a> <code>__doc__</code></h3>
+<p>帮助信息</p>
+<h3 id="__name__"><a class="markdownIt-Anchor" href="#__name__"></a> <code>__name__</code></h3>
+<p>类型名称</p>
+<h3 id="__module__"><a class="markdownIt-Anchor" href="#__module__"></a> <code>__module__</code></h3>
+<p>所在模块</p>
+<h3 id="__class__"><a class="markdownIt-Anchor" href="#__class__"></a> <code>__class__</code></h3>
+<p>类型</p>
+<h3 id="__bases__"><a class="markdownIt-Anchor" href="#__bases__"></a> <code>__bases__</code></h3>
+<p>所继承的基类</p>
+<h3 id="__dict__-2"><a class="markdownIt-Anchor" href="#__dict__-2"></a> <code>__dict__</code></h3>
+<p>存储所有类型成员<br />
+key是属性名，value为属性值</p>
+<blockquote>
+<p>实例的__dict__只存储与该实例相关的实例属性，即实例属性<br />
+类的__dict__存储所有实例变量共享的变量和函数，并不包含父类的属性<br />
+类的__dict__是一个只读，对象的__dict__是一个一般的；</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">C</span>():</span></span><br><span class="line">    cls_name = <span class="string">&#x27;123&#x27;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">c = C(<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(c.__dict__)</span><br><span class="line"><span class="built_in">print</span>(C.__dict__)</span><br><span class="line"><span class="string">&quot;&quot;&quot;输出</span></span><br><span class="line"><span class="string">&#123;&#x27;name&#x27;: &#x27;c&#x27;&#125;</span></span><br><span class="line"><span class="string">&#123;&#x27;__module__&#x27;: &#x27;__main__&#x27;, &#x27;cls_name&#x27;: &#x27;123&#x27;, &#x27;__init__&#x27;: &lt;function C.__init__ at 0x10e1ba950&gt;, &#x27;__dict__&#x27;: &lt;attribute &#x27;__dict__&#x27; of &#x27;C&#x27; objects&gt;, &#x27;__weakref__&#x27;: &lt;attribute &#x27;__weakref__&#x27; of &#x27;C&#x27; objects&gt;, &#x27;__doc__&#x27;: None&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="对象属性访问顺序"><a class="markdownIt-Anchor" href="#对象属性访问顺序"></a> 对象属性访问顺序</h2>
+<blockquote>
+<p>通过<code>__getattribute__</code>访问</p>
+</blockquote>
+<ol>
+<li>实例属性</li>
+<li>类属性</li>
+<li>父类属性</li>
+<li><code>__getattr__()</code></li>
+</ol>
+<p>在每个层级访问时数据描述符优先于dict，而dict查找优先于非数据描述符；<br />
+这里请参考<a target="_blank" rel="noopener" href="https://app.yinxiang.com/shard/s13/nl/3147905/078df602-8bb3-4977-8f56-12e4a2113a2a/">python 描述符</a></p>
+<h2 id="私有变量"><a class="markdownIt-Anchor" href="#私有变量"></a> 私有变量</h2>
+<ul>
+<li>
+<p>以两个或以上下划线字符开头<strong>且没有以两个或以上下划线结尾</strong>的变量当作私有变量</p>
+</li>
+<li>
+<p>私有变量会在代码生成之前被转换为长格式（变为公有），转换机制为：</p>
+</li>
+</ul>
+<blockquote>
+<p>在变量前端插入类名，再在前端加入一个下划线字符。这就是所谓的私有变量轧压（Private name mangling）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._age = <span class="number">1</span></span><br><span class="line">        self.__age = <span class="number">2</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self._age)</span><br><span class="line">        <span class="built_in">print</span>(self.__age)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;_name&#x27;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;__name&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p = Person()</span><br><span class="line">p._name()</span><br><span class="line">p.age()</span><br><span class="line"><span class="built_in">print</span>(p.__dict__)</span><br><span class="line"><span class="comment"># p.__name()    # AttributeError: &#x27;Person&#x27; object has no attribute &#x27;__name&#x27;</span></span><br><span class="line"><span class="comment"># print(p.__age)  # AttributeError: &#x27;Person&#x27; object has no attribute &#x27;__age&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;Out</span></span><br><span class="line"><span class="string">_name</span></span><br><span class="line"><span class="string">1</span></span><br><span class="line"><span class="string">2</span></span><br><span class="line"><span class="string">&#123;&#x27;_age&#x27;: 1, &#x27;_Person__age&#x27;: 2&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20210507-bf389a0f.html" rel="prev" title="描述符">
+      <i class="fa fa-chevron-left"></i> 描述符
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20210507-301efb7d.html" rel="next" title="理解mataclass">
+      理解mataclass <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text"> 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text"> 类方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#__new__"><span class="nav-number">2.1.</span> <span class="nav-text"> __new__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__init__"><span class="nav-number">2.2.</span> <span class="nav-text"> __init__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__call__"><span class="nav-number">2.3.</span> <span class="nav-text"> __call__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__del__"><span class="nav-number">2.4.</span> <span class="nav-text"> __del__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__repr__"><span class="nav-number">2.5.</span> <span class="nav-text"> __repr__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__str__"><span class="nav-number">2.6.</span> <span class="nav-text"> __str__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__dict__"><span class="nav-number">2.7.</span> <span class="nav-text"> __dict__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__setattr__"><span class="nav-number">2.8.</span> <span class="nav-text"> __setattr__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__super__"><span class="nav-number">2.9.</span> <span class="nav-text"> __super__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__getattr__"><span class="nav-number">2.10.</span> <span class="nav-text"> __getattr__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__getattribute__"><span class="nav-number">2.11.</span> <span class="nav-text"> __getattribute__</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text"> 类属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#__slots__"><span class="nav-number">3.1.</span> <span class="nav-text"> __slots__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__doc__"><span class="nav-number">3.2.</span> <span class="nav-text"> __doc__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__name__"><span class="nav-number">3.3.</span> <span class="nav-text"> __name__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__module__"><span class="nav-number">3.4.</span> <span class="nav-text"> __module__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__class__"><span class="nav-number">3.5.</span> <span class="nav-text"> __class__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__bases__"><span class="nav-number">3.6.</span> <span class="nav-text"> __bases__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__dict__-2"><span class="nav-number">3.7.</span> <span class="nav-text"> __dict__</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text"> 对象属性访问顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text"> 私有变量</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
