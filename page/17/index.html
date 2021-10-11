@@ -181,6 +181,219 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-96555fb2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210218-96555fb2.html" class="post-title-link" itemprop="url">插入排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-18 14:36:20" itemprop="dateCreated datePublished" datetime="2021-02-18T14:36:20+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/sorting/" itemprop="url" rel="index"><span itemprop="name">sorting</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
+<h2 id="基本思想"><a class="markdownIt-Anchor" href="#基本思想"></a> 基本思想</h2>
+<p>将一个记录插入到已排序好的有序表中，从而得到一个新的有序表；<br />
+即：先将序列的第1个记录看成是一个有序的子序列，然后从第2个记录逐个进行插入，直至整个序列有序为止</p>
+<h2 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h2>
+<ol>
+<li>直接插入</li>
+<li>二分插入</li>
+</ol>
+<h2 id="稳定性"><a class="markdownIt-Anchor" href="#稳定性"></a> 稳定性</h2>
+<p>相等的插入元素会放在相等元素的后面，所以插入排序是稳定的；<br />
+即相等的数据位置不会交换；</p>
+<h1 id="直接插入"><a class="markdownIt-Anchor" href="#直接插入"></a> 直接插入</h1>
+<h2 id="基本思想-2"><a class="markdownIt-Anchor" href="#基本思想-2"></a> 基本思想</h2>
+<p>设立哨兵，作为临时存储和判断数组边界之用；</p>
+<h2 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h2>
+<ol>
+<li>设置哨兵A为待插入的数据</li>
+<li>设置开始查找的位置i</li>
+<li>在数组中进行搜索，搜索中将第i个记录后移，直到array[i] &lt;= A；</li>
+</ol>
+<blockquote>
+<p><em>如果遇到相等的时会造成不稳定</em></p>
+</blockquote>
+<ol start="4">
+<li>将A插入到array[i+1]位置</li>
+</ol>
+<h2 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h2>
+<ol>
+<li>设置哨兵为上次插入的位置为i</li>
+<li>比较待插入数据和上次插入数据；如果待插入数据大，则从i向后搜索；如果小，则向前搜索</li>
+</ol>
+<h1 id="二分插入"><a class="markdownIt-Anchor" href="#二分插入"></a> 二分插入</h1>
+<h2 id="基本思想-3"><a class="markdownIt-Anchor" href="#基本思想-3"></a> 基本思想</h2>
+<p>对待插入区间进行对折，直到能确定插入位置</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<ol>
+<li>计算有序表 0 ~ i 的中间点j，其值为A，用待插入数据B元素与A进行比较，如果B大，则取区间[0, j]；反之，则取区间[j, i]</li>
+<li>对取得的区间重复步骤（1）缩小范围，范围依次缩小为 1/2 1/4 1/8 …快速的确定出插入位置</li>
+<li>确定位置之后，将之后的序列后移，并将元素插入到相应位置；</li>
+</ol>
+<h1 id="希尔排序缩小增量排序"><a class="markdownIt-Anchor" href="#希尔排序缩小增量排序"></a> 希尔排序（缩小增量排序）</h1>
+<h2 id="基本思想-4"><a class="markdownIt-Anchor" href="#基本思想-4"></a> 基本思想</h2>
+<p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序；</p>
+<h2 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h2>
+<ol>
+<li>选择一个增量序列，比如d[n/2, n/4, n/8, … 1]，其值n为待排序个数；</li>
+<li>先将待排序列按照指定增量d（从第一个增量开始）分成若干组子序列，每组中数据的下标相差d，对组中的全部元素进行直接插入排序（是在原序列中操作的，不会再需要额外空间）；</li>
+<li>缩小增量，重复步骤（2），直到d=1；</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-6367b42a.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210218-6367b42a.html" class="post-title-link" itemprop="url">基数排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-18 14:14:36" itemprop="dateCreated datePublished" datetime="2021-02-18T14:14:36+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/sorting/" itemprop="url" rel="index"><span itemprop="name">sorting</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>基数排序</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/20210218-6367b42a.html">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-43d00a99.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -503,7 +716,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
