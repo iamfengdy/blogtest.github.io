@@ -27,11 +27,14 @@
 <meta property="og:site_name" content="FLY">
 <meta property="og:description" content="笔试题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/images/567f8de2b2a442d88fe5b392484e8ef5.png">
+<meta property="og:image" content="http://example.com/assets/images/bd7addd5cc0649d98d30c4c0fee42798.png">
 <meta property="article:published_time" content="2021-06-29T03:28:59.000Z">
-<meta property="article:modified_time" content="2021-08-19T13:03:09.708Z">
+<meta property="article:modified_time" content="2021-11-30T06:34:15.935Z">
 <meta property="article:author" content="fengdy">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/images/567f8de2b2a442d88fe5b392484e8ef5.png">
 
 <link rel="canonical" href="http://example.com/posts/20210629-1813f66c.html">
 
@@ -215,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+                <time title="修改时间：2021-11-30 14:34:15" itemprop="dateModified" datetime="2021-11-30T14:34:15+08:00">2021-11-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,6 +283,11 @@
 <ul>
 <li>打乱列表元素,<code>random.shuffle(list)</code></li>
 <li>通过切片获取列表可以超出长度，但通过索引获取元素不可以超过长度</li>
+<li><code>避免索引错误</code>
+<ul>
+<li><code>当s=''时，s[0]和s[-1]会报IndexError: string index out of range，但是s[:1]）和s[-1:]不会。</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="元祖"><a class="markdownIt-Anchor" href="#元祖"></a> 元祖</h3>
 <p>不可变数据类型，不是真的不可变，是元素的地址不可变，比如如果元素是list，可以进行list的变更</p>
@@ -372,24 +380,24 @@
 </ol>
 <h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
 <ul>
-<li>
-<p><code>x.join()</code>，参数是可迭代对象，<code>x</code>插入可迭代对象中间，形成字符串；</p>
-</li>
-<li>
-<p><code>zip()</code>，</p>
+<li><code>x.join()</code>，参数是可迭代对象，<code>x</code>插入可迭代对象中间，形成字符串；</li>
+<li><code>zip()</code>，
 <ul>
 <li>以一个或多个序列（可迭代对象）做为参数，返回一个元组的列表。同时将这些序列中并排的元素配对。</li>
 <li>参数可以接受任何类型的序列，同时也可以有两个以上的参数;当传入参数的长度不同时，zip能自动以最短序列长度为准进行截取，获得元组。</li>
 </ul>
 </li>
-<li>
-<p><code>sort</code>和<code>sorted</code></p>
+<li><code>sort</code>和<code>sorted</code>
 <ul>
 <li><code>sort</code>，属于列表成员方法；无返回值，会更改列表</li>
 <li>sorted，可以对可迭代对象进行排序，返回新的有序列表</li>
 </ul>
 </li>
 </ul>
+<h3 id="传参"><a class="markdownIt-Anchor" href="#传参"></a> 传参</h3>
+<p>可以理解为引用传递；</p>
+<p>​	不可变类型因为不可变所以互不影响；</p>
+<p>​	可变需要注意；</p>
 <h3 id="编解码"><a class="markdownIt-Anchor" href="#编解码"></a> 编解码</h3>
 <p>字符串在python中是<code>unicode</code>编码，编码转换时是以<code>unicode</code>作为中间编码</p>
 <ul>
@@ -547,26 +555,171 @@ python是通过可迭代对象来获取迭代器的。</p>
 <li>类介绍，类方法、变量获取顺序等 <a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210507-687f2a8f.html">https://iamfengdy.github.io/posts/20210507-687f2a8f.html</a></li>
 <li>tcp握手以及状态：<a target="_blank" rel="noopener" href="https://iamfengdy.github.io/posts/20210219-b26c50c6.html">https://iamfengdy.github.io/posts/20210219-b26c50c6.html</a></li>
 </ul>
+<h3 id="复制"><a class="markdownIt-Anchor" href="#复制"></a> 复制</h3>
+<ol>
+<li>当复制对象是不可变对象时，复制的都是地址，即ID都一样；</li>
+<li>当复制对象是可变对象时
+<ol>
+<li>若元素为不可变对象，则复制后元素改变互不影响；</li>
+<li>若元素为可变对象，则复制后元素改变会共同影响；</li>
+</ol>
+</li>
+</ol>
 <h2 id="网络"><a class="markdownIt-Anchor" href="#网络"></a> 网络</h2>
 <ol>
 <li>tcp握手</li>
 </ol>
+<h2 id="缓存"><a class="markdownIt-Anchor" href="#缓存"></a> 缓存</h2>
+<h3 id="雪崩"><a class="markdownIt-Anchor" href="#雪崩"></a> 雪崩</h3>
+<p>​	主要是缓存大面积失效，像雪崩一样；</p>
+<ul>
+<li>
+<p>简介</p>
+<p>指缓存同一时间大面积的失效，所以，后面的请求都会落到数据库上，造成数据库短时间内承受大量请求而崩掉</p>
+</li>
+<li>
+<p>方案</p>
+<ul>
+<li>数据过期时间设置随机，防止同一时间大量数据过期现象发生；</li>
+<li>加锁排队，一般并发量不是特别多的时候，使用；</li>
+<li>给每一个缓存数据增加相应的缓存标记，记录缓存的是否失效，如果缓存标记失效，则更新数据缓存</li>
+</ul>
+</li>
+</ul>
+<h3 id="穿透"><a class="markdownIt-Anchor" href="#穿透"></a> 穿透</h3>
+<p>​	一定要注意<code>透</code>，就是缓存和数据库都没有；</p>
+<ul>
+<li>
+<p>简介</p>
+<p>指缓存和数据库中都没有的数据，导致所有的请求都落到数据库上，造成数据库短时间内承受大量请求而崩掉</p>
+</li>
+<li>
+<p>方案</p>
+<ul>
+<li>
+<p>接口层增加校验，如用户鉴权校验，id做基础校验，id&lt;=0的直接拦截；</p>
+</li>
+<li>
+<p>从缓存取不到的数据，在数据库中也没有取到，这时也可以将key-value对写为key-null，缓存有效时间可以设置短点，如30秒（设置太长会导致正常情况也没法使用）。这样可以防止攻击用户反复用同一个id暴力攻击；</p>
+</li>
+<li>
+<p>采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的 bitmap 中，一个一定不存在的数据会被这个 bitmap 拦截掉，从而避免了对底层存储系统的查询压力；</p>
+</li>
+<li>
+<p>Bitmap：典型的就是哈希表</p>
+<ul>
+<li>缺点是，Bitmap对于每个元素只能记录1bit信息，如果还想完成额外的功能，恐怕只能靠牺牲更多的空间、时间来完成了</li>
+</ul>
+</li>
+<li>
+<p>布隆过滤器（推荐）</p>
+<ul>
+<li>
+<p>就是引入了k(k&gt;1)k(k&gt;1)个相互独立的哈希函数，保证在给定的空间、误判率下，完成元素判重的过程。<br />
+它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。<br />
+Bloom-Filter算法的核心思想就是利用多个不同的Hash函数来解决“冲突”。<br />
+Hash存在一个冲突（碰撞）的问题，用同一个Hash得到的两个URL的值有可能相同。为了减少冲突，我们可以多引入几个Hash，如果通过其中的一个Hash值我们得出某元素不在集合中，那么该元素肯定不在集合中。只有在所有的Hash函数告诉我们该元素在集合中时，才能确定该元素存在于集合中。这便是Bloom-Filter的基本思想。</p>
+<p>Bloom-Filter一般用于在大数据量的集合中判定某元素是否存在。</p>
+<p>最重要的是：</p>
+<ul>
+<li><strong>一个元素如果判断结果为存在的时候元素不一定存在，但是判断结果为不存在的时候则一定不存在</strong>。</li>
+<li><strong>布隆过滤器可以添加元素，但是不能删除元素</strong>。因为删掉元素会导致误判率增加。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="击穿"><a class="markdownIt-Anchor" href="#击穿"></a> 击穿</h3>
+<p>​	<code>穿</code>，表示只是缓存没有，数据库有，所以只能是穿而不是透,一般指同一条数据；</p>
+<ul>
+<li>简介
+<ul>
+<li>缓存中没有但数据库中有的数据（一般是缓存时间到期），这时由于并发用户特别多，同时读缓存没读到数据，又同时去数据库去取数据，引起数据库压力瞬间增大，造成过大压力。和缓存雪崩不同的是，缓存击穿指并发查同一条数据，缓存雪崩是不同数据都过期了，很多数据都查不到从而查数据库</li>
+</ul>
+</li>
+<li>方案
+<ul>
+<li>设置热点数据永远不过期</li>
+<li>加互斥锁，互斥锁</li>
+</ul>
+</li>
+</ul>
+<h3 id="预热"><a class="markdownIt-Anchor" href="#预热"></a> 预热</h3>
+<ul>
+<li>简介
+<ul>
+<li>像汽车发动一样，系统上线后，将相关的缓存数据直接加载到缓存系统。这样就可以避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据；</li>
+</ul>
+</li>
+<li>方案
+<ul>
+<li>直接写个缓存刷新页面，上线时手工操作一下；</li>
+<li>数据量不大，可以在项目启动的时候自动进行加载</li>
+<li>定时刷新；</li>
+</ul>
+</li>
+</ul>
+<h3 id="降级"><a class="markdownIt-Anchor" href="#降级"></a> 降级</h3>
+<ul>
+<li>
+<p>简介</p>
+<p>当访问量剧增、服务出现问题（如响应时间慢或不响应）或非核心服务影响到核心流程的性能时，仍然需要保证服务还是可用的，即使是有损服务。系统可以根据一些关键数据进行自动降级，也可以配置开关实现人工降级。</p>
+<p><code>最终目的:</code>保证核心服务可用，即使是有损的。而且有些服务是无法降级的（如加入购物车、结算）。</p>
+<p>在进行降级之前要对系统进行梳理，看看系统是不是可以丢卒保帅；从而梳理出哪些必须誓死保护，哪些可降级；比如可以参考日志级别设置预案：</p>
+<ul>
+<li>一般：比如有些服务偶尔因为网络抖动或者服务正在上线而超时，可以自动降级；</li>
+<li>警告：有些服务在一段时间内成功率有波动（如在95~100%之间），可以自动降级或人工降级，并发送告警</li>
+<li>错误：比如可用率低于90%，或者数据库连接池被打爆了，或者访问量突然猛增到系统能承受的最大阀值，此时可以根据情况自动降级或者人工降级</li>
+<li>严重错误：比如因为特殊原因数据错误了，此时需要紧急人工降级；</li>
+</ul>
+<p>服务降级的目的，是为了防止Redis服务故障，导致数据库跟着一起发生雪崩问题。因此，对于不重要的缓存数据，可以采取服务降级策略，例如一个比较常见的做法就是，Redis出现问题，不去数据库查询，而是直接返回默认值给用户。</p>
+</li>
+</ul>
+<h3 id="热点key"><a class="markdownIt-Anchor" href="#热点key"></a> 热点key</h3>
+<p>缓存中的一个Key(比如一个促销商品)，在某个时间点过期的时候，恰好在这个时间点对这个Key有大量的并发请求过来，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端DB压垮。</p>
+<ul>
+<li>方案
+<ul>
+<li>对缓存查询加锁，如果KEY不存在，就加锁，然后查DB入缓存，然后解锁；其他进程如果发现有锁就等待，然后等解锁后返回数据或者进入DB查询</li>
+</ul>
+</li>
+</ul>
+<h3 id="更新提交问题"><a class="markdownIt-Anchor" href="#更新提交问题"></a> 更新提交问题</h3>
+<p><img src="/assets/images/567f8de2b2a442d88fe5b392484e8ef5.png" alt="567f8de2b2a442d88fe5b392484e8ef5" /></p>
 <h2 id="redis"><a class="markdownIt-Anchor" href="#redis"></a> redis</h2>
 <h3 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h3>
 <ul>
-<li>键的类型只能为字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合</li>
-<li></li>
+<li>
+<p>优点</p>
+<ul>
+<li>数据机构丰富，键的类型只能为字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合</li>
+<li>快</li>
+<li>支持数据持久化：RDB（redis database），AOF（append only file）</li>
+<li>支持事务</li>
+<li>支持主从复制</li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>受物理内存限制</li>
+<li>其他</li>
+</ul>
+</li>
 </ul>
 <h3 id="为什么快"><a class="markdownIt-Anchor" href="#为什么快"></a> 为什么快</h3>
 <ul>
-<li>完全基于内存，类似于HashMap</li>
+<li>完全基于内存，类似于HashMap，查找和操作的时间复杂度都是O(1)；</li>
 <li>数据结构简单</li>
 <li>采用单线程，避免了上下文切换和竞争等带来的消耗
 <ul>
 <li>是执行 Redis 命令的核心模块是单线程的，而不是整个 Redis 实例就一个线程，Redis 其他模块还有各自模块的线程的。</li>
 </ul>
 </li>
-<li>使用非阻塞IO</li>
+<li>使用非阻塞IO，即多路复用</li>
+<li>使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis 直接自己构建了 VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求</li>
 </ul>
 <h3 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> 持久化</h3>
 <p>​	同时使用时AOP优先RDB进行恢复；</p>
@@ -587,12 +740,20 @@ python是通过可迭代对象来获取迭代器的。</p>
 </li>
 <li>AOF，append-only-file
 <ul>
-<li>将每次执行的写命令记录到单独日志中，重启时恢复</li>
-<li>缺点
+<li>
+<p>将每次执行的写命令记录到单独日志中，重启时恢复</p>
+</li>
+<li>
+<p>缺点</p>
 <ul>
 <li>文件大，恢复慢</li>
 <li>启动效率低</li>
 </ul>
+<p>优缺点是什么？<br />
+RDB更新频率高，优先使用AOF还原数据。<br />
+AOF比RDB更安全也更大<br />
+RDB性能比AOF好<br />
+如果两个都配了优先加载AOF</p>
 </li>
 </ul>
 </li>
@@ -612,7 +773,51 @@ python是通过可迭代对象来获取迭代器的。</p>
 <p>每隔一段时间清楚</p>
 </li>
 </ul>
+<h3 id="redis的内存淘汰策略"><a class="markdownIt-Anchor" href="#redis的内存淘汰策略"></a> Redis的内存淘汰策略</h3>
+<p>Redis的内存淘汰策略有哪些</p>
+<p>Redis的内存淘汰策略是指在Redis的用于缓存的内存不足时，怎么处理需要新写入且需要申请额外空间的数据。</p>
+<ol>
+<li>全局的键空间选择性移除<br />
+noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。<br />
+allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key。（这个是最常用的）<br />
+allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key。</li>
+<li>设置过期时间的键空间选择性移除<br />
+volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。<br />
+volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。<br />
+volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。</li>
+<li>总结<br />
+Redis的内存淘汰策略的选取并不会影响过期的key的处理。内存淘汰策略用于处理内存不足时的需要申请额外空间的数据；过期策略用于处理过期的缓存数据。</li>
+</ol>
 <h3 id="内存用完会发生写错误但读不影响"><a class="markdownIt-Anchor" href="#内存用完会发生写错误但读不影响"></a> 内存用完，会发生写错误，但读不影响</h3>
+<h3 id="为什么使用单线程"><a class="markdownIt-Anchor" href="#为什么使用单线程"></a> 为什么使用单线程</h3>
+<p>因为Redis是基于内存的操作，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了（毕竟采用多线程会有很多麻烦！）Redis利用队列技术将并发访问变为串行访问</p>
+<ol>
+<li>绝大部分请求是纯粹的内存操作（非常快速）</li>
+<li>采用单线程,避免了不必要的上下文切换和竞争条件</li>
+<li>非阻塞IO优点</li>
+</ol>
+<h3 id="查找"><a class="markdownIt-Anchor" href="#查找"></a> 查找</h3>
+<ul>
+<li><code>keys</code>命令会致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复；</li>
+<li><code>scan</code>可以无阻塞的提取出指定模式的key列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用keys指令长;</li>
+</ul>
+<h3 id="与memcache相比"><a class="markdownIt-Anchor" href="#与memcache相比"></a> 与memcache相比</h3>
+<p><img src="/assets/images/bd7addd5cc0649d98d30c4c0fee42798.png" alt="bd7addd5cc0649d98d30c4c0fee42798" /></p>
+<h2 id="mysql"><a class="markdownIt-Anchor" href="#mysql"></a> mysql</h2>
+<h3 id="myisam-与-innodb-区别"><a class="markdownIt-Anchor" href="#myisam-与-innodb-区别"></a> MyISAM 与 InnoDB 区别：</h3>
+<ol>
+<li>InnoDB 支持事务，MyISAM 不支持，这一点是非常之重要。事务是一种高级的处理方式，如在一些列增删改中只要哪个出错还可以回滚还原，而 MyISAM</li>
+</ol>
+<p>就不可以了；</p>
+<ol start="2">
+<li>MyISAM 适合查询以及插入为主的应用，InnoDB 适合频繁修改以及涉及到安全性较高的应用；</li>
+<li>InnoDB 支持外键，MyISAM 不支持；</li>
+<li>对于自增长的字段，InnoDB 中必须包含只有该字段的索引，但是在 MyISAM表中可以和其他字段一起建立联合索引；</li>
+<li>清空整个表时，InnoDB 是一行一行的删除，效率非常慢。MyISAM 则会重建表；</li>
+</ol>
+<h3 id="乐观锁和悲观锁"><a class="markdownIt-Anchor" href="#乐观锁和悲观锁"></a> 乐观锁和悲观锁</h3>
+<p>悲观锁, 就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。</p>
+<p>乐观锁，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制，乐观锁适用于多读的应用类型，这样可以提高吞吐量</p>
 <h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
 <h2 id="8大算法"><a class="markdownIt-Anchor" href="#8大算法"></a> 8大算法</h2>
 <p><a target="_blank" rel="noopener" href="https://iamfengdy.github.io/categories/algorithm/sorting/">https://iamfengdy.github.io/categories/algorithm/sorting/</a></p>
@@ -706,7 +911,7 @@ python是通过可迭代对象来获取迭代器的。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text"> python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text"> 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text"> 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text"> 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%A5%96"><span class="nav-number">1.4.</span> <span class="nav-text"> 元祖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text"> 排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8"><span class="nav-number">1.6.</span> <span class="nav-text"> 字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%AF%AD%E8%A8%80%E8%83%BD%E5%A4%9F%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text"> 什么样的语言能够用装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E5%92%8C3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.8.</span> <span class="nav-text"> 2和3的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-number">1.9.</span> <span class="nav-text"> 正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.10.</span> <span class="nav-text"> 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-number">1.11.</span> <span class="nav-text"> 编解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="nav-number">1.12.</span> <span class="nav-text"> 字符串比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#legb"><span class="nav-number">1.13.</span> <span class="nav-text"> LEGB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%85%B3%E7%B3%BB"><span class="nav-number">1.14.</span> <span class="nav-text"> 类实例关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__name__"><span class="nav-number">1.15.</span> <span class="nav-text"> __name__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.16.</span> <span class="nav-text"> 性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.17.</span> <span class="nav-text"> 迭代器和生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.18.</span> <span class="nav-text"> 迭代器和迭代对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">1.19.</span> <span class="nav-text"> 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.20.</span> <span class="nav-text"> 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87"><span class="nav-number">1.21.</span> <span class="nav-text"> 提高效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pep8"><span class="nav-number">1.22.</span> <span class="nav-text"> pep8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E4%B9%8B%E7%A6%85"><span class="nav-number">1.23.</span> <span class="nav-text"> python之禅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.24.</span> <span class="nav-text"> 类型注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.25.</span> <span class="nav-text"> 对象命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.26.</span> <span class="nav-text"> 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%AF%BC%E5%85%A5%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%BD%86%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">1.27.</span> <span class="nav-text"> import可以同时导入多个库，但不推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">1.28.</span> <span class="nav-text"> zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%94%9F%E6%88%90%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.29.</span> <span class="nav-text"> 对生成器实现列表的切片操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BB%A7%E6%89%BF%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.30.</span> <span class="nav-text"> 类继承顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-number">1.31.</span> <span class="nav-text"> reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">1.32.</span> <span class="nav-text"> 描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.33.</span> <span class="nav-text"> 链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text"> 网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">3.</span> <span class="nav-text"> redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text"> 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB"><span class="nav-number">3.2.</span> <span class="nav-text"> 为什么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text"> 持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="nav-number">3.4.</span> <span class="nav-text"> 过期删除策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%94%A8%E5%AE%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%86%99%E9%94%99%E8%AF%AF%E4%BD%86%E8%AF%BB%E4%B8%8D%E5%BD%B1%E5%93%8D"><span class="nav-number">3.5.</span> <span class="nav-text"> 内存用完，会发生写错误，但读不影响</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E5%A4%A7%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text"> 8大算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text"> 设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text"> 数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">7.1.</span> <span class="nav-text"> 树</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text"> python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text"> 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text"> 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text"> 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%A5%96"><span class="nav-number">1.4.</span> <span class="nav-text"> 元祖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text"> 排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8"><span class="nav-number">1.6.</span> <span class="nav-text"> 字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%AF%AD%E8%A8%80%E8%83%BD%E5%A4%9F%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text"> 什么样的语言能够用装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E5%92%8C3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.8.</span> <span class="nav-text"> 2和3的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-number">1.9.</span> <span class="nav-text"> 正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.10.</span> <span class="nav-text"> 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E5%8F%82"><span class="nav-number">1.11.</span> <span class="nav-text"> 传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-number">1.12.</span> <span class="nav-text"> 编解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="nav-number">1.13.</span> <span class="nav-text"> 字符串比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#legb"><span class="nav-number">1.14.</span> <span class="nav-text"> LEGB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E4%BE%8B%E5%85%B3%E7%B3%BB"><span class="nav-number">1.15.</span> <span class="nav-text"> 类实例关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#__name__"><span class="nav-number">1.16.</span> <span class="nav-text"> __name__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.17.</span> <span class="nav-text"> 性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.18.</span> <span class="nav-text"> 迭代器和生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.19.</span> <span class="nav-text"> 迭代器和迭代对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">1.20.</span> <span class="nav-text"> 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.21.</span> <span class="nav-text"> 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87"><span class="nav-number">1.22.</span> <span class="nav-text"> 提高效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pep8"><span class="nav-number">1.23.</span> <span class="nav-text"> pep8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E4%B9%8B%E7%A6%85"><span class="nav-number">1.24.</span> <span class="nav-text"> python之禅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.25.</span> <span class="nav-text"> 类型注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.26.</span> <span class="nav-text"> 对象命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.27.</span> <span class="nav-text"> 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%AF%BC%E5%85%A5%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%BD%86%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">1.28.</span> <span class="nav-text"> import可以同时导入多个库，但不推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">1.29.</span> <span class="nav-text"> zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%94%9F%E6%88%90%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.30.</span> <span class="nav-text"> 对生成器实现列表的切片操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BB%A7%E6%89%BF%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.31.</span> <span class="nav-text"> 类继承顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-number">1.32.</span> <span class="nav-text"> reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">1.33.</span> <span class="nav-text"> 描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.34.</span> <span class="nav-text"> 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6"><span class="nav-number">1.35.</span> <span class="nav-text"> 复制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text"> 网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text"> 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%AA%E5%B4%A9"><span class="nav-number">3.1.</span> <span class="nav-text"> 雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BF%E9%80%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BB%E7%A9%BF"><span class="nav-number">3.3.</span> <span class="nav-text"> 击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E7%83%AD"><span class="nav-number">3.4.</span> <span class="nav-text"> 预热</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E7%BA%A7"><span class="nav-number">3.5.</span> <span class="nav-text"> 降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E7%82%B9key"><span class="nav-number">3.6.</span> <span class="nav-text"> 热点key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%8F%90%E4%BA%A4%E9%97%AE%E9%A2%98"><span class="nav-number">3.7.</span> <span class="nav-text"> 更新提交问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">4.</span> <span class="nav-text"> redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text"> 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB"><span class="nav-number">4.2.</span> <span class="nav-text"> 为什么快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">4.3.</span> <span class="nav-text"> 持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="nav-number">4.4.</span> <span class="nav-text"> 过期删除策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E7%9A%84%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-number">4.5.</span> <span class="nav-text"> Redis的内存淘汰策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%94%A8%E5%AE%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E5%86%99%E9%94%99%E8%AF%AF%E4%BD%86%E8%AF%BB%E4%B8%8D%E5%BD%B1%E5%93%8D"><span class="nav-number">4.6.</span> <span class="nav-text"> 内存用完，会发生写错误，但读不影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.7.</span> <span class="nav-text"> 为什么使用单线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-number">4.8.</span> <span class="nav-text"> 查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8Ememcache%E7%9B%B8%E6%AF%94"><span class="nav-number">4.9.</span> <span class="nav-text"> 与memcache相比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">5.</span> <span class="nav-text"> mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#myisam-%E4%B8%8E-innodb-%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text"> MyISAM 与 InnoDB 区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-number">5.2.</span> <span class="nav-text"> 乐观锁和悲观锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text"> 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E5%A4%A7%E7%AE%97%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text"> 8大算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text"> 设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">9.</span> <span class="nav-text"> 数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">9.1.</span> <span class="nav-text"> 树</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
