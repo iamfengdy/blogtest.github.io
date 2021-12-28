@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="身份认证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="身份认证">
+<meta property="og:url" content="http://example.com/posts/20211227-97ecf4ec.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="身份认证">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/images/1af71e984b334b4e9320f873d91c136e.png">
+<meta property="article:published_time" content="2021-12-27T07:14:07.000Z">
+<meta property="article:modified_time" content="2021-12-27T08:12:08.520Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/images/1af71e984b334b4e9320f873d91c136e.png">
+
+<link rel="canonical" href="http://example.com/posts/20211227-97ecf4ec.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>身份认证 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20211227-97ecf4ec.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          身份认证
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-27 15:14:07 / 修改时间：16:12:08" itemprop="dateCreated datePublished" datetime="2021-12-27T15:14:07+08:00">2021-12-27</time>
+            </span>
+
+          
+            <div class="post-description">身份认证</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<p>HA有一个内置的认证系统，允许不同的用户与其交互。认证系统由多个部分组成：</p>
+<p><img src="/assets/images/1af71e984b334b4e9320f873d91c136e.png" alt="1af71e984b334b4e9320f873d91c136e" /></p>
+<h3 id="身份认证提供者"><a class="markdownIt-Anchor" href="#身份认证提供者"></a> 身份认证提供者</h3>
+<p>身份验证提供者用于用户对自己进行身份验证。由身份验证提供者选择要使用的身份验证方法和后端。默认情况下，我们启用内置的HA身份验证提供程序，它将用户安全地存储在配置目录中。</p>
+<p>HA将使用的身份验证提供程序在<code>configuration.yaml</code>中指定。可以激活同一个身份验证提供者的多个实例。在这种情况下，每个都将由一个惟一的标识符标识。相同类型的身份验证提供者不会共享凭据。</p>
+<h3 id="credentials证书-凭据"><a class="markdownIt-Anchor" href="#credentials证书-凭据"></a> Credentials（证书、凭据）</h3>
+<p>凭据使用特定的身份验证提供者存储用户的身份验证。它是在用户成功通过身份验证时产生的。它将允许系统在我们的系统中找到用户。如果该用户不存在，将创建一个新用户。该用户将不会被激活，但将需要得到所有者的批准。</p>
+<p>用户可以有多个凭据链接到它。但是，每个特定的身份验证提供者只能有一个凭据。</p>
+<h3 id="用户"><a class="markdownIt-Anchor" href="#用户"></a> 用户</h3>
+<p>每个人都是系统中的一个用户。要作为特定用户登录，请使用链接到该用户的任何身份验证提供者进行身份验证。当用户登录时，它将获得一个刷新（refresh token）和一个访问（access token）令牌，以向Home Assistant发出请求。</p>
+<h4 id="拥有者owner"><a class="markdownIt-Anchor" href="#拥有者owner"></a> 拥有者（owner）</h4>
+<p>在onboarding期间创建的用户将被标记为“所有者”。所有者能够管理其他用户，并且总是能够访问所有权限。</p>
+<h3 id="组"><a class="markdownIt-Anchor" href="#组"></a> 组</h3>
+<p>用户是一个或多个组的成员。组成员关系是授予用户权限的方式。</p>
+<h3 id="权限策略permission-policy"><a class="markdownIt-Anchor" href="#权限策略permission-policy"></a> 权限策略（Permission Policy）</h3>
+<p>权限策略描述了一个组可以访问哪些资源。有关权限和策略的更多信息，请参见<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/auth_permissions">权限</a>。</p>
+<h3 id="refresh-and-access-token"><a class="markdownIt-Anchor" href="#refresh-and-access-token"></a> refresh and access token</h3>
+<p>希望访问Home Assistant的应用程序将要求用户启动授权流。当用户使用Home Assistant成功授权应用程序时，该流将生成授权码（authorization code)。此码可用于获取访问（access token）和刷新（refresh token）令牌。访问令牌（access token）将有一个有限的生存期，而刷新令牌 （refresh token）将保持有效，直到用户删除它。</p>
+<p>访问令牌用于访问Home Assistant api。刷新令牌用于检索新的有效访问令牌。</p>
+<h4 id="refresh-token-类型"><a class="markdownIt-Anchor" href="#refresh-token-类型"></a> refresh token 类型</h4>
+<ul>
+<li>正常，这些是用户授权应用程序时生成的令牌。应用程序将代表用户保留这些令牌；</li>
+<li>长期存活的access token，这些是支持长期生存访问令牌的刷新令牌。它们是在内部创建的，从不向用户公开；</li>
+<li>系统，这些令牌只能由Home Assistant OS和Supervisor等系统用户生成和使用。它们永远不会暴露给用户。</li>
+</ul>
+<h2 id="权限permissions"><a class="markdownIt-Anchor" href="#权限permissions"></a> 权限（permissions）</h2>
+<p>权限限制用户可以访问或控制的内容。权限被附加到组，用户可以是组的成员。用户所属的所有组的组合权限决定了用户可以看到什么，不能看到什么或控制什么。</p>
+<p>权限不适用于标记为“所有者”的用户。这个用户将始终能够访问所有内容。</p>
+<h3 id="普通权限结构"><a class="markdownIt-Anchor" href="#普通权限结构"></a> 普通权限结构</h3>
+<p>策略是一种字典，在根级别由不同类别的权限组成。在当前的实现中，这仅限于实体。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;entities&quot;</span>:&#123;</span><br><span class="line">    # ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个类别可以进一步细分为描述该类别部分的子类别。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;entities&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;domains&quot;</span>: &#123;</span><br><span class="line">            # …</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;entity_ids&quot;</span>: &#123;</span><br><span class="line">            # …</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果省略了某个类别，用户将没有该类别的权限。</p>
+<p>定义策略时，任何位置的任何字典值都可以用True或None替换。True表示授予权限，None表示使用default，即拒绝访问。</p>
+<h3 id="实体entities"><a class="markdownIt-Anchor" href="#实体entities"></a> 实体（Entities）</h3>
+<p>实体权限可以使用子类别entity_ids、device_ids、area_ids和domain在每个实体和域的基础上设置。您可以通过设置值为True授予所有访问权限，或者您可以使用“读”、“控制”、“编辑”权限单独指定每个实体。</p>
+<p>系统将根据顺序返回第一个匹配结果:entity_ids、device_ids、area_ids、domains、all。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;entities&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;domains&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;switch&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;entity_ids&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;light.kitchen&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;read&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;control&quot;</span>: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="合并策略"><a class="markdownIt-Anchor" href="#合并策略"></a> 合并策略</h3>
+<p>如果用户是多个组的成员，组权限策略将在运行时组合为单个策略。当合并策略时，我们将查看字典的每一层，并使用以下方法比较每个源的值:</p>
+<ol>
+<li>如果其中任何一个值为True，则合并后的值为True；</li>
+<li>如果有任何值是字典，则合并的值将成为使用此方法递归检查每个值而创建的字典；</li>
+<li>如果所有值都为None，则合并后的值为None；</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: &#123;</span><br><span class="line">            &quot;light.kitchen&quot;: True</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 合并后的</span><br><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="检测权限"><a class="markdownIt-Anchor" href="#检测权限"></a> 检测权限</h3>
+<p>我们目前有两种不同的权限检查:用户是否可以对一个实体进行读取/控制/编辑操作，以及用户是admin，因此允许更改这个配置设置。</p>
+<p>所有用户都可以访问某些api，但可能会根据权限提供有限的作用域，比如呈现模板。</p>
+<h4 id="检测权限-2"><a class="markdownIt-Anchor" href="#检测权限-2"></a> 检测权限</h4>
+<p>要检查权限，您需要拥有对用户对象的访问权限。一旦您拥有了用户对象，检查权限就很容易了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.exceptions <span class="keyword">import</span> Unauthorized</span><br><span class="line"><span class="keyword">from</span> homeassistant.permissions.const <span class="keyword">import</span> POLICY_READ, POLICY_CONTROL, POLICY_EDIT</span><br><span class="line"></span><br><span class="line"><span class="comment"># Raise error if user is not an admin</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user.is_admin:</span><br><span class="line">    <span class="keyword">raise</span> Unauthorized()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Raise error if user does not have access to control an entity</span></span><br><span class="line"><span class="comment"># Available policies: POLICY_READ, POLICY_CONTROL, POLICY_EDIT</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user.permissions.check_entity(entity_id, POLICY_CONTROL):</span><br><span class="line">    <span class="keyword">raise</span> Unauthorized()</span><br></pre></td></tr></table></figure>
+<h4 id="context对象"><a class="markdownIt-Anchor" href="#context对象"></a> context对象</h4>
+<h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
+<h2 id="authentication-providers"><a class="markdownIt-Anchor" href="#authentication-providers"></a> Authentication Providers</h2>
+<h2 id="multi-factor-authentication-modules"><a class="markdownIt-Anchor" href="#multi-factor-authentication-modules"></a> Multi-factor Authentication Modules</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20211227-f6347120.html" rel="prev" title="基础架构">
+      <i class="fa fa-chevron-left"></i> 基础架构
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20211227-2a1422d2.html" rel="next" title="配置">
+      配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%8F%90%E4%BE%9B%E8%80%85"><span class="nav-number">1.1.</span> <span class="nav-text"> 身份认证提供者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#credentials%E8%AF%81%E4%B9%A6-%E5%87%AD%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text"> Credentials（证书、凭据）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">1.3.</span> <span class="nav-text"> 用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E6%9C%89%E8%80%85owner"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 拥有者（owner）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text"> 组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AD%96%E7%95%A5permission-policy"><span class="nav-number">1.5.</span> <span class="nav-text"> 权限策略（Permission Policy）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#refresh-and-access-token"><span class="nav-number">1.6.</span> <span class="nav-text"> refresh and access token</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#refresh-token-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text"> refresh token 类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90permissions"><span class="nav-number">2.</span> <span class="nav-text"> 权限（permissions）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%9D%83%E9%99%90%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text"> 普通权限结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93entities"><span class="nav-number">2.2.</span> <span class="nav-text"> 实体（Entities）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E7%AD%96%E7%95%A5"><span class="nav-number">2.3.</span> <span class="nav-text"> 合并策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90"><span class="nav-number">2.4.</span> <span class="nav-text"> 检测权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90-2"><span class="nav-number">2.4.1.</span> <span class="nav-text"> 检测权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#context%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.4.2.</span> <span class="nav-text"> context对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">3.</span> <span class="nav-text"> API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#authentication-providers"><span class="nav-number">4.</span> <span class="nav-text"> Authentication Providers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-factor-authentication-modules"><span class="nav-number">5.</span> <span class="nav-text"> Multi-factor Authentication Modules</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
