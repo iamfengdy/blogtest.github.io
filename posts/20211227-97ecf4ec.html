@@ -28,8 +28,10 @@
 <meta property="og:description" content="身份认证">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/assets/images/1af71e984b334b4e9320f873d91c136e.png">
+<meta property="og:image" content="http://example.com/assets/images/49867633a5b946ba983c19f702f1c55c.png">
+<meta property="og:image" content="http://example.com/assets/images/593ea68ece534717be43c509e8623fde.png">
 <meta property="article:published_time" content="2021-12-27T07:14:07.000Z">
-<meta property="article:modified_time" content="2021-12-27T08:12:08.520Z">
+<meta property="article:modified_time" content="2021-12-28T03:56:16.062Z">
 <meta property="article:author" content="fengdy">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary">
@@ -209,9 +211,28 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-27 15:14:07 / 修改时间：16:12:08" itemprop="dateCreated datePublished" datetime="2021-12-27T15:14:07+08:00">2021-12-27</time>
+              <time title="创建时间：2021-12-27 15:14:07" itemprop="dateCreated datePublished" datetime="2021-12-27T15:14:07+08:00">2021-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-28 11:56:16" itemprop="dateModified" datetime="2021-12-28T11:56:16+08:00">2021-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/home-assistant/" itemprop="url" rel="index"><span itemprop="name">home-assistant</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/home-assistant/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a>
+                </span>
             </span>
 
           
@@ -235,9 +256,9 @@
 <p>HA将使用的身份验证提供程序在<code>configuration.yaml</code>中指定。可以激活同一个身份验证提供者的多个实例。在这种情况下，每个都将由一个惟一的标识符标识。相同类型的身份验证提供者不会共享凭据。</p>
 <h3 id="credentials证书-凭据"><a class="markdownIt-Anchor" href="#credentials证书-凭据"></a> Credentials（证书、凭据）</h3>
 <p>凭据使用特定的身份验证提供者存储用户的身份验证。它是在用户成功通过身份验证时产生的。它将允许系统在我们的系统中找到用户。如果该用户不存在，将创建一个新用户。该用户将不会被激活，但将需要得到所有者的批准。</p>
-<p>用户可以有多个凭据链接到它。但是，每个特定的身份验证提供者只能有一个凭据。</p>
+<p>用户可以有多个凭据链接到它本身（即用户）。但是，每个特定的身份验证提供者只能有一个凭据。</p>
 <h3 id="用户"><a class="markdownIt-Anchor" href="#用户"></a> 用户</h3>
-<p>每个人都是系统中的一个用户。要作为特定用户登录，请使用链接到该用户的任何身份验证提供者进行身份验证。当用户登录时，它将获得一个刷新（refresh token）和一个访问（access token）令牌，以向Home Assistant发出请求。</p>
+<p>每个人都是系统中的一个用户。要作为特定用户登录，请使用链接到该用户的任一身份验证提供者进行身份验证。当用户登录时，它将获得一个刷新（refresh token）和一个访问（access token）令牌，以向Home Assistant发出请求。</p>
 <h4 id="拥有者owner"><a class="markdownIt-Anchor" href="#拥有者owner"></a> 拥有者（owner）</h4>
 <p>在onboarding期间创建的用户将被标记为“所有者”。所有者能够管理其他用户，并且总是能够访问所有权限。</p>
 <h3 id="组"><a class="markdownIt-Anchor" href="#组"></a> 组</h3>
@@ -254,6 +275,9 @@
 <li>系统，这些令牌只能由Home Assistant OS和Supervisor等系统用户生成和使用。它们永远不会暴露给用户。</li>
 </ul>
 <h2 id="权限permissions"><a class="markdownIt-Anchor" href="#权限permissions"></a> 权限（permissions）</h2>
+<blockquote>
+<p>这是一个实验性的特性，还没有启用或实施</p>
+</blockquote>
 <p>权限限制用户可以访问或控制的内容。权限被附加到组，用户可以是组的成员。用户所属的所有组的组合权限决定了用户可以看到什么，不能看到什么或控制什么。</p>
 <p>权限不适用于标记为“所有者”的用户。这个用户将始终能够访问所有内容。</p>
 <h3 id="普通权限结构"><a class="markdownIt-Anchor" href="#普通权限结构"></a> 普通权限结构</h3>
@@ -275,7 +299,7 @@
 <li>如果所有值都为None，则合并后的值为None；</li>
 </ol>
 <p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: &#123;</span><br><span class="line">            &quot;light.kitchen&quot;: True</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 合并后的</span><br><span class="line">&#123;</span><br><span class="line">    &quot;entities&quot;: &#123;</span><br><span class="line">        &quot;entity_ids&quot;: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;entities&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;entity_ids&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;light.kitchen&quot;</span>: True</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;entities&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;entity_ids&quot;</span>: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 合并后的</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;entities&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;entity_ids&quot;</span>: True</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="检测权限"><a class="markdownIt-Anchor" href="#检测权限"></a> 检测权限</h3>
 <p>我们目前有两种不同的权限检查:用户是否可以对一个实体进行读取/控制/编辑操作，以及用户是admin，因此允许更改这个配置设置。</p>
 <p>所有用户都可以访问某些api，但可能会根据权限提供有限的作用域，比如呈现模板。</p>
@@ -283,9 +307,268 @@
 <p>要检查权限，您需要拥有对用户对象的访问权限。一旦您拥有了用户对象，检查权限就很容易了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.exceptions <span class="keyword">import</span> Unauthorized</span><br><span class="line"><span class="keyword">from</span> homeassistant.permissions.const <span class="keyword">import</span> POLICY_READ, POLICY_CONTROL, POLICY_EDIT</span><br><span class="line"></span><br><span class="line"><span class="comment"># Raise error if user is not an admin</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user.is_admin:</span><br><span class="line">    <span class="keyword">raise</span> Unauthorized()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Raise error if user does not have access to control an entity</span></span><br><span class="line"><span class="comment"># Available policies: POLICY_READ, POLICY_CONTROL, POLICY_EDIT</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user.permissions.check_entity(entity_id, POLICY_CONTROL):</span><br><span class="line">    <span class="keyword">raise</span> Unauthorized()</span><br></pre></td></tr></table></figure>
 <h4 id="context对象"><a class="markdownIt-Anchor" href="#context对象"></a> context对象</h4>
+<p>Home Assistant中的所有服务调用、触发的事件和状态都有一个上下文对象（context）。该对象允许我们将更改属性设置为事件和服务。这些上下文对象还包含一个用户id，用于检查权限。</p>
+<p>对于权限检查来说，代表用户执行的操作是使用包含用户ID的上下文完成的，这一点至关重要。如果您处于服务处理程序（service handler）中，则应该重用传入上下文call.context。如果你是在WebSocket API或Rest API端点，你应该创建一个正确的用户上下文:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.core <span class="keyword">import</span> Context</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> hass.services.async_call(</span><br><span class="line">    <span class="string">&quot;homeassistant&quot;</span>, <span class="string">&quot;stop&quot;</span>, context=Context(user_id=user.<span class="built_in">id</span>), blocking=<span class="literal">True</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="如果一个权限校验失败"><a class="markdownIt-Anchor" href="#如果一个权限校验失败"></a> 如果一个权限校验失败</h4>
+<p>当您检测到未经授权的操作时，您应该引发homeassistant.exceptions.Unauthorized异常。此异常将取消当前操作，并通知用户他们的操作是未授权的。</p>
+<p>Unauthorized异常有各种参数，用来识别权限检查失败。所有字段都是可选的。</p>
+<p>不是所有的动作都有一个ID(像添加config entry)，然后我们使用这个fallback来知道哪些类别是unauth</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>context</td>
+<td>The context of the current call</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>The user ID that we tried to operate on.</td>
+</tr>
+<tr>
+<td>entity_id</td>
+<td>The entity ID that we tried to operate on.</td>
+</tr>
+<tr>
+<td>config_entry_id</td>
+<td>The config entry ID that we tried to operate on.</td>
+</tr>
+<tr>
+<td>perm_category</td>
+<td>The permission category that we tested. Only necessary if we don’t have an object ID that the user tried to operate on (like when we create a config entry).</td>
+</tr>
+<tr>
+<td>permission</td>
+<td>The permission that we tested, ie <code>POLICY_READ</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="保护服务调用处理程序"><a class="markdownIt-Anchor" href="#保护服务调用处理程序"></a> 保护服务调用处理程序</h4>
+<p>服务调用允许用户控制实体或将其集成为一个整体。服务调用使用附加的上下文来查看是哪个用户调用了该命令。因为使用了上下文，所以将调用上下文传递给所有服务调用是很重要的。</p>
+<p>所有通过实体组件(component.async_register_entity_service())注册的服务将自动检查其权限。</p>
+<h5 id="检查实体的权限"><a class="markdownIt-Anchor" href="#检查实体的权限"></a> 检查实体的权限</h5>
+<p>您的服务调用处理程序将需要检查它将操作的每个实体的权限。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.exceptions <span class="keyword">import</span> Unauthorized, UnknownUser</span><br><span class="line"><span class="keyword">from</span> homeassistant.auth.permissions.const <span class="keyword">import</span> POLICY_CONTROL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">handle_entity_service</span>(<span class="params">call</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Handle a service call.&quot;&quot;&quot;</span></span><br><span class="line">    entity_ids = call.data[<span class="string">&quot;entity_id&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> entity_id <span class="keyword">in</span> entity_ids:</span><br><span class="line">        <span class="keyword">if</span> call.context.user_id:</span><br><span class="line">            user = <span class="keyword">await</span> hass.auth.async_get_user(call.context.user_id)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">raise</span> UnknownUser(</span><br><span class="line">                    context=call.context,</span><br><span class="line">                    entity_id=entity_id,</span><br><span class="line">                    permission=POLICY_CONTROL,</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> user.permissions.check_entity(entity_id, POLICY_CONTROL):</span><br><span class="line">                <span class="keyword">raise</span> Unauthorized(</span><br><span class="line">                    context=call.context,</span><br><span class="line">                    entity_id=entity_id,</span><br><span class="line">                    permission=POLICY_CONTROL,</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Do action on entity</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    hass.services.async_register(DOMAIN, <span class="string">&quot;my_service&quot;</span>, handle_entity_service)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h5 id="检查admin权限"><a class="markdownIt-Anchor" href="#检查admin权限"></a> 检查admin权限</h5>
+<p>从Home Assistant 0.90开始，有一个特殊的装饰器来帮助保护需要管理员访问权限的服务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># New in Home Assistant 0.90</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">handle_admin_service</span>(<span class="params">call</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Handle a service call.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Do admin action</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    hass.helpers.service.async_register_admin_service(</span><br><span class="line">        DOMAIN, <span class="string">&quot;my_service&quot;</span>, handle_admin_service, vol.Schema(&#123;&#125;)</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h4 id="保护rest-api端点"><a class="markdownIt-Anchor" href="#保护rest-api端点"></a> 保护REST API端点</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.core <span class="keyword">import</span> Context</span><br><span class="line"><span class="keyword">from</span> homeassistant.components.http.view <span class="keyword">import</span> HomeAssistantView</span><br><span class="line"><span class="keyword">from</span> homeassistant.exceptions <span class="keyword">import</span> Unauthorized</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyView</span>(<span class="params">HomeAssistantView</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;View to handle Status requests.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    url = <span class="string">&quot;/api/my-component/my-api&quot;</span></span><br><span class="line">    name = <span class="string">&quot;api:my-component:my-api&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Notify that the API is running.&quot;&quot;&quot;</span></span><br><span class="line">        hass = request.app[<span class="string">&quot;hass&quot;</span>]</span><br><span class="line">        user = request[<span class="string">&quot;hass_user&quot;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> user.is_admin:</span><br><span class="line">            <span class="keyword">raise</span> Unauthorized()</span><br><span class="line"></span><br><span class="line">        hass.bus.async_fire(</span><br><span class="line">            <span class="string">&quot;my-component-api-running&quot;</span>, context=Context(user_id=user.<span class="built_in">id</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.json_message(<span class="string">&quot;Done.&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="保护websocket-api"><a class="markdownIt-Anchor" href="#保护websocket-api"></a> 保护websocket api</h4>
+<p>验证Websocket API端点的权限可以通过connection.user访问用户来完成。如果需要检查管理员访问权限，可以使用内置的@require_admin装饰器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> websocket_api</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    hass.components.websocket_api.async_register_command(websocket_create)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@websocket_api.require_admin</span></span><br><span class="line"><span class="meta">@websocket_api.async_response</span></span><br><span class="line"><span class="meta">@websocket_api.websocket_command(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="meta">    &#123;vol.Required(<span class="params"><span class="string">&quot;type&quot;</span></span>): <span class="string">&quot;my-component/my-action&quot;</span>,&#125;</span></span></span><br><span class="line"><span class="params"><span class="meta"></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">websocket_create</span>(<span class="params">hass, connection, msg</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Create a user.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Do action</span></span><br></pre></td></tr></table></figure>
 <h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
+<h3 id="认证api"><a class="markdownIt-Anchor" href="#认证api"></a> 认证API</h3>
+<p>此页面将描述应用程序授权和集成Home Assistant实例所需的步骤。查看由我们的助手库<a target="_blank" rel="noopener" href="https://github.com/home-assistant/home-assistant-js-websocket">home-assistant-js-websocket</a>提供的<a target="_blank" rel="noopener" href="https://hass-auth-demo.glitch.me/">演示</a>。</p>
+<p>每个用户都有自己的Home Assistant实例，它让每个用户可以控制自己的数据。然而，我们也想让第三方开发者更容易创建允许用户与Home Assistant集成的应用程序。为了实现这一点，我们采用了<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc6749">OAuth 2规范</a>和<a target="_blank" rel="noopener" href="https://indieauth.spec.indieweb.org/">OAuth 2 IndieAuth扩展</a>来生成客户端。</p>
+<h3 id="客户端"><a class="markdownIt-Anchor" href="#客户端"></a> 客户端</h3>
+<p>在要求用户使用应用程序授权其实例之前，您将需要一个客户端。在传统的OAuth2中，服务器需要生成一个客户端，然后用户才能授权。但是，由于每个服务器都属于一个用户，所以我们采用了与<a target="_blank" rel="noopener" href="https://indieauth.spec.indieweb.org/#client-identifier">IndieAuth</a>稍有不同的方法。</p>
+<p>您需要使用的客户端ID是您的应用程序的网站。重定向url必须与客户端ID具有相同的主机和端口。例如:</p>
+<ul>
+<li>客户机id: <a target="_blank" rel="noopener" href="https://www.my-application.io">https://www.my-application.io</a></li>
+<li>重定向uri: <a target="_blank" rel="noopener" href="https://www.my-application.io/hass/auth_callback">https://www.my-application.io/hass/auth_callback</a></li>
+</ul>
+<p>如果你需要一个不同的重定向url(例如，如果构建一个本地应用程序)，你可以添加一个HTML标签到你的应用程序的网站内容(客户端ID)与一个批准的重定向url。例如，将此添加到您的站点的白名单重定向uri hass:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&#x27;redirect_uri&#x27;</span> <span class="attr">href</span>=<span class="string">&#x27;hass://auth&#x27;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>HA将扫描网站的前10kB链接标签.</p>
+<h3 id="认证"><a class="markdownIt-Anchor" href="#认证"></a> 认证</h3>
+<p><img src="/assets/images/49867633a5b946ba983c19f702f1c55c.png" alt="49867633a5b946ba983c19f702f1c55c" /></p>
+<p>授权url（authorize url)应该包含client_id和redirect_uri作为查询参数。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://your-instance.com/auth/authorize?</span><br><span class="line">    client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&amp;</span><br><span class="line">    redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2F%3Fauth_callback%3D1</span><br></pre></td></tr></table></figure>
+<p>您还可以选择包含一个state参数，它将被添加到重定向uri中。该状态非常适合存储您正在进行身份验证的实例url。例子:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://your-instance.com/auth/authorize?</span><br><span class="line">    client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&amp;</span><br><span class="line">    redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2Fauth_callback&amp;</span><br><span class="line">    state=http%3A%2F%2Fhassio.local%3A8123</span><br></pre></td></tr></table></figure>
+<p>用户将导航到这个链接，并看到登录和授权应用程序的说明。一旦授权，用户将被重定向回传入的重定向uri，授权代码和状态将作为查询参数的一部分。例子:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://hass-auth-demo.glitch.me/auth_callback</span><br><span class="line">    code=12345&amp;</span><br><span class="line">    state=http%3A%2F%2Fhassio.local%3A8123</span><br></pre></td></tr></table></figure>
+<p>可以通过将此授权代码发送到令牌端点（token endpoint)来交换令牌(请参阅下一节)。</p>
+<h3 id="token"><a class="markdownIt-Anchor" href="#token"></a> token</h3>
+<p>token端点返回给定有效授权的令牌。此授予是从授权端点检索到的授权代码或刷新令牌。对于刷新令牌，令牌端点也能够撤销令牌。</p>
+<p>与该端点的所有交互都需要是发送到http://your-instance.com/auth/token的HTTP POST请求，请求体编码为application/x-www-form-urlencoded。</p>
+<h4 id="authorization-code授权码"><a class="markdownIt-Anchor" href="#authorization-code授权码"></a> Authorization code(授权码)</h4>
+<blockquote>
+<p>到令牌端点的所有请求都需要包含用于将用户重定向到授权端点的完全相同的客户端ID。</p>
+</blockquote>
+<p>在用户成功完成授权步骤后，使用授权类型authorization_code检索令牌。请求体是:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant_type=authorization_code&amp;</span><br><span class="line">code=12345&amp;</span><br><span class="line">client_id=https%3A%2F%2Fhass-auth-demo.glitch.me</span><br></pre></td></tr></table></figure>
+<p>返回响应将是一个访问和刷新令牌:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;access_token&quot;</span>: <span class="string">&quot;ABCDEFGH&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;expires_in&quot;</span>: <span class="number">1800</span>,</span><br><span class="line">    <span class="attr">&quot;refresh_token&quot;</span>: <span class="string">&quot;IJKLMNOPQRST&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;token_type&quot;</span>: <span class="string">&quot;Bearer&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问令牌是一个短期存在的令牌，可用于访问API。可以使用刷新令牌来获取新的访问令牌。expires_in值是访问令牌有效的秒数。</p>
+<p>如果发出了无效的请求，将返回HTTP状态码400。如果请求不活动用户的令牌，则HTTP状态码为403。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;error&quot;</span>: <span class="string">&quot;invalid_request&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;error_description&quot;</span>: <span class="string">&quot;Invalid client id&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="refresh-token"><a class="markdownIt-Anchor" href="#refresh-token"></a> refresh token</h4>
+<p>通过授权类型authorization_code检索到刷新令牌后，就可以使用它来获取新的访问令牌。请求体是:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant_type=refresh_token&amp;</span><br><span class="line">refresh_token=IJKLMNOPQRST&amp;</span><br><span class="line">client_id=https%3A%2F%2Fhass-auth-demo.glitch.me</span><br></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;access_token&quot;</span>: <span class="string">&quot;ABCDEFGH&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;expires_in&quot;</span>: <span class="number">1800</span>,</span><br><span class="line">    <span class="attr">&quot;token_type&quot;</span>: <span class="string">&quot;Bearer&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果发出了无效的请求，将返回HTTP状态码400。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;error&quot;</span>: <span class="string">&quot;invalid_request&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;error_description&quot;</span>: <span class="string">&quot;Invalid client id&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="revoking-a-refresh-token"><a class="markdownIt-Anchor" href="#revoking-a-refresh-token"></a> Revoking a refresh token</h4>
+<blockquote>
+<p>Client_id不再需要</p>
+</blockquote>
+<p>令牌端点还能够撤销刷新令牌。撤销一个刷新令牌将立即撤销刷新令牌和它曾经授予的所有访问令牌。要撤销刷新令牌，请执行以下请求:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">token=IJKLMNOPQRST&amp;</span><br><span class="line">action=revoke</span><br></pre></td></tr></table></figure>
+<p>无论请求是否成功，请求将始终以空体和HTTP状态200进行响应。</p>
+<h3 id="long-lived-access-token"><a class="markdownIt-Anchor" href="#long-lived-access-token"></a> Long-lived access token</h3>
+<p>长寿命访问令牌的有效期为10年。这些对于集成第三方api和webhook风格的集成非常有用。长期访问令牌可以使用用户的家庭助理配置文件页面底部的“长期访问令牌”部分创建。</p>
+<p>您还可以使用websocket命令auth/long_lived_access_token生成一个长期生存的访问令牌，它将为当前用户创建一个长期生存的访问令牌。访问令牌字符串不保存在Home Assistant中;你必须把它记录在一个安全的地方。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;id&quot;</span>: <span class="number">11</span>,</span><br><span class="line">    <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;auth/long_lived_access_token&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;client_name&quot;</span>: <span class="string">&quot;GPS Logger&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;client_icon&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;lifespan&quot;</span>: <span class="number">365</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应包含一个长期存在的访问令牌:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;id&quot;</span>: <span class="number">11</span>,</span><br><span class="line">    <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;result&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;success&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">&quot;result&quot;</span>: <span class="string">&quot;ABCDEFGH&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="making-authenticated-requests"><a class="markdownIt-Anchor" href="#making-authenticated-requests"></a> Making authenticated requests</h3>
+<p>有了访问令牌后，就可以向Home Assistant api发出经过身份验证的请求。</p>
+<p>对于websocket连接，在认证消息中传递访问令牌。</p>
+<p>对于HTTP请求，将令牌类型和访问令牌作为授权头传递:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer ABCDEFGH</span><br></pre></td></tr></table></figure>
+<p>如果访问令牌不再有效，您将得到一个HTTP状态码401未授权的响应。这意味着您需要刷新令牌。如果刷新令牌不起作用，则令牌将不再有效，因此用户将不再登录。您需要清除用户的数据，并请用户重新授权。</p>
+<h3 id="signed-paths"><a class="markdownIt-Anchor" href="#signed-paths"></a> Signed paths</h3>
+<p>有时您希望用户向Home Assistant发出GET请求以下载数据。在这种情况下，普通的认证系统不会这样做，因为我们不能将用户链接到一个带有认证头的API。在这种情况下，带符号的路径会有所帮助。</p>
+<p>签名路径是我们服务器上的普通路径，比如/api/states，但是附带了一个安全的身份验证签名。用户能够导航到此路径，并将被授权为创建签名路径的访问令牌。经过签名的路径可以通过websocket连接创建，并且是短期的。默认的过期时间是30秒。</p>
+<p>要获取签名路径，请发送以下命令:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;auth/sign_path&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;path&quot;</span>: <span class="string">&quot;/api/states&quot;</span>,</span><br><span class="line">  <span class="comment">// optional, expiration time in seconds. Defaults to 30 seconds</span></span><br><span class="line">  <span class="attr">&quot;expires&quot;</span>: <span class="number">20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;path&quot;</span>: <span class="string">&quot;/api/states?authSig=ABCDEFGH&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于带符号的路径需要注意的一些事情:</p>
+<ul>
+<li>如果删除刷新令牌，则签名url不再有效。</li>
+<li>如果用户被删除，签名url将不再有效(因为刷新令牌将被删除)。</li>
+<li>如果HA重新启动，则签名的url不再有效。</li>
+<li>访问只有在接收到请求时才进行验证。如果响应时间超过了过期时间(例如，下载一个大文件)，那么在过期时间过去后，下载将继续。</li>
+</ul>
 <h2 id="authentication-providers"><a class="markdownIt-Anchor" href="#authentication-providers"></a> Authentication Providers</h2>
+<p>身份验证提供者确认用户的身份。用户通过登录流验证身份提供者的身份。身份验证提供者定义登录流，并可以询问用户所需的所有信息。这通常是用户名和密码，但也可能包括2FA令牌或其他挑战。</p>
+<p>一旦身份验证提供者确认了用户的身份，它将以凭据对象的形式将其传递给Home Assistant。</p>
+<h3 id="定义一个auth-provider"><a class="markdownIt-Anchor" href="#定义一个auth-provider"></a> 定义一个auth provider</h3>
+<blockquote>
+<p>我们目前只支持内置的身份验证提供者。对自定义身份验证提供者的支持可能会在将来实现。</p>
+</blockquote>
+<p>身份验证提供者定义在homeassistant/ Auth /providers/&lt;提供者名称&gt;.py中。auth提供者模块需要提供AuthProvider类和LoginFlow类的实现，它向用户询问信息，并根据data_entry_flow对其进行验证。</p>
+<p>For an example of a fully implemented auth provider, please see <a target="_blank" rel="noopener" href="https://github.com/home-assistant/core/blob/dev/homeassistant/auth/providers/insecure_example.py">insecure_example.py</a>.</p>
+<p>Auth providers shall extend the following methods of <code>AuthProvider</code> class.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>required</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>async def async_login_flow(self)</td>
+<td>是</td>
+<td>Return an instance of the login flow for a user to identify itself.</td>
+</tr>
+<tr>
+<td>async def async_get_or_create_credentials(self,flow_result)</td>
+<td>是</td>
+<td>Given the result of a login flow, return a credentials object. This can either be an existing one or a new one.</td>
+</tr>
+<tr>
+<td>async def async_user_meta_for_credentials(credentials)</td>
+<td>否</td>
+<td>Callback called Home Assistant is going to create a user from a Credentials object. Can be used to populate extra fields for the user.</td>
+</tr>
+</tbody>
+</table>
+<p>Auth providers shall extend the following methods of <code>LoginFlow</code> class</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>required</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>async def async_step_init(self, user_input=None)</td>
+<td>是</td>
+<td>Handle the login form, see more detail in below</td>
+</tr>
+</tbody>
+</table>
+<h3 id="async_step_init-of-loginflow"><a class="markdownIt-Anchor" href="#async_step_init-of-loginflow"></a> async_step_init of LoginFlow</h3>
+<blockquote>
+<p>未来该方法可能胡更改</p>
+</blockquote>
+<p>LoginFlow扩展data_entry_flow.FlowHandler。数据输入流的第一步硬编码为init，因此每个流都必须实现async_step_init方法。async_step_init的模式喜欢下面的伪代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_init</span>(<span class="params">self, user_input=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> user_input <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> self.async_show_form(</span><br><span class="line">            step_id=<span class="string">&quot;init&quot;</span>, data_schema=<span class="string">&quot;some schema to construct ui form&quot;</span></span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">if</span> is_invalid(user_input):</span><br><span class="line">        <span class="keyword">return</span> self.async_show_form(step_id=<span class="string">&quot;init&quot;</span>, errors=errors)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> self.async_finish(user_input)</span><br></pre></td></tr></table></figure>
 <h2 id="multi-factor-authentication-modules"><a class="markdownIt-Anchor" href="#multi-factor-authentication-modules"></a> Multi-factor Authentication Modules</h2>
+<p>多因素身份验证模块与身份验证提供者一起使用，以提供一个完全可配置的身份验证框架。每个MFA模块可以提供一个多因素认证功能。用户可以启用多个mfa模块，但登录过程中只能选择一个模块。</p>
+<h3 id="定义一个mfa"><a class="markdownIt-Anchor" href="#定义一个mfa"></a> 定义一个MFA</h3>
+<blockquote>
+<p>当前只支持内置的</p>
+</blockquote>
+<p>多因素认证模块定义在homeassistant/ Auth /mfa_modules/&lt;模块名&gt;.py中。auth模块需要提供MultiFactorAuthModule类的实现。</p>
+<p>有关完整实现的身份验证模块的示例，请参见<a target="_blank" rel="noopener" href="https://github.com/home-assistant/core/blob/dev/homeassistant/auth/mfa_modules/insecure_example.py">insecure_example.py</a>。</p>
+<p>多因素认证模块应该扩展MultiFactorAuthModule类的以下方法。</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>required</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@property def input_schema(self)</td>
+<td>是</td>
+<td>Return a schema defined the user input form.</td>
+</tr>
+<tr>
+<td>async def async_setup_flow(self, user_id)</td>
+<td>是</td>
+<td>Return a SetupFlow to handle the setup workflow.</td>
+</tr>
+<tr>
+<td>async def async_setup_user(self, user_id, setup_data)</td>
+<td>是</td>
+<td>Set up user for use this auth module.</td>
+</tr>
+<tr>
+<td>async def async_depose_user(self, user_id)</td>
+<td>是</td>
+<td>Remove user information from this auth module.</td>
+</tr>
+<tr>
+<td>async def async_is_user_setup(self, user_id)</td>
+<td>是</td>
+<td>Return whether user is set up.</td>
+</tr>
+<tr>
+<td>async def async_validate(self, user_id, user_input)</td>
+<td>是</td>
+<td>Given a user_id and user input, return validation result.</td>
+</tr>
+<tr>
+<td>async def async_initialize_login_mfa_step(self, user_id)</td>
+<td>否</td>
+<td>Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setup-flow"><a class="markdownIt-Anchor" href="#setup-flow"></a> setup flow</h3>
+<p>在用户可以使用多因素身份验证模块之前，必须启用或设置该模块。所有可用的模块将列出在用户配置文件页面，用户可以启用他/她想使用的模块。设置数据输入流将指导用户完成必要的步骤。</p>
+<p>每个MFA模块需要实现一个从mfa_modules扩展的设置流处理程序。SetupFlow(如果只需要一个简单的设置步骤，SetupFlow也可以使用)。例如，对于谷歌验证器(TOTP，基于时间的一次性密码)模块，流程将需要:</p>
+<ul>
+<li>生成一个秘密并将其存储在设置流程的实例中</li>
+<li>返回带有描述中的QR码的async_show_form(通过description_placeholders作为base64注入)</li>
+<li>用户扫描代码，并输入一个代码来验证它的扫描正确和时钟同步</li>
+<li>TOTP模块保存的秘密连同user_id，模块为用户启用</li>
+</ul>
+<h3 id="workflow"><a class="markdownIt-Anchor" href="#workflow"></a> workflow</h3>
+<p><img src="/assets/images/593ea68ece534717be43c509e8623fde.png" alt="593ea68ece534717be43c509e8623fde" /></p>
+<h3 id="配置示例"><a class="markdownIt-Anchor" href="#配置示例"></a> 配置示例</h3>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># configuration.xml</span></span><br><span class="line"><span class="attr">homeassistant:</span></span><br><span class="line">  <span class="attr">auth_providers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">homeassistant</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">legacy_api_password</span></span><br><span class="line">  <span class="attr">auth_mfa_modules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">totp</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">insecure_example</span></span><br><span class="line">      <span class="attr">users:</span> [&#123;<span class="attr">&#x27;user_id&#x27;:</span> <span class="string">&#x27;a_32_bytes_length_user_id&#x27;</span>, <span class="attr">&#x27;pin&#x27;:</span> <span class="string">&#x27;123456&#x27;</span>&#125;]</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，用户将首先从homeassistant或legacy_api_password身份验证提供者中选择。对于homeassistant身份验证提供商，用户将首先输入用户名/密码，如果该用户同时启用了totp和insecure_example，则用户需要选择一个身份验证模块，然后根据选择输入谷歌身份验证码或pin码。</p>
+<h3 id="验证会话"><a class="markdownIt-Anchor" href="#验证会话"></a> 验证会话</h3>
+<p>与auth提供程序不同，auth模块使用session来管理验证。认证提供者验证后，mfa模块将创建一个验证会话，包括一个过期时间和来自认证提供者验证结果的user_id。多因素认证模块不仅会验证用户输入，还会验证会话是否过期。验证会话数据存储在配置目录中。</p>
 
     </div>
 
@@ -370,7 +653,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%8F%90%E4%BE%9B%E8%80%85"><span class="nav-number">1.1.</span> <span class="nav-text"> 身份认证提供者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#credentials%E8%AF%81%E4%B9%A6-%E5%87%AD%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text"> Credentials（证书、凭据）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">1.3.</span> <span class="nav-text"> 用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E6%9C%89%E8%80%85owner"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 拥有者（owner）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text"> 组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AD%96%E7%95%A5permission-policy"><span class="nav-number">1.5.</span> <span class="nav-text"> 权限策略（Permission Policy）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#refresh-and-access-token"><span class="nav-number">1.6.</span> <span class="nav-text"> refresh and access token</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#refresh-token-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text"> refresh token 类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90permissions"><span class="nav-number">2.</span> <span class="nav-text"> 权限（permissions）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%9D%83%E9%99%90%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text"> 普通权限结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93entities"><span class="nav-number">2.2.</span> <span class="nav-text"> 实体（Entities）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E7%AD%96%E7%95%A5"><span class="nav-number">2.3.</span> <span class="nav-text"> 合并策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90"><span class="nav-number">2.4.</span> <span class="nav-text"> 检测权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90-2"><span class="nav-number">2.4.1.</span> <span class="nav-text"> 检测权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#context%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.4.2.</span> <span class="nav-text"> context对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">3.</span> <span class="nav-text"> API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#authentication-providers"><span class="nav-number">4.</span> <span class="nav-text"> Authentication Providers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-factor-authentication-modules"><span class="nav-number">5.</span> <span class="nav-text"> Multi-factor Authentication Modules</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%8F%90%E4%BE%9B%E8%80%85"><span class="nav-number">1.1.</span> <span class="nav-text"> 身份认证提供者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#credentials%E8%AF%81%E4%B9%A6-%E5%87%AD%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text"> Credentials（证书、凭据）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">1.3.</span> <span class="nav-text"> 用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E6%9C%89%E8%80%85owner"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 拥有者（owner）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text"> 组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AD%96%E7%95%A5permission-policy"><span class="nav-number">1.5.</span> <span class="nav-text"> 权限策略（Permission Policy）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#refresh-and-access-token"><span class="nav-number">1.6.</span> <span class="nav-text"> refresh and access token</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#refresh-token-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text"> refresh token 类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90permissions"><span class="nav-number">2.</span> <span class="nav-text"> 权限（permissions）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%9D%83%E9%99%90%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text"> 普通权限结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93entities"><span class="nav-number">2.2.</span> <span class="nav-text"> 实体（Entities）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E7%AD%96%E7%95%A5"><span class="nav-number">2.3.</span> <span class="nav-text"> 合并策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90"><span class="nav-number">2.4.</span> <span class="nav-text"> 检测权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9D%83%E9%99%90-2"><span class="nav-number">2.4.1.</span> <span class="nav-text"> 检测权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#context%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.4.2.</span> <span class="nav-text"> context对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%80%E4%B8%AA%E6%9D%83%E9%99%90%E6%A0%A1%E9%AA%8C%E5%A4%B1%E8%B4%A5"><span class="nav-number">2.4.3.</span> <span class="nav-text"> 如果一个权限校验失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.4.4.</span> <span class="nav-text"> 保护服务调用处理程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%9E%E4%BD%93%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">2.4.4.1.</span> <span class="nav-text"> 检查实体的权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5admin%E6%9D%83%E9%99%90"><span class="nav-number">2.4.4.2.</span> <span class="nav-text"> 检查admin权限</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4rest-api%E7%AB%AF%E7%82%B9"><span class="nav-number">2.4.5.</span> <span class="nav-text"> 保护REST API端点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4websocket-api"><span class="nav-number">2.4.6.</span> <span class="nav-text"> 保护websocket api</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">3.</span> <span class="nav-text"> API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81api"><span class="nav-number">3.1.</span> <span class="nav-text"> 认证API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.2.</span> <span class="nav-text"> 客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81"><span class="nav-number">3.3.</span> <span class="nav-text"> 认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#token"><span class="nav-number">3.4.</span> <span class="nav-text"> token</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#authorization-code%E6%8E%88%E6%9D%83%E7%A0%81"><span class="nav-number">3.4.1.</span> <span class="nav-text"> Authorization code(授权码)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#refresh-token"><span class="nav-number">3.4.2.</span> <span class="nav-text"> refresh token</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#revoking-a-refresh-token"><span class="nav-number">3.4.3.</span> <span class="nav-text"> Revoking a refresh token</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#long-lived-access-token"><span class="nav-number">3.5.</span> <span class="nav-text"> Long-lived access token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#making-authenticated-requests"><span class="nav-number">3.6.</span> <span class="nav-text"> Making authenticated requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#signed-paths"><span class="nav-number">3.7.</span> <span class="nav-text"> Signed paths</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#authentication-providers"><span class="nav-number">4.</span> <span class="nav-text"> Authentication Providers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAauth-provider"><span class="nav-number">4.1.</span> <span class="nav-text"> 定义一个auth provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async_step_init-of-loginflow"><span class="nav-number">4.2.</span> <span class="nav-text"> async_step_init of LoginFlow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-factor-authentication-modules"><span class="nav-number">5.</span> <span class="nav-text"> Multi-factor Authentication Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAmfa"><span class="nav-number">5.1.</span> <span class="nav-text"> 定义一个MFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup-flow"><span class="nav-number">5.2.</span> <span class="nav-text"> setup flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#workflow"><span class="nav-number">5.3.</span> <span class="nav-text"> workflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.4.</span> <span class="nav-text"> 配置示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E4%BC%9A%E8%AF%9D"><span class="nav-number">5.5.</span> <span class="nav-text"> 验证会话</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -393,7 +676,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
