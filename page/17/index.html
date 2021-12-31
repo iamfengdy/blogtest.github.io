@@ -181,6 +181,676 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210219-d036071c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210219-d036071c.html" class="post-title-link" itemprop="url">中介者模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-19 11:33:20" itemprop="dateCreated datePublished" datetime="2021-02-19T11:33:20+08:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-09 15:59:57" itemprop="dateModified" datetime="2021-11-09T15:59:57+08:00">2021-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/java-design-patterns/" itemprop="url" rel="index"><span itemprop="name">java-design-patterns</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>用来降低类类之间的耦合的，因为如果类类之间有依赖关系的话，不利于功能的拓展和维护，因为只要修改一个对象，其它关联的对象都得进行修改。如果使用中介者模式，只需关心和Mediator类的关系，具体类类之间的关系及调度交给Mediator就行，这有点像spring容器的作用</p>
+<h3 id="uml"><a class="markdownIt-Anchor" href="#uml"></a> UML</h3>
+<p><img src="/assets/images/27bc0f40c0754ad190c174307e745dd3.png" alt="27bc0f40c0754ad190c174307e745dd3" /></p>
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Mediator</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createMediator</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">workAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> Mediator mediator; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Mediator <span class="title">getMediator</span><span class="params">()</span></span>&#123; </span><br><span class="line">        <span class="keyword">return</span> mediator; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(Mediator mediator)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">this</span>.mediator = mediator; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User1</span> <span class="keyword">extends</span> <span class="title">User</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User1</span><span class="params">(Mediator mediator)</span></span>&#123; </span><br><span class="line">        <span class="keyword">super</span>(mediator); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        Test.printMsg(<span class="string">&quot;user1 exe!&quot;</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User2</span> <span class="keyword">extends</span> <span class="title">User</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User2</span><span class="params">(Mediator mediator)</span></span>&#123; </span><br><span class="line">        <span class="keyword">super</span>(mediator); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        Test.printMsg(<span class="string">&quot;user2 exe!&quot;</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyMediator</span> <span class="keyword">implements</span> <span class="title">Mediator</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> User user1; </span><br><span class="line">    <span class="keyword">private</span> User user2;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser1</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> user1; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser2</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> user2; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createMediator</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        user1 = <span class="keyword">new</span> User1(<span class="keyword">this</span>); </span><br><span class="line">        user2 = <span class="keyword">new</span> User2(<span class="keyword">this</span>); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">workAll</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        user1.work(); </span><br><span class="line">        user2.work(); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printMsg</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">        System.out.println(msg);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Mediator mediator = <span class="keyword">new</span> MyMediator(); </span><br><span class="line">        mediator.createMediator(); </span><br><span class="line">        mediator.workAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210219-f1601c3e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210219-f1601c3e.html" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-19 09:27:39" itemprop="dateCreated datePublished" datetime="2021-02-19T09:27:39+08:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-09 16:01:48" itemprop="dateModified" datetime="2021-11-09T16:01:48+08:00">2021-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/java-design-patterns/" itemprop="url" rel="index"><span itemprop="name">java-design-patterns</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>单例模式</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/20210219-f1601c3e.html">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-28239a8d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210218-28239a8d.html" class="post-title-link" itemprop="url">面向对象</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-18 17:11:47" itemprop="dateCreated datePublished" datetime="2021-02-18T17:11:47+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/system-design/" itemprop="url" rel="index"><span itemprop="name">system-design</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<h2 id="三要素"><a class="markdownIt-Anchor" href="#三要素"></a> 三要素</h2>
+<h3 id="1封装"><a class="markdownIt-Anchor" href="#1封装"></a> 1.封装</h3>
+<p>封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象</p>
+<h3 id="2继承"><a class="markdownIt-Anchor" href="#2继承"></a> 2.继承</h3>
+<p>继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程称为类继承。新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。</p>
+<h3 id="3多态"><a class="markdownIt-Anchor" href="#3多态"></a> 3.多态</h3>
+<p>多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。</p>
+<h2 id="5设计原则"><a class="markdownIt-Anchor" href="#5设计原则"></a> 5设计原则</h2>
+<h3 id="1单一职责原则single-resposibility-principle"><a class="markdownIt-Anchor" href="#1单一职责原则single-resposibility-principle"></a> 1.单一职责原则（Single-Resposibility Principle）</h3>
+<blockquote>
+<p>其核心思想为：一个类，最好只做一件事，只有一个引起它的变化。</p>
+</blockquote>
+<p>单一职责原则可以看做是低耦合、高内聚在面向对象原则上的引申，将职责定义为引起变化的原 因，以提高内聚性来减少引起变化的原因。职责过多，可能引起它变化的原因就越多，这将导致职责依赖，相互之间就产生影响，从而大大损伤其内聚性和耦合度。 通常意义下的单一职责，就是指只有一种单一功能，不要为类实现过多的功能点，以保证实体只有一个引起它变化的原因。专注，是一个人优良的品质；同样的，单一也是一个类的优良设计。交杂不清的职责将使得代码看起来特别别扭牵一发而动全身，有失美感和必然导致丑陋的系统错误风险。</p>
+<h3 id="2开放封闭原则open-closed-principle"><a class="markdownIt-Anchor" href="#2开放封闭原则open-closed-principle"></a> 2.开放封闭原则（Open-Closed principle）</h3>
+<blockquote>
+<p>其核心思想是：软件实体应该是可扩展的，而不可修改的。也就是，对扩展开放，对修改封闭的。</p>
+</blockquote>
+<ul>
+<li>
+<p>开放封闭原则主要体现在两个方面:</p>
+<ol>
+<li>对扩展开放，意味着有新的需求或变化时</li>
+<li>对修改封闭，意味着类一旦设计完成，就可以独立完成其工作，而不要对其进行任何尝试的修改。</li>
+</ol>
+</li>
+<li>
+<p>实现开放封闭原则的核心思想就是对抽象编程，而不对具体编程，因为抽象相对稳定。让类依赖于固定的抽象，所以修改就是封闭的；而通过面向对象的继承和多态机制，又可以实现对抽象类的继承，通过覆写其方法来改变固有行为，实现新的拓展方法，所以就是开放的。</p>
+</li>
+<li>
+<p>“需求总是变化”没有不变的软件，所以就需要用封闭开放原则来封闭变化满足需求，同时还能保持软件内部的封装体系稳定，不被需求的变化影响。</p>
+</li>
+</ul>
+<h3 id="3liskov替换原则liskov-substituion-principle"><a class="markdownIt-Anchor" href="#3liskov替换原则liskov-substituion-principle"></a> 3.Liskov替换原则（Liskov-Substituion Principle）</h3>
+<blockquote>
+<p>其核心思想是：子类必须能够替换其基类。<br />
+这一思想体现为对继承机制的约束规范，只有子类能够替换基类时，才能保证系统在运行期内识别子类，这是保证继承复 用的基础。在父类和子类的具体行为中，必须严格把握继承层次中的关系和特征，将基类替换为子类，程序的行为不会发生任何变化。同时，这一约束反过来则是不 成立的，子类可以替换基类，但是基类不一定能替换子类。</p>
+</blockquote>
+<ul>
+<li>Liskov替换原则，主要着眼于对抽象和多态建立在继承的基础上，因此只有遵循了Liskov替换原则，才能保证继承复用是可靠地。实现的方法是面向接口编程：将公共部分抽象为基类接口或抽象类，通过Extract Abstract  Class，在子类中通过覆写父类的方法实现新的方式支持同样的职责。</li>
+<li>Liskov替换原则是关于继承机制的设计原则，违反了Liskov替换原则就必然导致违反开放封闭原则</li>
+<li>Liskov替换原则能够保证系统具有良好的拓展性，同时实现基于多态的抽象机制，能够减少代码冗余，避免运行期的类型判别。</li>
+</ul>
+<h3 id="4依赖倒置原则dependecy-inversion-principle"><a class="markdownIt-Anchor" href="#4依赖倒置原则dependecy-inversion-principle"></a> 4.依赖倒置原则（Dependecy-Inversion Principle）</h3>
+<blockquote>
+<p>其核心思想是：依赖于抽象。具体而言就是高层模块不依赖于底层模块，二者都同依赖于抽象；抽象不依赖于具体，具体依赖于抽象。</p>
+</blockquote>
+<ul>
+<li>我们知道，依赖一定会存在于类与类、模块与模块之间。当两个模块之间存在紧密的耦合关系时，最好的方法就是分离接口和实现：在依赖之间定义一个抽象的接口使得高层模块调用接口，而底层模块实现接口的定义，以此来有效控制耦合关系，达到依赖于抽象的设计目标。</li>
+<li>抽象的稳定性决定了系统的稳定性，因为抽象是不变的，依赖于抽象是面向对象设计的精髓，也是依赖倒置原则的核心。</li>
+<li>依赖于抽象是一个通用的原则，而某些时候依赖于细节则是在所难免的，必须权衡在抽象和具体之间的取舍，方法不是一层不变的。依赖于抽象，就是对接口编程，不要对实现编程。</li>
+</ul>
+<h3 id="5接口隔离原则interface-segregation-principle"><a class="markdownIt-Anchor" href="#5接口隔离原则interface-segregation-principle"></a> 5.接口隔离原则（Interface-Segregation Principle）</h3>
+<blockquote>
+<p>其核心思想是：使用多个小的专门的接口，而不要使用一个大的总接口。</p>
+</blockquote>
+<ul>
+<li>具体而言，接口隔离原则体现在：接口应该是内聚的，应该避免“胖”接口。一个类对另外一个类的依赖应该建立在最小的接口上，不要强迫依赖不用的方法，这是一种接口污染。</li>
+<li>接口有效地将细节和抽象隔离，体现了对抽象编程的一切好处，接口隔离强调接口的单一性。而胖接口存在明显的弊端，会导致实现的类型必须完全实现接口的所有 方法、属性等；而某些时候，实现类型并非需要所有的接口定义，在设计上这是“浪费”，而且在实施上这会带来潜在的问题，对胖接口的修改将导致一连串的客户 端程序需要修改，有时候这是一种灾难。在这种情况下，将胖接口分解为多个特点的定制化方法，使得客户端仅仅依赖于它们的实际调用的方法，从而解除了客户端 不会依赖于它们不用的方法</li>
+<li>分离的手段主要有以下两种：
+<ul>
+<li>委托分离，通过增加一个新的类型来委托客户的请求，隔离客户和接口的直接依赖，但是会增加系统的开销。</li>
+<li>多重继承分离，通过接口多继承来实现客户的需求，这种方式是较好的。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-d7272f86.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210218-d7272f86.html" class="post-title-link" itemprop="url">权限系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-18 17:01:39" itemprop="dateCreated datePublished" datetime="2021-02-18T17:01:39+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design/system-design/" itemprop="url" rel="index"><span itemprop="name">system-design</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<h2 id="acl"><a class="markdownIt-Anchor" href="#acl"></a> ACL</h2>
+<h3 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h3>
+<p>Access Control List，访问控制列表；<br />
+即将用户与权限做成一个二维矩阵，比如</p>
+<table>
+<thead>
+<tr>
+<th>用户/权限</th>
+<th>权限a</th>
+<th>权限b</th>
+<th>……</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户1</td>
+<td>y</td>
+<td>n</td>
+<td></td>
+</tr>
+<tr>
+<td>用户2</td>
+<td>n</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>……</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点</h3>
+<h3 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点</h3>
+<ul>
+<li>权限控制比较分散，不利于组合控制</li>
+</ul>
+<h3 id="应用"><a class="markdownIt-Anchor" href="#应用"></a> 应用</h3>
+<ul>
+<li>常用于文件系统的权限设计</li>
+</ul>
+<h2 id="rbac"><a class="markdownIt-Anchor" href="#rbac"></a> RBAC</h2>
+<h3 id="简介-2"><a class="markdownIt-Anchor" href="#简介-2"></a> 简介</h3>
+<p>Role-Based Access Control，基于角色的访问控制；<br />
+用户与权限通过角色关联</p>
+<h4 id="1基本类型"><a class="markdownIt-Anchor" href="#1基本类型"></a> 1.基本类型</h4>
+<p><img src="/assets/images/4956f736d70146a3aa5c2a1215e89e6c.jpg" alt="4956f736d70146a3aa5c2a1215e89e6c" /></p>
+<h4 id="2引入用户组权限组"><a class="markdownIt-Anchor" href="#2引入用户组权限组"></a> 2.引入用户组/权限组</h4>
+<p><img src="/assets/images/c6f27222326d418ca4a65cf8622aa2d9.jpg" alt="c6f27222326d418ca4a65cf8622aa2d9" /></p>
+<h4 id="3引入继承"><a class="markdownIt-Anchor" href="#3引入继承"></a> 3.引入继承</h4>
+<p><img src="/assets/images/69dd0b2034a14a2f89266317aa18fda9.jpg" alt="69dd0b2034a14a2f89266317aa18fda9" /><br />
+<img src="/assets/images/8770cb8d9274459fa97b6be52463cbdb.jpg" alt="8770cb8d9274459fa97b6be52463cbdb" /></p>
+<h4 id="4引入限制类型"><a class="markdownIt-Anchor" href="#4引入限制类型"></a> 4.引入限制类型</h4>
+<p>当角色或权限需要隔离时引入；</p>
+<h3 id="优点-2"><a class="markdownIt-Anchor" href="#优点-2"></a> 优点</h3>
+<h3 id="缺点-2"><a class="markdownIt-Anchor" href="#缺点-2"></a> 缺点</h3>
+<h3 id="应用-2"><a class="markdownIt-Anchor" href="#应用-2"></a> 应用</h3>
+<h2 id="abac"><a class="markdownIt-Anchor" href="#abac"></a> ABAC</h2>
+<h3 id="简介-3"><a class="markdownIt-Anchor" href="#简介-3"></a> 简介</h3>
+<h3 id="优点-3"><a class="markdownIt-Anchor" href="#优点-3"></a> 优点</h3>
+<h3 id="缺点-3"><a class="markdownIt-Anchor" href="#缺点-3"></a> 缺点</h3>
+<h3 id="应用-3"><a class="markdownIt-Anchor" href="#应用-3"></a> 应用</h3>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-576e286f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/20210218-576e286f.html" class="post-title-link" itemprop="url">机器学习指南</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-18 16:54:13" itemprop="dateCreated datePublished" datetime="2021-02-18T16:54:13+08:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index"><span itemprop="name">machine-learning</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/general/" itemprop="url" rel="index"><span itemprop="name">general</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- toc -->
+<h1 id="学习之路"><a class="markdownIt-Anchor" href="#学习之路"></a> 学习之路</h1>
+<h2 id="1基础"><a class="markdownIt-Anchor" href="#1基础"></a> 1：基础</h2>
+<ol>
+<li>
+<p>英语</p>
+<blockquote>
+<p>大学英语4级</p>
+</blockquote>
+</li>
+<li>
+<p>高数（线性代数、微积分）</p>
+<blockquote>
+<p>关键概念经查阅能随时记忆起来</p>
+</blockquote>
+</li>
+<li>
+<p>编程</p>
+</li>
+<li>
+<p>概率理论与统计学</p>
+</li>
+</ol>
+<h2 id="2理论"><a class="markdownIt-Anchor" href="#2理论"></a> 2：理论</h2>
+<ol>
+<li>
+<p>machine learning-Andrew Ng</p>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gfzJlej#list/path=%2F">百度网盘</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">在线学习</a></p>
+<blockquote>
+<p>Coursera是一个非常知名的公开课网站，Andrew Ng讲授的的“machine learning”课程可以说是它的成名作</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>
+<p>机器学习基石/技法-林轩田</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/17qGVLlChaK98-OVwSmHMng#list/path=%2F">百度网盘</a></p>
+</li>
+<li>
+<p>统计学习方法-李航</p>
+</li>
+</ol>
+<blockquote>
+<p>介绍了统计机器学习的主要方法，主要是监督学习部分</p>
+</blockquote>
+<ol start="4">
+<li>统计学习基础-Trevor Hastie</li>
+</ol>
+<blockquote>
+<p>对当前较为流行的统计机器学习方法有较为全面的介绍</p>
+</blockquote>
+<ol start="5">
+<li>机器学习-周志华</li>
+</ol>
+<blockquote>
+<p>中文里最好的机器学习教科书</p>
+</blockquote>
+<ol start="6">
+<li>DEEP LEARNING 深度学习</li>
+</ol>
+<blockquote>
+<p>目前关于深度学习最全面的图书</p>
+</blockquote>
+<ol start="7">
+<li>The element of statistical learning</li>
+<li>算法导论</li>
+</ol>
+<h2 id="3实践"><a class="markdownIt-Anchor" href="#3实践"></a> 3.实践</h2>
+<ol>
+<li>机器学习实战</li>
+</ol>
+<blockquote>
+<p>基于python对一些主要的机器学习算法进行了代码实现，一定要照着敲一遍</p>
+</blockquote>
+<ol start="2">
+<li>
+<p>利用Python进行数据分析</p>
+<blockquote>
+<p>numpy与pandas是python进行处理数据的两个关键库</p>
+</blockquote>
+</li>
+<li>
+<p>Python machine learning</p>
+</li>
+<li>
+<p>cs231n（Convolutional Neural Networks for Visual Recognition）</p>
+</li>
+</ol>
+<blockquote>
+<p>做图像识别的</p>
+</blockquote>
+<ol start="5">
+<li></li>
+</ol>
+<h2 id="4实战"><a class="markdownIt-Anchor" href="#4实战"></a> 4.实战</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions">Competitions | Kaggle</a></li>
+</ol>
+<blockquote>
+<p>一个机器学习竞赛网站</p>
+</blockquote>
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/">阿里云天池</a></li>
+<li><a target="_blank" rel="noopener" href="https://js.dclab.run/v2/index.html">中国版kaggle</a></li>
+<li>leetcode</li>
+</ol>
+<h2 id="5进阶"><a class="markdownIt-Anchor" href="#5进阶"></a> 5.进阶</h2>
+<ol>
+<li>模式分类 - Richard O. Duda</li>
+<li>Pattern Recognition and Machine Learning -必读</li>
+<li>机器学习 - Tom Mitchell</li>
+<li>深度学习 - Ian Goodfellow</li>
+<li>数据挖掘导论 - Pang-Ning Tan</li>
+</ol>
+<h1 id="推荐"><a class="markdownIt-Anchor" href="#推荐"></a> 推荐</h1>
+<h2 id="1公开课"><a class="markdownIt-Anchor" href="#1公开课"></a> 1.公开课</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.coursera.org/course/ml">AndrewNg在coursera伤的机器学习课程</a></li>
+<li><a target="_blank" rel="noopener" href="http://v.163.com/special/opencourse/machinelearning.html">AngrewNg在163上的机器学习视频</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.coursera.org/course/pgm">Daphne Koller 图模型</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.coursera.org/course/neuralnets">Geoffrey Hinton神经网络</a></li>
+</ol>
+<h2 id="2经典书籍"><a class="markdownIt-Anchor" href="#2经典书籍"></a> 2.经典书籍</h2>
+<ol>
+<li>Tom M.Mitchell. Machine Learning</li>
+<li>Kevin P. Murphy. Machine Learning: A Probabilistic Perspective</li>
+<li>Christopher M.Bishop. Pattern Recognition and Machine Learning</li>
+<li>Trevor Hastie , Robert Tibshirani , Jerome Friedman. The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition</li>
+<li>Richard O. Duda. Pattern Classification</li>
+<li>李航，统计学习方法</li>
+<li>David Barber ，Bayesian Reasoning and Machine Learning</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-13aedf83.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -811,679 +1481,6 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-7b216a3b.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-flying.gif">
-      <meta itemprop="name" content="fengdy">
-      <meta itemprop="description" content="i believe i can fly.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FLY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/20210218-7b216a3b.html" class="post-title-link" itemprop="url">树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-18 14:47:46" itemprop="dateCreated datePublished" datetime="2021-02-18T14:47:46+08:00">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/data-structure/" itemprop="url" rel="index"><span itemprop="name">data-structure</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<ul>
-<li>每个节点有零个或多个子节点</li>
-<li>没有父节点的节点称为根节点</li>
-<li>每一个非根节点有且只有一个父节点</li>
-<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
-</ul>
-<h2 id="名词"><a class="markdownIt-Anchor" href="#名词"></a> 名词</h2>
-<h3 id="节点的度"><a class="markdownIt-Anchor" href="#节点的度"></a> 节点的度</h3>
-<p>一个节点含有的子树的个数</p>
-<h3 id="叶节点或终端节点"><a class="markdownIt-Anchor" href="#叶节点或终端节点"></a> 叶节点（或终端节点）</h3>
-<p>度为0的节点</p>
-<h3 id="分支节点或非终端节点"><a class="markdownIt-Anchor" href="#分支节点或非终端节点"></a> 分支节点（或非终端节点）</h3>
-<p>度不为0的节点</p>
-<h3 id="双亲节点或父节点"><a class="markdownIt-Anchor" href="#双亲节点或父节点"></a> 双亲节点（或父节点）</h3>
-<p>若一个节点含有子节点，则该节点为其子节点的父节点</p>
-<h3 id="孩子节点或子节点"><a class="markdownIt-Anchor" href="#孩子节点或子节点"></a> 孩子节点（或子节点）</h3>
-<h3 id="兄弟节点"><a class="markdownIt-Anchor" href="#兄弟节点"></a> 兄弟节点</h3>
-<p>具有相同父节点的节点</p>
-<h3 id="树的度"><a class="markdownIt-Anchor" href="#树的度"></a> 树的度</h3>
-<p>一棵树中，最大的节点的度</p>
-<h3 id="节点的层次"><a class="markdownIt-Anchor" href="#节点的层次"></a> 节点的层次</h3>
-<p>根节点为1，以此类推</p>
-<h3 id="高度树-节点"><a class="markdownIt-Anchor" href="#高度树-节点"></a> 高度（树、节点）</h3>
-<p>从根（高度为1）开始向叶子节点数，即从上往下数</p>
-<h3 id="深度树-节点"><a class="markdownIt-Anchor" href="#深度树-节点"></a> 深度（树、节点）</h3>
-<p>从叶子节点往该j节点数，即从下往上数</p>
-<h3 id="堂兄弟节点"><a class="markdownIt-Anchor" href="#堂兄弟节点"></a> 堂兄弟节点</h3>
-<p>父节点在同一层的节点</p>
-<h3 id="节点的祖先"><a class="markdownIt-Anchor" href="#节点的祖先"></a> 节点的祖先</h3>
-<p>从根到该节点所经分支上的所有节点</p>
-<h3 id="子孙"><a class="markdownIt-Anchor" href="#子孙"></a> 子孙</h3>
-<p>以某节点为根的子树中任一节点</p>
-<h3 id="森林"><a class="markdownIt-Anchor" href="#森林"></a> 森林</h3>
-<p>有m（m&gt;0）棵互不相交的树的集合</p>
-<h2 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h2>
-<h3 id="无序树自由树"><a class="markdownIt-Anchor" href="#无序树自由树"></a> 无序树（自由树）</h3>
-<p>树中任意节点的子节点之间没有顺序关系</p>
-<h3 id="有序树"><a class="markdownIt-Anchor" href="#有序树"></a> 有序树</h3>
-<p>与无序树相对应</p>
-<h3 id="二叉树"><a class="markdownIt-Anchor" href="#二叉树"></a> 二叉树</h3>
-<p>每个节点最多含有两个子树的树，且左右子树顺序不能颠倒</p>
-<h3 id="完全二叉树"><a class="markdownIt-Anchor" href="#完全二叉树"></a> 完全二叉树</h3>
-<ul>
-<li>叶节点只能出现在最下层和次下层，并且最下面一层的结点都集中在该层最左边的若干位置的二叉树；</li>
-<li>对于深度为K的，有n个结点的二叉树，当且仅当其每一个结点都与深度为K的满二叉树中编号从1至n的结点一一对应时称之为完全二叉树</li>
-</ul>
-<h3 id="满二叉树"><a class="markdownIt-Anchor" href="#满二叉树"></a> 满二叉树</h3>
-<p>除最后一层无任何子节点外，每一层上的所有结点都有两个子结点二叉树；<br />
-（如果一棵二叉树的结点要么是叶子结点，要么它有两个孩子结点，这样的树就是满二叉树。）</p>
-<h3 id="霍夫曼树最优二叉树"><a class="markdownIt-Anchor" href="#霍夫曼树最优二叉树"></a> 霍夫曼树（最优二叉树）</h3>
-<p>带权路径最短的二叉树</p>
-<h3 id="平衡二叉树"><a class="markdownIt-Anchor" href="#平衡二叉树"></a> 平衡二叉树</h3>
-<p>它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树</p>
-<h2 id="二叉树性质"><a class="markdownIt-Anchor" href="#二叉树性质"></a> 二叉树性质</h2>
-<ol>
-<li>在非空二叉树中，第i层的结点总数不超过<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><mo separator="true">,</mo><mi>i</mi><mo>&gt;</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{i-1}, i&gt;=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.019104em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
-<li>深度为h的二叉树节点个数最少有h个，最多<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>h</mi></msup><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mi>h</mi><mo>&gt;</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^h-1, h&gt;=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">h</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
-<li>对于任意一棵二叉树，如果其叶结点数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>N</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">N_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，而度数为2的结点总数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>N</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">N_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>N</mi><mn>0</mn></msub><mo>=</mo><msub><mi>N</mi><mn>2</mn></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">N_0=N_2+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>；</li>
-<li>具有n个结点的完全二叉树的深度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msubsup><mi>g</mi><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup></mrow><annotation encoding="application/x-tex">log_2^{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.120547em;vertical-align:-0.266308em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.854239em;"><span style="top:-2.433692em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.1031310000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.266308em;"><span></span></span></span></span></span></span></span></span></span></li>
-<li>有N个结点的完全二叉树各结点如果用顺序方式存储，则结点之间有如下关系：
-<ol>
-<li>若I为结点编号则 如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">I&gt;1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，则其父结点的编号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">I/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord">/</span><span class="mord">2</span></span></span></span>;</li>
-<li>如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi><mo>&lt;</mo><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">2*I&lt;=N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，则其左儿子（即左子树的根结点）的编号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">2*I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span>；若<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi><mo>&gt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">2*I&gt;N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，则无左儿子；</li>
-<li>如果<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi><mo>+</mo><mn>1</mn><mo>&lt;</mo><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">2*I+1&lt;=N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，则其右儿子的结点编号为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*I+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>；若<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mi>I</mi><mo>+</mo><mn>1</mn><mo>&gt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">2*I+1&gt;N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，则无右儿子。</li>
-</ol>
-</li>
-<li>给定<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>个节点，能构成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>种不同的二叉树。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>为卡特兰数的第N项，则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>C</mi><mo stretchy="false">(</mo><mn>2</mn><mo>∗</mo><mi>n</mi><mo separator="true">,</mo><mi>n</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(n)=C(2*n,n)/(n+1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mopen">(</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>;</li>
-<li>设有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个枝点，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span>为所有枝点的道路长度总和，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span></span></span></span>为叶的道路长度总和, 则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>J</mi><mo>=</mo><mi>I</mi><mo>+</mo><mn>2</mn><mi>i</mi><mo stretchy="false">[</mo><mn>4</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">J=I+2i[4]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord">4</span><span class="mclose">]</span></span></span></span>；</li>
-</ol>
-<h2 id="遍历"><a class="markdownIt-Anchor" href="#遍历"></a> 遍历</h2>
-<h3 id="先序遍历"><a class="markdownIt-Anchor" href="#先序遍历"></a> 先序遍历</h3>
-<p>首先访问根，再先序遍历左（右）子树，最后先序遍历右（左）子树</p>
-<h3 id="中序遍历"><a class="markdownIt-Anchor" href="#中序遍历"></a> 中序遍历</h3>
-<p>首先中序遍历左（右）子树，再访问根，最后中序遍历右（左）子树</p>
-<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
-<p>首先后序遍历左（右）子树，再后序遍历右（左）子树，最后访问根</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-cfc657db.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-flying.gif">
-      <meta itemprop="name" content="fengdy">
-      <meta itemprop="description" content="i believe i can fly.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FLY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/20210218-cfc657db.html" class="post-title-link" itemprop="url">目录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-18 14:45:54" itemprop="dateCreated datePublished" datetime="2021-02-18T14:45:54+08:00">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/design/java-design-patterns/" itemprop="url" rel="index"><span itemprop="name">java-design-patterns</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<h3 id="遵守原则"><a class="markdownIt-Anchor" href="#遵守原则"></a> 遵守原则</h3>
-<p><img src="/assets/images/a1e7ddda5e2448248d30e9c95de59624.png" alt="a1e7ddda5e2448248d30e9c95de59624" /></p>
-<h3 id="相互关系"><a class="markdownIt-Anchor" href="#相互关系"></a> 相互关系</h3>
-<p><img src="/assets/images/e099ceb5d6454e94ba077c099eb80557.png" alt="e099ceb5d6454e94ba077c099eb80557" /></p>
-<h2 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h2>
-<h3 id="创建型5种"><a class="markdownIt-Anchor" href="#创建型5种"></a> 创建型（5种）</h3>
-<ol>
-<li>
-<p><a href="/architecture-design/java-design-patterns/abstract-factory/">抽象工厂模式</a></p>
-<p>提供一个接口, 用于创建相关或依赖对象的家族, 而不需要指定具体类</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/factory/">工厂模式</a></p>
-<p>定义了一个创建对象的接口, 但由子类决定要实例化的类是哪一个. 工厂方法让类把实例化推迟到子类</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/prototype/">原型模式</a></p>
-<p>当创建给定类的实例过程很昂贵或很复杂时, 就使用原形模式</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/singleton/">单例模式</a></p>
-<p>确保一个类只有一个实例, 并提供全局访问点</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/builder/">建造者模式</a></p>
-<p>封装一个产品的构造过程，并允许按步骤构造 将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示</p>
-</li>
-</ol>
-<h3 id="结构型7种"><a class="markdownIt-Anchor" href="#结构型7种"></a> 结构型（7种）</h3>
-<ol>
-<li>
-<p><a href="/architecture-design/java-design-patterns/adapter/">适配器模式</a></p>
-<p>将一个类的接口, 转换成客户期望的另一个接口. 适配器让原本接口不兼容的类可以合作无间. 对象适配器使用组合, 类适配器使用多重继承</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/bridge/">桥接模式</a></p>
-<p>使用桥接模式通过将实现和抽象放在两个不同的类层次中而使它们可以独立改变</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/composite/">组合模式</a></p>
-<p>允许你将对象组合成树形结构来表现&quot;整体/部分&quot;层次结构. 组合能让客户以一致的方式处理个别对象以及对象组合</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/decorator/">装饰者模式</a></p>
-<p>动态地将责任附加到对象上, 若要扩展功能, 装饰者提供了比继承更有弹性的替代方案</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/facade/">外观模式</a></p>
-<p>提供了一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层接口, 让子系统更容易使用</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/adapter/flyweight/">享元模式</a></p>
-<p>让某个类的一个实例能用来提供许多&quot;虚拟实例&quot;</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/proxy/">代理模式</a></p>
-<p>为另一个对象提供一个代理以控制对这个对象的访问</p>
-</li>
-</ol>
-<p><img src="/assets/images/58903fb6020a41e696f8699fe4711ef9.png" alt="58903fb6020a41e696f8699fe4711ef9" /></p>
-<h3 id="行为型11种"><a class="markdownIt-Anchor" href="#行为型11种"></a> 行为型（11种）</h3>
-<ol>
-<li>
-<p><a href="/architecture-design/java-design-patterns/chain-of-responsibility/">责任链模式</a></p>
-<p>通过责任链模式, 可以为某个请求创建一个对象链. 每个对象依序检查此请求并对其进行处理或者将它传给链中的下一个对象</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/command/">命令模式</a></p>
-<p>将&quot;请求&quot;封闭成对象, 以便使用不同的请求,队列或者日志来参数化其他对象. 命令模式也支持可撤销的操作</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/interpreter/">解释器模式</a></p>
-<p>使用解释器模式为语言创建解释器</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/iterator/">迭代器模式</a></p>
-<p>提供一种方法顺序访问一个聚合对象中的各个元素， 而又不暴露其内部的表示</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/mediator/">中介者模式</a></p>
-<p>使用中介者模式来集中相关对象之间复杂的沟通和控制方式</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/memento/">备忘录模式</a></p>
-<p>当你需要让对象返回之前的状态时(例如， 你的用户请求&quot;撤销&quot;)， 你使用备忘录模式</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/observer/">观察者模式</a></p>
-<p>在对象之间定义一对多的依赖，这样当一个对象改变状态，依赖它的对象都会收到通知，并自动更新</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/state/">状态模式</a></p>
-<p>允许对象在内部状态改变时改变它的行为， 对象看起来好象改了它的类</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/strategy/">策略模式</a></p>
-<p>定义了算法族，分别封闭起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/template-method/">模板方法模式</a></p>
-<p>在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中 模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤</p>
-</li>
-<li>
-<p><a href="/architecture-design/java-design-patterns/visitor/">访问者模式</a></p>
-<p>当你想要为一个对象的组合增加新的能力，且封装并不重要时，就使用访问者模式</p>
-</li>
-</ol>
-<p><img src="/assets/images/f1921e58002a480b8284fefd912ebe9b.png" alt="f1921e58002a480b8284fefd912ebe9b" /></p>
-<h3 id="并发型"><a class="markdownIt-Anchor" href="#并发型"></a> 并发型</h3>
-<h3 id="线程池型"><a class="markdownIt-Anchor" href="#线程池型"></a> 线程池型</h3>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-6971cdf2.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-flying.gif">
-      <meta itemprop="name" content="fengdy">
-      <meta itemprop="description" content="i believe i can fly.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FLY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/20210218-6971cdf2.html" class="post-title-link" itemprop="url">交换排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-18 14:41:00" itemprop="dateCreated datePublished" datetime="2021-02-18T14:41:00+08:00">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sorting/" itemprop="url" rel="index"><span itemprop="name">sorting</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
-<h2 id="基本思想"><a class="markdownIt-Anchor" href="#基本思想"></a> 基本思想</h2>
-<p>将待排序列中的相邻数据比较，大的下沉，小的上升</p>
-<h1 id="冒泡排序"><a class="markdownIt-Anchor" href="#冒泡排序"></a> 冒泡排序</h1>
-<h2 id="基本思想-2"><a class="markdownIt-Anchor" href="#基本思想-2"></a> 基本思想</h2>
-<p>同交换排序</p>
-<h2 id="基本思路"><a class="markdownIt-Anchor" href="#基本思路"></a> 基本思路</h2>
-<p>相邻数比较</p>
-<h2 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h2>
-<p>加入一标志性变量exchange，用于标志某一趟排序过程中是否有数据交换，如果进行某一趟排序时并没有进行数据交换，则说明数据已经按要求排列好，可立即结束排序</p>
-<h2 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h2>
-<p>设置一标志性变量pos,用于记录每趟排序中最后一次进行交换的位置。由于pos位置之后的记录均已交换到位,故在进行下一趟排序时只要扫描到pos位置即可</p>
-<h2 id="思路3"><a class="markdownIt-Anchor" href="#思路3"></a> 思路3</h2>
-<p>在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半；<br />
-即从当前值分别向前和向后冒泡</p>
-<h1 id="快速排序"><a class="markdownIt-Anchor" href="#快速排序"></a> 快速排序</h1>
-<h2 id="基本思路-2"><a class="markdownIt-Anchor" href="#基本思路-2"></a> 基本思路</h2>
-<ol>
-<li>选择一个基准元素（通常是第一或最后一个）</li>
-<li>遍历待排序列，将每个元素与基准元素比较，若基准元素小则将两个元素位置替换</li>
-<li>遍历之后，此时基准元素在排好序后的正确位置</li>
-<li>然后得到基准元素左（小）右（大）两个区间，分别对两个区间重复（1-4）步骤；</li>
-<li>得到有序列表；</li>
-</ol>
-<h2 id="思路1-2"><a class="markdownIt-Anchor" href="#思路1-2"></a> 思路1</h2>
-<p>只对长度大于k的子序列递归调用快速排序,让原序列基本有序，然后再对整个基本有序序列用插入排序算法排序。实践证明，改进后的算法时间复杂度有所降低，且当k取值为 8 左右时,改进算法的性能最佳；</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-1599bffe.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-flying.gif">
-      <meta itemprop="name" content="fengdy">
-      <meta itemprop="description" content="i believe i can fly.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FLY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/20210218-1599bffe.html" class="post-title-link" itemprop="url">归并排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-18 14:38:48" itemprop="dateCreated datePublished" datetime="2021-02-18T14:38:48+08:00">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sorting/" itemprop="url" rel="index"><span itemprop="name">sorting</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
-<h2 id="基本思想"><a class="markdownIt-Anchor" href="#基本思想"></a> 基本思想</h2>
-<p>将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的；然后再把有序子序列合并为整体有序序列</p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<ol>
-<li>将待排序列的元素每两个排序后组成一组；</li>
-<li>然后将已排好序的组，两两归并排序（二路归并）；</li>
-<li>重复步骤2，直到排好序；</li>
-</ol>
-<h1 id="二路归并"><a class="markdownIt-Anchor" href="#二路归并"></a> 二路归并</h1>
-<h2 id="基本思想-2"><a class="markdownIt-Anchor" href="#基本思想-2"></a> 基本思想</h2>
-<h2 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h2>
-<ol>
-<li>分别有有序组a，b；分别设置游标i，j，初始化为0；</li>
-<li>准备一长度为a+b长度的空间，设为r，并设游标k=0；</li>
-<li>比较a[i]和b[j]，将大者复制到r[k]；</li>
-<li>i，j，k均+1；</li>
-<li>重复（3,4）步骤，直到其中一个有序表取完，然后将另一个有序表中的数据按顺序复制到r中；</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20210218-96555fb2.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar-flying.gif">
-      <meta itemprop="name" content="fengdy">
-      <meta itemprop="description" content="i believe i can fly.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FLY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/20210218-96555fb2.html" class="post-title-link" itemprop="url">插入排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-18 14:36:20" itemprop="dateCreated datePublished" datetime="2021-02-18T14:36:20+08:00">2021-02-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-19 21:03:09" itemprop="dateModified" datetime="2021-08-19T21:03:09+08:00">2021-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/sorting/" itemprop="url" rel="index"><span itemprop="name">sorting</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!-- toc -->
-<h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
-<h2 id="基本思想"><a class="markdownIt-Anchor" href="#基本思想"></a> 基本思想</h2>
-<p>将一个记录插入到已排序好的有序表中，从而得到一个新的有序表；<br />
-即：先将序列的第1个记录看成是一个有序的子序列，然后从第2个记录逐个进行插入，直至整个序列有序为止</p>
-<h2 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h2>
-<ol>
-<li>直接插入</li>
-<li>二分插入</li>
-</ol>
-<h2 id="稳定性"><a class="markdownIt-Anchor" href="#稳定性"></a> 稳定性</h2>
-<p>相等的插入元素会放在相等元素的后面，所以插入排序是稳定的；<br />
-即相等的数据位置不会交换；</p>
-<h1 id="直接插入"><a class="markdownIt-Anchor" href="#直接插入"></a> 直接插入</h1>
-<h2 id="基本思想-2"><a class="markdownIt-Anchor" href="#基本思想-2"></a> 基本思想</h2>
-<p>设立哨兵，作为临时存储和判断数组边界之用；</p>
-<h2 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h2>
-<ol>
-<li>设置哨兵A为待插入的数据</li>
-<li>设置开始查找的位置i</li>
-<li>在数组中进行搜索，搜索中将第i个记录后移，直到array[i] &lt;= A；</li>
-</ol>
-<blockquote>
-<p><em>如果遇到相等的时会造成不稳定</em></p>
-</blockquote>
-<ol start="4">
-<li>将A插入到array[i+1]位置</li>
-</ol>
-<h2 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h2>
-<ol>
-<li>设置哨兵为上次插入的位置为i</li>
-<li>比较待插入数据和上次插入数据；如果待插入数据大，则从i向后搜索；如果小，则向前搜索</li>
-</ol>
-<h1 id="二分插入"><a class="markdownIt-Anchor" href="#二分插入"></a> 二分插入</h1>
-<h2 id="基本思想-3"><a class="markdownIt-Anchor" href="#基本思想-3"></a> 基本思想</h2>
-<p>对待插入区间进行对折，直到能确定插入位置</p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<ol>
-<li>计算有序表 0 ~ i 的中间点j，其值为A，用待插入数据B元素与A进行比较，如果B大，则取区间[0, j]；反之，则取区间[j, i]</li>
-<li>对取得的区间重复步骤（1）缩小范围，范围依次缩小为 1/2 1/4 1/8 …快速的确定出插入位置</li>
-<li>确定位置之后，将之后的序列后移，并将元素插入到相应位置；</li>
-</ol>
-<h1 id="希尔排序缩小增量排序"><a class="markdownIt-Anchor" href="#希尔排序缩小增量排序"></a> 希尔排序（缩小增量排序）</h1>
-<h2 id="基本思想-4"><a class="markdownIt-Anchor" href="#基本思想-4"></a> 基本思想</h2>
-<p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序；</p>
-<h2 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h2>
-<ol>
-<li>选择一个增量序列，比如d[n/2, n/4, n/8, … 1]，其值n为待排序个数；</li>
-<li>先将待排序列按照指定增量d（从第一个增量开始）分成若干组子序列，每组中数据的下标相差d，对组中的全部元素进行直接插入排序（是在原序列中操作的，不会再需要额外空间）；</li>
-<li>缩小增量，重复步骤（2），直到d=1；</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1555,7 +1552,7 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

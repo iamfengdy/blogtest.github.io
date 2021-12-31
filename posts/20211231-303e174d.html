@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开发清单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发清单">
+<meta property="og:url" content="http://example.com/posts/20211231-303e174d.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="开发清单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-31T03:01:39.000Z">
+<meta property="article:modified_time" content="2021-12-31T03:30:42.555Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20211231-303e174d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>开发清单 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20211231-303e174d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发清单
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-31 11:01:39 / 修改时间：11:30:42" itemprop="dateCreated datePublished" datetime="2021-12-31T11:01:39+08:00">2021-12-31</time>
+            </span>
+
+          
+            <div class="post-description">开发清单</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<p>在您提交任何更改之前，请根据这些需求检查您的工作</p>
+<ul>
+<li>所有与外部设备或服务的通信都必须封装在托管在 <a target="_blank" rel="noopener" href="https://pypi.python.org/pypi">pypi</a>上的外部Python库中</li>
+<li>新的依赖项被添加到requirements_all.txt(如果适用的话)，使用<code>python3 -m script.gen_requirements_all</code></li>
+<li>New codeowners are added to <code>CODEOWNERS</code> (if applicable), using <code>python3 -m script.hassfest</code></li>
+<li>如果没有可用的测试，或者您的新代码使用第三方库与设备、服务通信或sensor.<code>config_flow.py</code>不能被排除，因为它必须被完全测试(100%覆盖)，则.coveragerc文件将被更新以排除您的平台。</li>
+<li>如果.strict-typing文件确实提供了一个完整的类型提示源代码，那么它将更新为包含您的代码</li>
+<li>按照这些<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/blog/2019/07/31/black.html">guidelines</a>，代码使用Black格式化。这可以通过运行命令<code>black --fast homeassistant tests</code>.</li>
+<li>Documentation is developed for <a target="_blank" rel="noopener" href="http://home-assistant.io">home-assistant.io</a>
+<ul>
+<li>Visit the <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/documenting">website documentation</a> for more information about contributing to <a target="_blank" rel="noopener" href="https://github.com/home-assistant/home-assistant.io">home-assistant.io</a>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="组件清单"><a class="markdownIt-Anchor" href="#组件清单"></a> 组件清单</h2>
+<p>添加新组件时要做的事情的清单。</p>
+<blockquote>
+<p>并非所有现有代码都符合此检查表中的要求。这不能作为不遵循它们的理由!</p>
+</blockquote>
+<h3 id="通用"><a class="markdownIt-Anchor" href="#通用"></a> 通用</h3>
+<ol>
+<li>遵守<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/development_guidelines">Style guidelines</a></li>
+<li>使用<code>const.py</code>中存在的常量
+<ol>
+<li>只有在新常量被广泛使用时才添加到<code>const.py</code>中。否则，将它们保持在组件级别</li>
+</ol>
+</li>
+</ol>
+<h3 id="requirements"><a class="markdownIt-Anchor" href="#requirements"></a> Requirements</h3>
+<ol>
+<li>已添加到<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest"><code>manifest.json</code></a></li>
+<li>内容格式为<code>&quot;requirements&quot;: ['phue==0.8.1']</code></li>
+<li>使用pypi而不是github</li>
+</ol>
+<h3 id="configuration"><a class="markdownIt-Anchor" href="#configuration"></a> Configuration</h3>
+<ol>
+<li>为<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/development_validation">configuration validation</a>提供了丰富的模式</li>
+<li>在voluptuous模式中指定的默认参数，而不是在<code>setup(…)</code></li>
+<li>使用尽可能多的通用配置键的模式,在<code>homeassistant.const</code></li>
+<li>如果你的组件有平台，定义一个<code>PLATFORM_SCHEMA</code>而不是<code>CONFIG_SCHEMA</code>。</li>
+<li>如果使用的是与<code>EntityComponent</code>一起使用的<code>PLATFORM_SCHEMA</code>，请从<code>homeassistant.helpers.config_validation</code>导入base</li>
+<li>永远不要依赖于用户添加自定义内容来配置组件内部的行为。</li>
+</ol>
+<h3 id="componentplatform-communication"><a class="markdownIt-Anchor" href="#componentplatform-communication"></a> Component/platform communication</h3>
+<ol>
+<li>你可以利用<code>hass.data[DOMAIN]</code>与你的平台共享数据。</li>
+<li>如果组件获取了导致其相关平台实体更新的数据，您可以使用<code>homeassistant.helpers.dispatcher</code>中的dispatcher代码来通知它们。</li>
+</ol>
+<h3 id="communication-with-devicesservices"><a class="markdownIt-Anchor" href="#communication-with-devicesservices"></a> Communication with devices/services</h3>
+<ol>
+<li>所有API特定的代码都必须是托管在PyPi上的第三方库的一部分。Home Assistant应该只与对象交互，而不直接调用API。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bad</span></span><br><span class="line">status = requests.get(url(<span class="string">&quot;/status&quot;</span>))</span><br><span class="line"><span class="comment"># good</span></span><br><span class="line"><span class="keyword">from</span> phue <span class="keyword">import</span> Bridge</span><br><span class="line"></span><br><span class="line">bridge = Bridge(...)</span><br><span class="line">status = bridge.status()</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/how-to-open-source-your-first-python-package-e717444e1da0">Tutorial on publishing your own PyPI package</a></p>
+<p>Other noteworthy resources for publishing python packages:<br />
+<a target="_blank" rel="noopener" href="https://cookiecutter.readthedocs.io/">Cookiecutter Project</a><br />
+<a target="_blank" rel="noopener" href="https://flit.readthedocs.io/">flit</a><br />
+<a target="_blank" rel="noopener" href="https://python-poetry.org/">Poetry</a></p>
+<h3 id="make-your-pull-request-as-small-as-possible"><a class="markdownIt-Anchor" href="#make-your-pull-request-as-small-as-possible"></a> Make your pull request as small as possible</h3>
+<p>将新集成保持在最小功能，以便人们从集成中获得价值。这允许评审人员一次只批准一小块代码，让我们更快地获得新的集成/特性。包含大型代码转储的Pull请求将不是审查的优先级，可能会被关闭。</p>
+<ul>
+<li>限于单一平台</li>
+<li>不要添加不需要直接支持单一平台的特性(如定制服务)</li>
+<li>不要把清理和新功能混合在一个拉请求中。</li>
+<li>不要在一个拉请求中解决几个问题。</li>
+<li>不提交拉请求依赖于其他工作仍未合并</li>
+</ul>
+<h3 id="event-names"><a class="markdownIt-Anchor" href="#event-names"></a> Event names</h3>
+<p>以域名为前缀的组件事件名称。例如，netatmo组件使用netatmo_person而不是person。请注意我们<a target="_blank" rel="noopener" href="https://data.home-assistant.io/docs/events/#database-table">Data Science portal</a>.中记录的数据结构</p>
+<h3 id="tests"><a class="markdownIt-Anchor" href="#tests"></a> Tests</h3>
+<p>强烈考虑为组件添加测试，以最小化未来的回归。</p>
+<h2 id="平台清单"><a class="markdownIt-Anchor" href="#平台清单"></a> 平台清单</h2>
+<h3 id="通用-2"><a class="markdownIt-Anchor" href="#通用-2"></a> 通用</h3>
+<p>同上</p>
+<h3 id="需求"><a class="markdownIt-Anchor" href="#需求"></a> 需求</h3>
+<p>同上</p>
+<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
+<ol>
+<li>如果平台可以直接设置，请添加一个丰富的模式来进行 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/development_validation">configuration validation</a></li>
+<li>丰富的模式从组件扩展模式(例如,<code>hue.light.PLATFORM_SCHEMA</code>扩展<code>light.PLATFORM_SCHEMA</code>)</li>
+<li>在voluptuous模式中指定的默认参数，而不是在<code>setup_platform(…)</code>中指定的</li>
+<li>你的<code>PLATFORM_SCHEM</code>A应该使用尽可能多的来自<code>homeassistant.const</code>的通用配置键</li>
+<li>永远不要依赖于用户添加自定义内容来配置平台内部的行为。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> voluptuous <span class="keyword">as</span> vol</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> homeassistant.const <span class="keyword">import</span> CONF_FILENAME, CONF_HOST</span><br><span class="line"><span class="keyword">from</span> homeassistant.components.light <span class="keyword">import</span> PLATFORM_SCHEMA</span><br><span class="line"><span class="keyword">import</span> homeassistant.helpers.config_validation <span class="keyword">as</span> cv</span><br><span class="line"></span><br><span class="line">CONF_ALLOW_UNREACHABLE = <span class="string">&quot;allow_unreachable&quot;</span></span><br><span class="line">DEFAULT_UNREACHABLE = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(</span><br><span class="line">    &#123;</span><br><span class="line">        vol.Required(CONF_HOST): cv.string,</span><br><span class="line">        vol.<span class="type">Optional</span>(CONF_ALLOW_UNREACHABLE, default=DEFAULT_UNREACHABLE): cv.boolean,</span><br><span class="line">        vol.<span class="type">Optional</span>(CONF_FILENAME): cv.string,</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="setup-platform"><a class="markdownIt-Anchor" href="#setup-platform"></a> Setup Platform</h3>
+<ol>
+<li>验证传入的配置(user/pass/host等)是否正常。</li>
+<li>如果可能的话，将调用分组到<code>add_devices</code>。</li>
+<li>如果平台添加了额外的服务，格式应该是<code>&lt;您的集成域&gt;。&lt;服务名称&gt;</code>。因此，如果您的集成域是“awesome_sauce”，并且您正在创建一个轻量级平台，那么您将在<code>awesome_sauce</code>域下注册服务。确保你的服务<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/auth_permissions#checking-permissions">verify permissions</a>.</li>
+</ol>
+<h3 id="entity"><a class="markdownIt-Anchor" href="#entity"></a> Entity</h3>
+<ol>
+<li>从您正在为其构建平台的集成扩展实体</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components.light <span class="keyword">import</span> Light</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HueLight</span>(<span class="params">Light</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Hue light component.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>避免将<code>hass</code>作为参数传递给实体。当实体被添加到HA时，<code>hass</code>将被设置在实体上。这意味着您可以通过<code>self.hass</code>访问</li>
+<li>不要在构造函数中调用<code>update()</code>，而是使用<code>add_entities(devices, True)</code>。</li>
+<li>不要在内部属性中执行任何I/O操作。取而代之的是在<code>update()</code>中的缓存值。</li>
+<li>在处理时间时，状态和/或属性不应该包含发生事件后的相对时间。相反，它应该存储UTC时间戳。</li>
+<li>利用<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity#lifecycle-hooks">entity lifecycle callbacks</a>来附加事件监听器或清理连接。</li>
+</ol>
+<h3 id="communication-with-devicesservices-2"><a class="markdownIt-Anchor" href="#communication-with-devicesservices-2"></a> Communication with devices/services</h3>
+<p>同上</p>
+<h2 id="集成质量"><a class="markdownIt-Anchor" href="#集成质量"></a> 集成质量</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20211231-e68c7f67.html" rel="prev" title="建造实体集成">
+      <i class="fa fa-chevron-left"></i> 建造实体集成
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20211231-f78a061d.html" rel="next" title="访问core">
+      访问core <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%B8%85%E5%8D%95"><span class="nav-number">2.</span> <span class="nav-text"> 组件清单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text"> 通用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requirements"><span class="nav-number">2.2.</span> <span class="nav-text"> Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#configuration"><span class="nav-number">2.3.</span> <span class="nav-text"> Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentplatform-communication"><span class="nav-number">2.4.</span> <span class="nav-text"> Component&#x2F;platform communication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#communication-with-devicesservices"><span class="nav-number">2.5.</span> <span class="nav-text"> Communication with devices&#x2F;services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-your-pull-request-as-small-as-possible"><span class="nav-number">2.6.</span> <span class="nav-text"> Make your pull request as small as possible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-names"><span class="nav-number">2.7.</span> <span class="nav-text"> Event names</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tests"><span class="nav-number">2.8.</span> <span class="nav-text"> Tests</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0%E6%B8%85%E5%8D%95"><span class="nav-number">3.</span> <span class="nav-text"> 平台清单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8-2"><span class="nav-number">3.1.</span> <span class="nav-text"> 通用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text"> 需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text"> 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup-platform"><span class="nav-number">3.4.</span> <span class="nav-text"> Setup Platform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entity"><span class="nav-number">3.5.</span> <span class="nav-text"> Entity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#communication-with-devicesservices-2"><span class="nav-number">3.6.</span> <span class="nav-text"> Communication with devices&#x2F;services</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E8%B4%A8%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text"> 集成质量</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="建造集成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建造集成">
+<meta property="og:url" content="http://example.com/posts/20211231-3d0da91d.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="建造集成">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-31T02:51:35.000Z">
+<meta property="article:modified_time" content="2021-12-31T02:55:28.414Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20211231-3d0da91d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>建造集成 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20211231-3d0da91d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          建造集成
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-31 10:51:35 / 修改时间：10:55:28" itemprop="dateCreated datePublished" datetime="2021-12-31T10:51:35+08:00">2021-12-31</time>
+            </span>
+
+          
+            <div class="post-description">建造集成</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="创建第一个集成"><a class="markdownIt-Anchor" href="#创建第一个集成"></a> 创建第一个集成</h2>
+<p>好了，现在是时候编写集成的第一个代码了。太棒了。别担心，我们已经尽力让它尽可能的简单。在HA开发环境中，输入以下内容并遵循以下说明:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m script.scaffold integration</span><br></pre></td></tr></table></figure>
+<p>这将为您提供所需的一切，以构建一个能够通过用户界面进行设置的集成。我们的示例存储库中提供了更广泛的集成示例。<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_component_index#:~:text=our%20example%20repository">our example repository</a></p>
+<h3 id="the-minimum"><a class="markdownIt-Anchor" href="#the-minimum"></a> The minimum</h3>
+<p>scaffold集成包含的不仅仅是最小值。最小值是定义一个包含集成域的<code>DOMAIN</code>常量。第二部分是，它需要定义一个setup方法，该方法在设置成功时返回一个布尔值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN = <span class="string">&quot;hello_state&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    hass.states.<span class="built_in">set</span>(<span class="string">&quot;hello_state.world&quot;</span>, <span class="string">&quot;Paulus&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Return boolean to indicate that initialization was successful.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>如果你更喜欢异步组件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN = <span class="string">&quot;hello_state&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    hass.states.async_set(<span class="string">&quot;hello_state.world&quot;</span>, <span class="string">&quot;Paulus&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Return boolean to indicate that initialization was successful.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>要加载这个，将<code>hello_state:</code>添加到<code>configuration.yaml</code>中。创建一个<code>&lt;config_dir&gt;/custom_components/hello_state/__init__.py</code>文件，使用上面两个代码块中的一个在本地测试它。</p>
+<h3 id="scaffold提供什么"><a class="markdownIt-Anchor" href="#scaffold提供什么"></a> scaffold提供什么</h3>
+<p>当使用脚手架脚本时，它将超过集成的最小限度。它将包括配置流、配置流测试和基本转换基础设施，以提供配置流的国际化。</p>
+<h2 id="文件结构"><a class="markdownIt-Anchor" href="#文件结构"></a> 文件结构</h2>
+<p>每个集成都存储在一个以集成域命名的目录中。域名是由字符和下划线组成的短名称。此域必须是唯一的，不能更改。移动应用程序集成的域示例:mobile_app。因此，这个集成的所有文件都在文件夹<code>mobile_app/</code>中。</p>
+<p>这个文件夹的最小内容是这样的:</p>
+<ul>
+<li><code>manifest.json</code>,manifest文件描述了集成和它的依赖项,<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest">more info</a></li>
+<li><code>__init__.py</code>,集成只提供一个平台，你可以把这个文件限制在一个文档字符串中，介绍集成,<code>&quot;&quot;&quot;The Mobile App integration.&quot;&quot;&quot;</code></li>
+</ul>
+<h3 id="集成设备lightpyswitchpy等"><a class="markdownIt-Anchor" href="#集成设备lightpyswitchpy等"></a> 集成设备，<code>light.py</code>,<code>switch.py</code>等</h3>
+<p>如果您的集成要集成一个或多个设备，您需要创建一个与实体集成交互的平台来实现这一点。例如，如果您想在Home Assistant中表示一个照明设备，您将创建<code>light.py</code>，它将包含一个用于照明集成的照明平台。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity">available entity integrations</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_platform_index">creating platforms</a></li>
+</ul>
+<h3 id="集成服务servicesyaml"><a class="markdownIt-Anchor" href="#集成服务servicesyaml"></a> 集成服务，<code>services.yaml</code></h3>
+<p>如果您的集成要注册服务，它将需要提供可用服务的描述。描述存储在<code>services.yaml</code>中,<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/dev_101_services">More information about <code>services.yaml</code>.</a></p>
+<h3 id="ha在哪里查找集成"><a class="markdownIt-Anchor" href="#ha在哪里查找集成"></a> HA在哪里查找集成</h3>
+<p>当Home Assistant看到配置文件中引用的域时(例如<code>mobile_app:</code>)，或者它是另一个集成的依赖时，它将查找集成。HA将检查以下地点:</p>
+<ul>
+<li><code>&lt;config directory&gt;/custom_components/&lt;domain&gt;</code></li>
+<li><code>homeassistant/components/&lt;domain&gt;</code>,内置集成</li>
+</ul>
+<p>您可以通过在<code>&lt;config directory&gt;/custom_components</code>文件夹中拥有与相同域的集成来覆盖内置集成，<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest/#version">The <code>manifest.json</code> file requires a version tag when you override a core integration</a>.</p>
+<p>覆盖的核心集成可以通过概览中集成框右上角的特定图标来标识。打开您的家庭助理实例并显示您的集成。注意，不建议覆盖内置集成，因为您将不再获得更新。建议选择一个惟一的名称</p>
+<h2 id="manifest清单"><a class="markdownIt-Anchor" href="#manifest清单"></a> Manifest(清单)</h2>
+<blockquote>
+<p>发现即查找到的一个动作，decovery</p>
+</blockquote>
+<p>每个集成都有一个清单文件来指定关于集成的基本信息。该文件以<code>manifest.json</code>文件的形式保存在集成目录。即需要添加这样一个文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;domain&quot;</span>: <span class="string">&quot;hue&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Philips Hue&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;documentation&quot;</span>: <span class="string">&quot;https://www.home-assistant.io/components/hue&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;issue_tracker&quot;</span>: <span class="string">&quot;https://github.com/balloob/hue/issues&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: [<span class="string">&quot;mqtt&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;after_dependencies&quot;</span>: [<span class="string">&quot;http&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;codeowners&quot;</span>: [<span class="string">&quot;@balloob&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;requirements&quot;</span>: [<span class="string">&quot;aiohue==1.9.1&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;quality_scale&quot;</span>: <span class="string">&quot;platinum&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;iot_class&quot;</span>: <span class="string">&quot;local_polling&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者一个你可以复制到你的项目中的最小的例子:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;domain&quot;</span>: <span class="string">&quot;your_domain_name&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Your Integration&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;documentation&quot;</span>: <span class="string">&quot;https://www.example.com&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: [],</span><br><span class="line">  <span class="attr">&quot;codeowners&quot;</span>: [],</span><br><span class="line">  <span class="attr">&quot;requirements&quot;</span>: [],</span><br><span class="line">  <span class="attr">&quot;iot_class&quot;</span>: <span class="string">&quot;cloud_polling&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="domain"><a class="markdownIt-Anchor" href="#domain"></a> domain</h3>
+<p>域名是由字符和下划线组成的短名称。此域必须是唯一的，不能更改。移动应用程序集成的域示例:<code>mobile_app</code>。域密钥必须与文件所在的目录相匹配(The domain key has to match the directory this file is in.)。</p>
+<h3 id="name"><a class="markdownIt-Anchor" href="#name"></a> name</h3>
+<p>集成的名称</p>
+<h3 id="version"><a class="markdownIt-Anchor" href="#version"></a> version</h3>
+<p>对于核心集成，应该忽略这一点。</p>
+<p>集成的版本是定制集成所必需的。该版本需要是被识别的有效版本<a target="_blank" rel="noopener" href="https://github.com/ludeeus/awesomeversion">AwesomeVersion</a> like <a target="_blank" rel="noopener" href="https://calver.org/">CalVer</a> or <a target="_blank" rel="noopener" href="https://semver.org/">SemVer</a></p>
+<h3 id="documention"><a class="markdownIt-Anchor" href="#documention"></a> documention</h3>
+<p>包含如何使用您的集成的文档的网站。如果这个集成被提交给HA，它应该是<code>https://www.home-assistant.io/integrations/&lt;domain&gt;</code></p>
+<h3 id="issue-tracker"><a class="markdownIt-Anchor" href="#issue-tracker"></a> issue tracker</h3>
+<p>集成的问题跟踪器，当用户遇到问题时，可以报告问题。如果这一整合是提交纳入HA，它应该被省略。对于内置集成，Home Assistant将自动生成正确的链接。</p>
+<h3 id="dependencies"><a class="markdownIt-Anchor" href="#dependencies"></a> dependencies</h3>
+<p>依赖项是在加载集成之前希望Home Assistant成功设置的其他Home Assistant集成。如果您想从其他集成中提供功能，比如使用webhook或MQTT连接，这可能是必要的。</p>
+<p>内置集成只能在依赖关系中指定其他内置集成。自定义集成可以在依赖关系中指定内置集成和自定义集成。</p>
+<h3 id="after-dependencies"><a class="markdownIt-Anchor" href="#after-dependencies"></a> after dependencies</h3>
+<p>此选项用于指定集成可能使用但不是必需的依赖项。当<code>after_dependencies</code>存在时，集成的设置将等待<code>after_dependencies</code>设置好后再进行设置。它还将确保安装了<code>after_dependencies</code>的需求，这样集成中的方法就可以安全地导入了。例如，如果<code>camera</code>集成可能在某些配置中使用<code>stream</code>集成，将<code>stream</code>添加到<code>camera</code>清单的<code>after_dependencies</code>中，将确保<code>stream</code>在<code>camera</code>配置之前加载。如果<code>stream</code>没有配置，<code>camrea</code>仍将加载。</p>
+<p>内置集成只能在<code>after_dependencies</code>中指定其他内置集成。自定义集成可以在<code>after_dependencies</code>中指定内置和自定义集成。</p>
+<h3 id="code-owners"><a class="markdownIt-Anchor" href="#code-owners"></a> code owners</h3>
+<p>负责此集成的GitHub用户名或团队名。你至少应该在这里添加你的GitHub用户名，以及任何帮助你编写代码的人被包括在内。</p>
+<h3 id="config-flow"><a class="markdownIt-Anchor" href="#config-flow"></a> config flow</h3>
+<p>如果您的集成有一个创建配置条目的配置流，则指定config_flow键。当指定时，<code>config_flow.py</code>文件需要存在于您的集成中。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;config_flow&quot;</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="requirements"><a class="markdownIt-Anchor" href="#requirements"></a> requirements</h3>
+<p>需求是通常使用pip为组件安装的Python库或模块。如果您没有使用venv，那么Home Assistant将尝试将需求安装到Home Assistant<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/configuration/">configuration directory</a>的<code>deps</code>子目录中，或者如果您在虚拟环境中运行，则安装到<code>/to/venv/lib/python3.6/site-packages</code>之类的路径中。这将确保所有需求在启动时都存在。如果步骤失败，比如缺少用于编译模块的包或其他安装错误，则组件将无法加载。</p>
+<p>需求是一个字符串数组。每个条目都是<code>pip</code>兼容的字符串。例如，媒体播放器Cast平台依赖于Python包PyChromecast v3.2.0:<code>[&quot; PyChromecast ==3.2.0&quot;]</code>。</p>
+<h3 id="custom-requirements-during-development-testing"><a class="markdownIt-Anchor" href="#custom-requirements-during-development-testing"></a> Custom requirements during development &amp; testing</h3>
+<p>在组件的开发过程中，针对不同版本的需求进行测试是很有用的。这可以分两步完成，以pychromecast为例:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install pychromecast==3.2.0 --target ~/.homeassistant/deps</span><br><span class="line">hass --skip-pip</span><br></pre></td></tr></table></figure>
+<p>这将使用指定的版本，并防止Home Assistant试图用requirments中指定的内容覆盖它</p>
+<p>如果您需要对需求进行更改以支持您的组件，也可以使用<code>pip install -e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/balloob/pychromecast.git</span><br><span class="line">pip install -e ./pychromecast</span><br><span class="line">hass --skip-pip</span><br></pre></td></tr></table></figure>
+<p>也可以使用公共git存储库来安装需求。这可能很有用，例如，在将需求依赖关系发布到PyPI之前，测试它的更改。下面的例子将直接从GitHub安装<code>pycoolmaster</code>库的<code>except_connect</code>分支，除非当前安装的是0.2.2版本:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;requirements&quot;</span>: [<span class="string">&quot;git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="custom-integration-requirements"><a class="markdownIt-Anchor" href="#custom-integration-requirements"></a> Custom integration requirements</h3>
+<p>自定义集成应该只包含核心不需要的需求<a target="_blank" rel="noopener" href="https://github.com/home-assistant/core/blob/dev/requirements.txt">requirements.txt</a></p>
+<h3 id="zeroconf"><a class="markdownIt-Anchor" href="#zeroconf"></a> Zeroconf</h3>
+<p>如果您的集成支持通过<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Zero-configuration_networking">Zeroconf</a>进行发现，您可以将该类型添加到manifest。如果用户已经加载了zeroconf集成，它将在发现集成配置流的<code>zeroconf</code>步骤时加载它。</p>
+<p>Zeroconf是一个列表，因此您可以指定多个类型进行匹配。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;zeroconf&quot;</span>: [<span class="string">&quot;_googlecast._tcp.local.&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>某些zeroconf类型是非常通用的(例如，<code>_printer._tcp.local.</code>, <code>_axis-video._tcp.local.</code>或<code>_http._tcp.local.</code>)。在这种情况下，你应该包含一个Name (<code>name</code>)或Properties (<code>properties</code>)过滤器:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;zeroconf&quot;</span>: [</span><br><span class="line">    &#123;<span class="attr">&quot;type&quot;</span>:<span class="string">&quot;_axis-video._tcp.local.&quot;</span>,<span class="attr">&quot;properties&quot;</span>:&#123;<span class="attr">&quot;macaddress&quot;</span>:<span class="string">&quot;00408c*&quot;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="attr">&quot;type&quot;</span>:<span class="string">&quot;_axis-video._tcp.local.&quot;</span>,<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;example*&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">&quot;type&quot;</span>:<span class="string">&quot;_airplay._tcp.local.&quot;</span>,<span class="attr">&quot;properties&quot;</span>:&#123;<span class="attr">&quot;am&quot;</span>:<span class="string">&quot;audioaccessory*&quot;</span>&#125;&#125;,</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请注意，属性过滤器中的所有值必须是小写的，并且可以包含fnmatch类型通配符。</p>
+<h3 id="ssdp"><a class="markdownIt-Anchor" href="#ssdp"></a> ssdp</h3>
+<p>如果您的集成支持通过<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP</a>进行发现，您可以将该类型添加到清单中。如果用户加载了ssdp集成，它将在发现集成配置流的ssdp步骤时加载该步骤。我们通过SSDP ST、USN、EXT和服务器报头(报头名称小写)以及 <a target="_blank" rel="noopener" href="https://openconnectivity.org/developer/specifications/upnp-resources/upnp/basic-device-v1-0/">UPnP device description</a>数据支持SSDP发现。manifest值是一个匹配器字典列表，如果在SSDP/UPnP数据中找到任何指定的匹配器的所有项目，就会发现集成。您的配置流可以过滤掉重复的内容。</p>
+<p>下面的示例有一个由三个项组成的匹配器，所有项都必须匹配，才能通过此配置进行发现。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;ssdp&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;st&quot;</span>: <span class="string">&quot;roku:ecp&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;manufacturer&quot;</span>: <span class="string">&quot;Roku&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;deviceType&quot;</span>: <span class="string">&quot;urn:roku-com:device:player:1-0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="homekit"><a class="markdownIt-Anchor" href="#homekit"></a> homekit</h3>
+<p>如果您的集成支持通过HomeKit发现，您可以将支持的模型名称添加到清单中。如果用户加载了zeroconf集成，它将在发现集成配置流的homekit步骤时加载它。</p>
+<p>HomeKit发现工作通过测试发现的模型名是否以manifest.json中指定的任何模型名开始。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;homekit&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;models&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;LIFX&quot;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过HomeKit进行发现并不意味着你必须使用HomeKit协议才能与你的设备进行通信。你可以用你认为合适的方式与这个设备通信。</p>
+<p>由于清单中的这个条目，当一个发现信息路由到集成时，该发现信息不再路由到监听HomeKit zeroconf类型的集成。</p>
+<h3 id="mqtt"><a class="markdownIt-Anchor" href="#mqtt"></a> mqtt</h3>
+<p>如果您的集成支持通过MQTT进行发现，那么您可以添加用于发现的主题。如果用户加载了mqtt集成，它将在发现集成配置流的mqtt步骤时加载该步骤。</p>
+<p>MQTT发现通过订阅manifest.json中指定的MQTT主题工作。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mqtt&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;tasmota/discovery/#&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dhcp"><a class="markdownIt-Anchor" href="#dhcp"></a> dhcp</h3>
+<p>如果您的集成支持通过dhcp发现，您可以将该类型添加到清单中。如果用户已经加载了dhcp集成，它将在发现集成配置流的dhcp步骤时加载它。我们支持通过主机名和OUI被动监听DHCP发现。manifest值是一个匹配器字典列表，如果在DHCP数据中找到任何指定的匹配器的所有项目，你的集成被发现。您的配置流可以过滤掉重复的内容。</p>
+<p>如果集成支持zeroconf或ssdp，它们应该优于dhcp，因为它通常提供更好的用户体验。</p>
+<p>下面的示例有三个匹配器，由两个项组成。这三个匹配器中的所有项都必须匹配，才能通过此配置进行发现。</p>
+<p>示例：</p>
+<ul>
+<li>如果主机名是Rachio-XYZ, macaddress是00:9D:6B:55:12:AA，就会发现。</li>
+<li>如果主机名是Rachio-XYZ，而macaddress是00:00:00:55:12:AA，则不会发生发现。</li>
+<li>如果主机名是NotRachio-XYZ，而macaddress是00:9D:6B:55:12:AA，则不会发生发现。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;dhcp&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;hostname&quot;</span>: <span class="string">&quot;rachio-*&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;macaddress&quot;</span>: <span class="string">&quot;009D6B*&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;hostname&quot;</span>: <span class="string">&quot;rachio-*&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;macaddress&quot;</span>: <span class="string">&quot;F0038C*&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;hostname&quot;</span>: <span class="string">&quot;rachio-*&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;macaddress&quot;</span>: <span class="string">&quot;74C63B*&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="usb"><a class="markdownIt-Anchor" href="#usb"></a> usb</h3>
+<p>如果您的集成支持通过usb进行发现，您可以将该类型添加到清单中。如果用户已经加载了usb集成，它将在发现集成配置流时加载usb步骤。通过从USB描述符中提取这些值，我们支持通过VID(供应商ID)、PID(设备ID)、序列号、制造商和描述来发现。有关标识这些值的帮助，请参见 <a target="_blank" rel="noopener" href="https://wiki.debian.org/HowToIdentifyADevice/USB">How To Identify A Device</a>。清单值是一个匹配器字典列表。如果在USB数据中找到任何指定的匹配器的所有项，就会发现集成。您的配置流可以过滤掉重复的内容。</p>
+<blockquote>
+<p>一些VID和PID组合被许多不相关的设备使用。例如VID 10C4和PID EA60匹配任何Silicon Labs CP2102 USB-Serial桥接芯片。在匹配这些类型的设备时，重要的是要匹配描述或其他标识符，以避免意外发现。</p>
+</blockquote>
+<p>下面的示例有两个匹配器，由两个项组成。两个匹配器中的所有项都必须匹配，才能通过此配置进行发现。</p>
+<p>例如:</p>
+<ul>
+<li>如果vid为AAAA, pid为AAAA，则会发生发现。</li>
+<li>如果vid为AAAA, pid为FFFF，则不会发现。</li>
+<li>如果vid为CCCC, pid为AAAA，则不会发现。</li>
+<li>如果vid为1234,pid为ABCD, serial_number为12345678，制造商为Midway USB，描述为Version 12 Zigbee Stick，则会发现。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;usb&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;vid&quot;</span>: <span class="string">&quot;AAAA&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;pid&quot;</span>: <span class="string">&quot;AAAA&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;vid&quot;</span>: <span class="string">&quot;BBBB&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;pid&quot;</span>: <span class="string">&quot;BBBB&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">&quot;vid&quot;</span>: <span class="string">&quot;1234&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;pid&quot;</span>: <span class="string">&quot;ABCD&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;serial_number&quot;</span>: <span class="string">&quot;1234*&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;manufacturer&quot;</span>: <span class="string">&quot;*midway*&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;*zigbee*&quot;</span></span><br><span class="line">    &#125;,    </span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="integration-quality-scale"><a class="markdownIt-Anchor" href="#integration-quality-scale"></a> Integration Quality Scale</h3>
+<p>(集成质量量表)<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/quality_scale/">Integration Quality Scale</a>对代码质量和用户体验的集成进行评分。质量等级的每一个层次都由一系列需求组成。如果一个集成满足了所有的需求，那么它就被认为达到了那个级别。</p>
+<p>如果您的集成没有得分，那么不要将其添加到集成的清单中。但是，一定要查看需求的集成质量量表列表。它有助于极大地改进代码和用户体验。</p>
+<p>我们强烈建议对您的集成进行评分。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">&quot;quality_scale&quot;</span>: <span class="string">&quot;silver&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="iot-class"><a class="markdownIt-Anchor" href="#iot-class"></a> iot class</h3>
+<p>(物联网类别)<a target="_blank" rel="noopener" href="https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers">IoT Class</a>描述集成如何与设备或服务相连接。有关物联网分类的更多信息，请阅读有关<a target="_blank" rel="noopener" href="https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers">&quot;Classifying the Internet of Things&quot;</a>的博客。</p>
+<p>清单接受以下物联网类别:</p>
+<ul>
+<li><code>assumed_state</code>:我们无法获得设备的状态。我们能做的最好的事情就是根据最后一个命令来假设状态。</li>
+<li><code>cloud_polling</code>:该设备的集成是通过云实现的，并且需要一个活跃的互联网连接。轮询状态意味着稍后可能会注意到更新。</li>
+<li><code>cloud_push</code>:该设备的集成是通过云实现的，需要主动的互联网连接。一旦新州成立，家庭助理将被通知。</li>
+<li><code>local_polling</code>:提供与设备的直接通信。轮询状态意味着稍后可能会注意到更新。</li>
+<li><code>local_push</code>:提供与设备的直接通信。一旦新州成立，家庭助理将被通知。</li>
+<li><code>calculate</code>:集成本身并不处理通信，而是提供一个计算结果。</li>
+</ul>
+<h2 id="configuration"><a class="markdownIt-Anchor" href="#configuration"></a> Configuration</h2>
+<p>通过添加对配置流的支持来创建配置条目，因此可以通过用户界面建立集成。希望支持配置项的组件需要定义一个配置流处理程序。这个处理程序将管理来自用户输入、发现或其他来源(如Home Assistant OS)的条目的创建。</p>
+<p>配置流处理程序控制存储在配置项中的数据。这意味着在Home Assistant启动时，不需要验证配置是否正确。它还将防止破坏性的更改，因为如果版本更改，我们将能够将配置条目迁移到新的格式。</p>
+<p>在实例化处理程序时，Home Assistant将确保加载所有依赖项并安装组件的需求。</p>
+<h3 id="更新manifest"><a class="markdownIt-Anchor" href="#更新manifest"></a> 更新manifest</h3>
+<p>您需要更新集成清单，以通知Home Assistant您的集成有一个配置流。这是通过向清单(<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest#config-flow">docs</a>)添加<code>config_flow: true</code>来实现的。</p>
+<h3 id="定义一个配置流"><a class="markdownIt-Anchor" href="#定义一个配置流"></a> 定义一个配置流</h3>
+<p>配置条目使用<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/data_entry_flow_index">data flow entry framework</a>来定义它们的配置流。配置流需要在集成文件夹中的<code>config_flow.py</code>文件中定义，扩展<code>homeassistant.config_entries.ConfigFlow</code>，并传递<code>domain</code>key作为继承<code>ConfigFlow</code>的一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant <span class="keyword">import</span> config_entries</span><br><span class="line"><span class="keyword">from</span> .const <span class="keyword">import</span> DOMAIN</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleConfigFlow</span>(<span class="params">config_entries.ConfigFlow, domain=DOMAIN</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Example config flow.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>一旦你更新了清单并创建了<code>config_flow.py</code>，你将需要运行为HA运行<code>python3 -m script.hassfest</code>(只需要一次）为您的集成激活配置条目。</p>
+<h3 id="定义步骤steps"><a class="markdownIt-Anchor" href="#定义步骤steps"></a> 定义步骤（steps）</h3>
+<p>配置流需要定义配置流的步骤。 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/data_entry_flow_index">Data Entry Flow</a> 的文档描述了步骤的不同返回值。下面是一个关于如何定义用户步骤的示例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> voluptuous <span class="keyword">as</span> vol</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleConfigFlow</span>(<span class="params">config_entries.ConfigFlow, domain=DOMAIN</span>):</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_user</span>(<span class="params">self, info</span>):</span></span><br><span class="line">        <span class="keyword">if</span> info <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">pass</span>  <span class="comment"># <span class="doctag">TODO:</span> process info</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.async_show_form(</span><br><span class="line">            step_id=<span class="string">&quot;user&quot;</span>, data_schema=vol.Schema(&#123;vol.Required(<span class="string">&quot;password&quot;</span>): <span class="built_in">str</span>&#125;)</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<p>有几个步骤名保留给系统使用:</p>
+<table>
+<thead>
+<tr>
+<th>步骤名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>discovery</td>
+<td>如果您的集成已经被发现，并且匹配的步骤还没有定义，则不赞成调用。</td>
+</tr>
+<tr>
+<td>dhcp</td>
+<td>如果您的集成通过指定的DHCP被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td>hassio</td>
+<td>如果您的集成通过指定的Supervisor add-on，则调用；</td>
+</tr>
+<tr>
+<td>homekit</td>
+<td>如果您的集成通过指定的被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td>mqtt</td>
+<td>如果您的集成通过指定的MQTT被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td>ssdp</td>
+<td>如果您的集成通过指定的被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td>usb</td>
+<td>如果您的集成通过指定的被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td>user</td>
+<td>当用户通过用户界面启动流时调用，或者当发现且未定义匹配和发现步骤时调用。</td>
+</tr>
+<tr>
+<td>Zeroconf</td>
+<td>如果您的集成通过指定的被发现，则调用；请见Manifest文档</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="unique-ids"><a class="markdownIt-Anchor" href="#unique-ids"></a> Unique IDs</h3>
+<p>配置流可以为配置流附加一个唯一的ID，以避免同一设备被设置两次。当设置了一个唯一ID时，如果有另一个流正在处理这个唯一ID，它将立即中止。如果这个ID已经存在一个配置条目，您也可以快速中止。配置条目将获得创建它们的流的唯一ID。</p>
+<p>在配置流步骤中调用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> self.async_set_unique_id(device_unique_id)</span><br><span class="line">self._abort_if_unique_id_configured()</span><br></pre></td></tr></table></figure>
+<p>通过设置唯一ID，用户可以选择忽略配置条目的发现。这样，他们就不会再为此烦恼了。如果集成使用DHCP、HomeKit、Zeroconf/mDNS、USB或SSDP/uPnP被发现，则需要提供一个唯一的ID。</p>
+<p>如果一个唯一的ID不可用，那么可以省略dhcp、zeroconf、hassio、homekit、ssdp、usb和discovery步骤，即使它们在集成清单中进行了配置。在这种情况下，当发现项目时将调用user步骤。</p>
+<p>或者，如果集成不能始终获得唯一的ID(例如，多个设备，有些只有一个，有些没有)，则可以使用一个助手，它仍然允许发现，只要还没有配置集成的任何实例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> device_unique_id:</span><br><span class="line">  <span class="keyword">await</span> self.async_set_unique_id(device_unique_id)</span><br><span class="line"><span class="keyword">await</span> self._async_handle_discovery_without_unique_id()</span><br></pre></td></tr></table></figure>
+<h4 id="unique-id需求"><a class="markdownIt-Anchor" href="#unique-id需求"></a> Unique ID需求</h4>
+<p>​	唯一ID用于匹配底层设备或API的配置条目。唯一ID必须是稳定的，不应该被用户改变。当设备访问细节发生变化时，可以使用Unique ID更新配置条目数据。例如，对于通过本地网络进行通信的设备，如果由于新的DHCP分配而改变了IP地址，集成可以使用Unique ID来更新主机，使用下面的代码片段:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> self.async_set_unique_id(serial_number)</span><br><span class="line">self._abort_if_unique_id_configured(updates=&#123;CONF_HOST: host, CONF_PORT: port&#125;)</span><br></pre></td></tr></table></figure>
+<p>唯一ID的可接受源示例:</p>
+<ul>
+<li>设备序列号</li>
+<li>MAC地址:使用<code>homeassistant.helpers.device_registry.format_mac</code>;只能从设备API或发现处理程序中获取MAC地址。依赖于读取arp缓存或本地网络访问的工具，如getmac，将不能在所有支持的网络环境中工作，这是不可接受的。</li>
+<li>经纬度或其他独特的地理位置</li>
+<li>在设备上打印或刻录到EEPROM中的唯一标识符</li>
+</ul>
+<p>有时本地设备的唯一ID的可接受源</p>
+<ul>
+<li>主机名:如果主机名的子集包含一个可接受的来源，则可以使用这一部分</li>
+</ul>
+<p>有时云服务的唯一ID的可接受源</p>
+<ul>
+<li>电子邮件地址:必须格式化为小写</li>
+<li>用户名:如果用户名不区分大小写，则必须格式化为小写。</li>
+<li>帐户ID:不能有冲突</li>
+</ul>
+<p>无法接受的唯一ID来源</p>
+<ul>
+<li>IP地址</li>
+<li>设备名称</li>
+<li>主机名，如果它可以被用户更改</li>
+<li>URL</li>
+</ul>
+<h4 id="unignoring"><a class="markdownIt-Anchor" href="#unignoring"></a> Unignoring</h4>
+<p>您的配置流可以通过实现配置流中的unignore步骤来添加支持，以重新发现以前被忽略的条目。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_unignore</span>(<span class="params">self, user_input</span>):</span></span><br><span class="line">    unique_id = user_input[<span class="string">&quot;unique_id&quot;</span>]</span><br><span class="line">    <span class="keyword">await</span> self.async_set_unique_id(unique_id)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Discover devices and find the one that matches the unique ID.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> self.async_show_form(…)</span><br></pre></td></tr></table></figure>
+<h3 id="decovery-steps"><a class="markdownIt-Anchor" href="#decovery-steps"></a> decovery steps</h3>
+<p>当发现一个集成时，它们各自的发现步骤(即<code>async_step_dhc</code>p或<code>async_step_zeroconf</code>)与发现信息一起被调用。该步骤将必须检查以下事项:</p>
+<ul>
+<li>确保在设置已发现设备的过程中没有此配置流的其他实例。如果有多种方式发现一个设备在网络上，就会发生这种情况。</li>
+<li>请确保设备尚未设置好。</li>
+<li>调用发现步骤不应该导致完成的流和配置条目。始终与用户确认。</li>
+</ul>
+<h3 id="不需要身份验证的可发现集成"><a class="markdownIt-Anchor" href="#不需要身份验证的可发现集成"></a> 不需要身份验证的可发现集成</h3>
+<p>如果您的集成不需要任何身份验证就可以被发现，那么您将能够使用内置的discoverable Flow。该流程提供以下功能:</p>
+<ul>
+<li>在完成配置流程之前，检测网络上是否可以发现设备/服务。</li>
+<li>支持所有基于清单的发现协议。</li>
+<li>限制只有一个配置条目。由配置条目来发现所有可用的设备。</li>
+</ul>
+<p>开始时，运行<code>python3 -m script.scaffold config_flow_discovery</code>，并按照说明操作。这将创建使用discovery配置集成所需的所有样板。</p>
+<h3 id="通过oauth2配置"><a class="markdownIt-Anchor" href="#通过oauth2配置"></a> 通过OAuth2配置</h3>
+<p>Home Assistant内置了对使用<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc6749">the OAuth2 authorization framework</a>提供帐户链接的集成支持。为了能够利用这一点，您将需要以一种允许Home Assistant负责刷新令牌的方式来构造您的Python API库。请参阅我们的<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/api_lib_index">API library guide</a>，了解如何做到这一点。</p>
+<p>内置的OAuth2支持使用本地配置的客户端ID / secret和Home Assistant云帐户链接服务开箱即用。该服务允许用户将他们的帐户与一个集中管理的客户端ID/秘密联系起来。如果您希望您的集成成为该服务的一部分，请通过hello@home-assistant.io联系我们。</p>
+<p>开始时，运行<code>python3 -m script.scaffold config_flow_oauth2</code>，并按照说明操作。这将创建使用OAuth2配置集成所需的所有样板。</p>
+<h3 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h3>
+<p>配置流处理程序的转换定义在组件转换文件<code>strings.json</code>中的<code>config</code>键下。Hue组件的例子:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;Philips Hue Bridge&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;config&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;step&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;init&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;Pick Hue bridge&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;Host&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">&quot;link&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;Link Hub&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;Press the button on the bridge to register Philips Hue with Home Assistant.\n\n![Location of button on bridge](/static/images/config_philips_hue.jpg)&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;error&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;register_failed&quot;</span>: <span class="string">&quot;Failed to register, please try again&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;linking&quot;</span>: <span class="string">&quot;Unknown linking error occurred.&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;abort&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;discover_timeout&quot;</span>: <span class="string">&quot;Unable to discover Hue bridges&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;no_bridges&quot;</span>: <span class="string">&quot;No Philips Hue bridges discovered&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;all_configured&quot;</span>: <span class="string">&quot;All Philips Hue bridges are already configured&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;unknown&quot;</span>: <span class="string">&quot;Unknown error occurred&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;cannot_connect&quot;</span>: <span class="string">&quot;Unable to connect to the bridge&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;already_configured&quot;</span>: <span class="string">&quot;Bridge is already configured&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当翻译合并到HA，他们将自动上传到<a target="_blank" rel="noopener" href="https://lokalise.co/">okalise</a>，在那里翻译团队将帮助翻译他们在其他语言。在本地开发时，需要运行<code>python3 -m script.translations develop</code>。翻译可以看到对<code>string.json</code>的更改。<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/translations">More info on translating Home Assistant.</a></p>
+<h3 id="config-entry-migration"><a class="markdownIt-Anchor" href="#config-entry-migration"></a> Config Entry Migration</h3>
+<p>如上所述，每个配置条目都分配了一个版本。这样可以在Config Entry模式更改时将Config Entry数据迁移到新格式。</p>
+<p>迁移可以通过在组件的<code>__init__.py</code>文件中实现<code>async_migrate_entry</code>函数来实现。如果迁移成功，函数应该返回True。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example migration function</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_migrate_entry</span>(<span class="params">hass, config_entry: ConfigEntry</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Migrate old entry.&quot;&quot;&quot;</span></span><br><span class="line">    _LOGGER.debug(<span class="string">&quot;Migrating from version %s&quot;</span>, config_entry.version)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> config_entry.version == <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">        new = &#123;**config_entry.data&#125;</span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> modify Config Entry data</span></span><br><span class="line"></span><br><span class="line">        config_entry.version = <span class="number">2</span></span><br><span class="line">        hass.config_entries.async_update_entry(config_entry, data=new)</span><br><span class="line"></span><br><span class="line">    _LOGGER.info(<span class="string">&quot;Migration to version %s successful&quot;</span>, config_entry.version)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h3 id="reauthentication"><a class="markdownIt-Anchor" href="#reauthentication"></a> Reauthentication</h3>
+<p>优雅地处理身份验证错误，如无效、过期或撤销令牌，需要在集成质量尺度上取得进步。本示例演示如何将reauth添加到脚本创建的OAuth流中。脚手架遵循构建Python库中的模式。</p>
+<p>这个例子在<code>__init__.py</code>的配置条目设置中捕获了一个身份验证异常，并指示用户访问集成页面，以便重新配置集成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.config_entries <span class="keyword">import</span> SOURCE_REAUTH, ConfigEntry</span><br><span class="line"><span class="keyword">from</span> homeassistant.core <span class="keyword">import</span> HomeAssistant</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> api</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup_entry</span>(<span class="params">hass: HomeAssistant, entry: ConfigEntry</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Setup up a config entry.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Replace with actual API setup and exception</span></span><br><span class="line">    auth = api.AsyncConfigEntryAuth(...)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">await</span> auth.refresh_tokens()</span><br><span class="line">    <span class="keyword">except</span> TokenExpiredError <span class="keyword">as</span> err:</span><br><span class="line">        <span class="keyword">raise</span> ConfigEntryAuthFailed(err) <span class="keyword">from</span> err</span><br><span class="line"></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Proceed with component setup</span></span><br></pre></td></tr></table></figure>
+<p><code>config_flow.py</code>中的流处理程序还需要一些额外的步骤来支持reauth，包括显示确认、启动reauth流、更新现有的配置条目以及重新加载以再次调用setup。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OAuth2FlowHandler</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="class">    config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN</span></span></span><br><span class="line"><span class="params"><span class="class"></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Config flow to handle OAuth2 authentication.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_reauth</span>(<span class="params">self, user_input=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Perform reauth upon an API authentication error.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> self.async_step_reauth_confirm()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_reauth_confirm</span>(<span class="params">self, user_input=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Dialog that informs the user that reauth is required.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> user_input <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> self.async_show_form(</span><br><span class="line">                step_id=<span class="string">&quot;reauth_confirm&quot;</span>,</span><br><span class="line">                data_schema=vol.Schema(&#123;&#125;),</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> self.async_step_user()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_oauth_create_entry</span>(<span class="params">self, data: <span class="built_in">dict</span></span>) -&gt; <span class="built_in">dict</span>:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Create an oauth config entry or update existing entry for reauth.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> This example supports only a single config entry. Consider</span></span><br><span class="line">        <span class="comment"># any special handling needed for multiple config entries.</span></span><br><span class="line">        existing_entry = <span class="keyword">await</span> self.async_set_unique_id(DOMAIN)</span><br><span class="line">        <span class="keyword">if</span> existing_entry:</span><br><span class="line">            self.hass.config_entries.async_update_entry(existing_entry, data=data)</span><br><span class="line">            <span class="keyword">await</span> self.hass.config_entries.async_reload(existing_entry.entry_id)</span><br><span class="line">            <span class="keyword">return</span> self.async_abort(reason=<span class="string">&quot;reauth_successful&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> <span class="built_in">super</span>().async_oauth_create_entry(data)</span><br></pre></td></tr></table></figure>
+<p>根据集成的细节，可能会有一些额外的考虑，比如确保跨reauth使用相同的帐户，或者处理多个配置条目。</p>
+<p>reauth确认对话框需要在<code>string.json</code>附加定义用于reauth确认和成功对话框:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;config&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;step&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;reauth_confirm&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;title&quot;</span>: <span class="string">&quot;[%key:common::config_flow::title::reauth%]&quot;</span>,</span><br><span class="line">        # TODO: Replace with the name of the integration</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;The Example integration needs to re-authenticate your account&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;abort&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;reauth_successful&quot;</span>: <span class="string">&quot;[%key:common::config_flow::abort::reauth_successful%]&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参见翻译本地开发说明。</p>
+<p>身份验证失败(例如撤销的oauth令牌)对于手动测试来说有点棘手。一个建议是复制<code>config/.storage/core.Config_entries</code>，并根据需要测试的场景手动更改access_token、refresh_token和expires_at的值。然后，您可以遍历reauth流，并确认这些值已被新的有效令牌替换。</p>
+<p>自动化测试应验证reauth流更新了现有的配置条目，而没有创建其他条目。</p>
+<h3 id="测试配置流"><a class="markdownIt-Anchor" href="#测试配置流"></a> 测试配置流</h3>
+<p>与配置流集成需要对<code>config_flow.py</code>中的所有代码进行完整的测试覆盖，才能被核心接受。测试您的代码包括关于如何生成覆盖率报告的更多细节。</p>
+<h2 id="配置选项"><a class="markdownIt-Anchor" href="#配置选项"></a> 配置选项</h2>
+<p>通过配置条目配置的集成可以向用户公开一些选项，以允许对集成的行为进行调整，比如应该集成哪些设备或位置。</p>
+<p>配置条目选项使用 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/data_entry_flow_index">Data Flow Entry framework</a>来允许用户更新配置条目选项。希望支持配置入口选项的组件需要定义一个选项流处理程序。</p>
+<h3 id="选项支持"><a class="markdownIt-Anchor" href="#选项支持"></a> 选项支持</h3>
+<p>为了让集成支持选项，它需要在配置流处理程序中有一个<code>async_get_options_flow</code>方法。调用它将返回组件选项流处理程序的实例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@staticmethod</span></span><br><span class="line"><span class="meta">@callback</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_get_options_flow</span>(<span class="params">config_entry</span>):</span></span><br><span class="line">    <span class="keyword">return</span> OptionsFlowHandler(config_entry)</span><br></pre></td></tr></table></figure>
+<h3 id="flow-handler"><a class="markdownIt-Anchor" href="#flow-handler"></a> Flow handler</h3>
+<p>流处理程序的工作方式与配置流处理程序类似，只不过流中的第一步始终是async_step_init</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OptionsFlowHandler</span>(<span class="params">config_entries.OptionsFlow</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, config_entry</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Initialize options flow.&quot;&quot;&quot;</span></span><br><span class="line">        self.config_entry = config_entry</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_step_init</span>(<span class="params">self, user_input=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Manage the options.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> user_input <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> self.async_create_entry(title=<span class="string">&quot;&quot;</span>, data=user_input)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.async_show_form(</span><br><span class="line">            step_id=<span class="string">&quot;init&quot;</span>,</span><br><span class="line">            data_schema=vol.Schema(</span><br><span class="line">                &#123;</span><br><span class="line">                    vol.Required(</span><br><span class="line">                        <span class="string">&quot;show_things&quot;</span>,</span><br><span class="line">                        default=self.config_entry.options.get(<span class="string">&quot;show_things&quot;</span>),</span><br><span class="line">                    ): <span class="built_in">bool</span></span><br><span class="line">                &#125;</span><br><span class="line">            ),</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<h3 id="signal-updates"><a class="markdownIt-Anchor" href="#signal-updates"></a> Signal updates</h3>
+<p>如果集成应该对更新的选项起作用，您可以向配置条目注册一个更新监听器，当条目更新时将调用它。监听器是通过在集成的<code>__init__.py</code>中添加以下<code>async_setup_entry</code>函数来注册的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry.async_on_unload(entry.add_update_listener(update_listener))</span><br></pre></td></tr></table></figure>
+<p>使用上述方法意味着在加载条目时附加Listener，并在卸载时分离该条目。Listener应该是一个async函数，它接受与<code>async_setup_entry</code>相同的输入。然后可以从<code>entry.options</code>访问选项。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">update_listener</span>(<span class="params">hass, entry</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Handle options update.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="通过yaml配置"><a class="markdownIt-Anchor" href="#通过yaml配置"></a> 通过yaml配置</h2>
+<p><code>configuration.yaml</code>是一个由用户定义的配置文件。它是由HA在第一次启动时自动创建的。它定义了要加载的组件。</p>
+<blockquote>
+<p>与设备和/或服务通信的集成通过配置流进行配置。在极少数情况下，我们可以破例。允许并鼓励不应该有YAML配置的现有集成实现配置流并删除YAML支持。对于这些相同的现有集成，对现有YAML配置的更改将不再被接受。</p>
+<p>详细信息请阅读<a target="_blank" rel="noopener" href="https://github.com/home-assistant/architecture/blob/master/adr/0010-integration-configuration.md#decision">ADR-0010</a></p>
+</blockquote>
+<h3 id="pre-processing"><a class="markdownIt-Anchor" href="#pre-processing"></a> Pre-processing</h3>
+<p>HA将根据指定要加载的组件对配置进行一些预处理。</p>
+<h4 id="config_schema"><a class="markdownIt-Anchor" href="#config_schema"></a> CONFIG_SCHEMA</h4>
+<p>如果组件定义了一个变量<code>CONFIG_SCHEMA</code>，则传入的配置对象将是通过<code>CONFIG_SCHEMA</code>运行配置的结果。<code>CONFIG_SCHEMA</code>应该是一个丰富的模式。</p>
+<h3 id="platform_schema"><a class="markdownIt-Anchor" href="#platform_schema"></a> PLATFORM_SCHEMA</h3>
+<p>如果一个组件定义了一个变量<code>PLATFORM_SCHEMA</code>，那么这个组件将被视为一个实体组件。实体组件的配置是平台配置的列表。</p>
+<p>家庭助理将收集此组件的所有平台配置。它将通过在组件的域(比如light)下查找配置条目，以及在任何域+额外文本的条目下查找配置条目来实现。</p>
+<p>在收集平台配置时，Home Assistant将验证它们。它将查看平台是否存在，以及平台是否定义了一个<code>PLATFORM_SCHEMA</code>，然后根据该模式进行验证。如果没有定义，它将根据组件中定义的<code>PLATFORM_SCHEMA</code>验证配置。任何引用非现有平台或包含无效配置的配置将被删除。</p>
+<p>以下configuration.yaml:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">unrelated_component:</span></span><br><span class="line">  <span class="attr">some_key:</span> <span class="string">some_value</span></span><br><span class="line"></span><br><span class="line"><span class="attr">switch:</span></span><br><span class="line">  <span class="attr">platform:</span> <span class="string">example1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">switch living room:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">platform:</span> <span class="string">example2</span></span><br><span class="line">    <span class="attr">some_config:</span> <span class="literal">true</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">platform:</span> <span class="string">invalid_platform</span></span><br></pre></td></tr></table></figure>
+<p>将传递给组件为</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;unrelated_component&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;some_key&quot;</span>: <span class="string">&quot;some_value&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;switch&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;platform&quot;</span>: <span class="string">&quot;example1&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;platform&quot;</span>: <span class="string">&quot;example2&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;some_config&quot;</span>: True</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义服务"><a class="markdownIt-Anchor" href="#自定义服务"></a> 自定义服务</h2>
+<p>HA为很多事情提供现成的服务，但并不总是包罗万象。与其尝试更改Home Assistant，不如先将其作为服务添加到您自己的集成中。一旦我们看到这些服务中的模式，我们就可以讨论一般化它们。</p>
+<p>这是一个简单的“hello world”示例，展示了注册服务的基础知识。要使用这个例子，创建文件<code>&lt;config dir&gt;/custom_components/hello_service/__init__.py</code>并复制下面的例子代码。</p>
+<p>服务可以从自动化和前端的服务“开发人员工具”中调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN = <span class="string">&quot;hello_service&quot;</span></span><br><span class="line"></span><br><span class="line">ATTR_NAME = <span class="string">&quot;name&quot;</span></span><br><span class="line">DEFAULT_NAME = <span class="string">&quot;World&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">hass, config</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Set up is called when Home Assistant is loading our component.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle_hello</span>(<span class="params">call</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Handle the service call.&quot;&quot;&quot;</span></span><br><span class="line">        name = call.data.get(ATTR_NAME, DEFAULT_NAME)</span><br><span class="line"></span><br><span class="line">        hass.states.<span class="built_in">set</span>(<span class="string">&quot;hello_service.hello&quot;</span>, name)</span><br><span class="line"></span><br><span class="line">    hass.services.register(DOMAIN, <span class="string">&quot;hello&quot;</span>, handle_hello)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Return boolean to indicate that initialization was successfully.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>通过在您的<code>configuration.yaml</code>中添加以下内容来加载集成。当组件加载后，应该可以调用一个新服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># configuration.yaml entry</span></span><br><span class="line"><span class="attr">hello_service:</span></span><br></pre></td></tr></table></figure>
+<p>打开前端，在侧栏，单击开发人员工具部分中的第一个图标。这将打开Call Service开发人员工具。在右侧，找到您的服务并点击它。这将自动填写正确的值。</p>
+<p>按下“Call Service”将现在没有任何参数调用您的服务。这将导致你的服务创建一个默认名称为“World”的状态。如果要指定名称，则必须通过Service Data提供一个参数。在YAML模式下，添加如下内容，再按“Call Service again”。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">service:</span> <span class="string">helloworld_service.hello</span></span><br><span class="line"><span class="attr">data:</span> &#123; <span class="attr">&quot;name&quot;:</span> <span class="string">&quot;Planet&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>该服务现在将用“Planet”覆盖以前的状态</p>
+<h3 id="服务描述"><a class="markdownIt-Anchor" href="#服务描述"></a> 服务描述</h3>
+<p>添加服务只有在用户知道的情况下才有用。在HA中，我们使用一种<code>services.yaml</code>作为集成的一部分来描述服务。</p>
+<p>服务是在集成的域名下发布的，因此在<code>services.yaml</code>中也是如此我们只使用服务名作为base key。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example services.yaml entry</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Service ID</span></span><br><span class="line"><span class="attr">set_speed:</span></span><br><span class="line">  <span class="comment"># Service name as shown in UI</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">Set</span> <span class="string">speed</span></span><br><span class="line">  <span class="comment"># Description of the service</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">Sets</span> <span class="string">fan</span> <span class="string">speed.</span></span><br><span class="line">  <span class="comment"># If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map. By default it shows only targets matching entities from the same domain as the service, but if further customization is required, target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. </span></span><br><span class="line">  <span class="attr">target:</span></span><br><span class="line">  <span class="comment"># Different fields that your service accepts</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="comment"># Key of the field</span></span><br><span class="line">    <span class="attr">speed:</span></span><br><span class="line">      <span class="comment"># Field name as shown in UI</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">Speed</span></span><br><span class="line">      <span class="comment"># Description of the field</span></span><br><span class="line">      <span class="attr">description:</span> <span class="string">Speed</span> <span class="string">setting</span></span><br><span class="line">      <span class="comment"># Whether or not field is required (default = false)</span></span><br><span class="line">      <span class="attr">required:</span> <span class="literal">true</span></span><br><span class="line">      <span class="comment"># Advanced fields are only shown when the advanced mode is enabled for the user (default = false)</span></span><br><span class="line">      <span class="attr">advanced:</span> <span class="literal">true</span></span><br><span class="line">      <span class="comment"># Example value that can be passed for this field</span></span><br><span class="line">      <span class="attr">example:</span> <span class="string">&quot;low&quot;</span></span><br><span class="line">      <span class="comment"># The default field value</span></span><br><span class="line">      <span class="attr">default:</span> <span class="string">&quot;high&quot;</span></span><br><span class="line">      <span class="comment"># Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field</span></span><br><span class="line">      <span class="attr">selector:</span></span><br><span class="line">        <span class="attr">select:</span></span><br><span class="line">          <span class="attr">options:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;off&quot;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;low&quot;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;medium&quot;</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;high&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="实体服务"><a class="markdownIt-Anchor" href="#实体服务"></a> 实体服务</h3>
+<p>有时您希望提供额外的服务来控制您的实体。例如，Sonos集成为分组和取消分组设备提供服务。实体服务是特殊的，因为用户可以通过许多不同的方式指定实体。它可以使用areas、a group or 一组实体。</p>
+<p>你需要在你的平台上注册实体服务，比如<code>&lt;your-domain&gt;/media_player.py</code>。这些服务将在您的域而不是<code>media player</code>域下提供。示例代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.helpers <span class="keyword">import</span> config_validation <span class="keyword">as</span> cv, entity_platform, service</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup_entry</span>(<span class="params">hass, entry</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Set up the media player platform for Sonos.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    platform = entity_platform.async_get_current_platform()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># This will call Entity.set_sleep_timer(sleep_time=VALUE)</span></span><br><span class="line">    platform.async_register_entity_service(</span><br><span class="line">        SERVICE_SET_TIMER,</span><br><span class="line">        &#123;</span><br><span class="line">            vol.Required(<span class="string">&#x27;sleep_time&#x27;</span>): cv.time_period,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;set_sleep_timer&quot;</span>,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>如果你需要对服务调用进行更多的控制，你也可以传递一个async函数来代替<code>&quot;set_sleep_timer&quot;</code>:</p>
+<h2 id="平台platforms"><a class="markdownIt-Anchor" href="#平台platforms"></a> 平台（Platforms）</h2>
+<p>Home Assistant有各种内置的集成来抽象设备类型。有<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity/light">lights</a>, <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity/switch">switches</a>, <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity/cover">covers</a>, <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity/climate">climate devices</a>, and <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity">many more</a>. 。您的集成可以通过创建一个平台来挂钩到这些集成中。对于要集成的每个集成，您都需要一个平台。</p>
+<p>要创建平台，您需要创建一个文件，该文件带有您正在为之构建平台的集成的域名。因此，如果您正在构建一个light，您将向您的集成文件夹中添加一个新文件<code>light.py</code>。</p>
+<p>我们已经创建了两个例子，应该让你看看这是如何工作的:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor/">Example sensor platform</a>: hello world of platforms.</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_light/">Example light platform</a>: showing best practices.</li>
+</ul>
+<h3 id="interfacing-with-devices"><a class="markdownIt-Anchor" href="#interfacing-with-devices"></a> Interfacing with devices</h3>
+<p>HA的一个规则是，集成绝不能直接与设备连接。相反，它应该与第三方Python 3库交互。通过这种方式，Home Assistant可以与Python社区共享代码，并保持项目的可维护性。</p>
+<p>准备好Python库并发布到PyPI之后，将其添加到<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest">manifest</a>.中。现在是时候实现Entity基类了，它是由您正在为其创建平台的集成所提供的。</p>
+<p>在 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/core/entity">entity index</a>处找到您的集成，查看有哪些方法和属性可以实现。</p>
+<h2 id="multiple-platforms"><a class="markdownIt-Anchor" href="#multiple-platforms"></a> Multiple Platforms</h2>
+<p>大多数集成由单个平台组成。在这种情况下，只定义一个平台是可以的。但是，如果要添加第二个平台，则需要集中连接逻辑。这是在组件内部完成的(<code>__init__.py</code>)。</p>
+<p>如果您的集成是通过<code>configuration.yaml</code>可配置的，它将导致配置的入口点发生更改，因为现在用户需要直接设置集成，而由集成来设置平台。</p>
+<h3 id="loading-platforms-when-configured-via-a-config-entry"><a class="markdownIt-Anchor" href="#loading-platforms-when-configured-via-a-config-entry"></a> Loading platforms when configured via a config entry</h3>
+<p>如果您的集成是通过配置条目来设置的，那么您需要将配置条目转发到适当的集成来设置您的平台。有关更多信息，请参见 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/config_entries_index#for-platforms">config entry documentation</a>.</p>
+<h3 id="loading-platforms-when-configured-via-configurationyaml"><a class="markdownIt-Anchor" href="#loading-platforms-when-configured-via-configurationyaml"></a> Loading platforms when configured via configuration.yaml</h3>
+<p>如果你的集成没有使用配置项，它将不得不使用我们的发现助手(discovery helper)来设置它的平台。注意，这种方法不支持卸载。</p>
+<p>为此，您需要使用来自发现助手的<code>load_platform</code>和<code>async_load_platform</code>方法。</p>
+<ul>
+<li>See also a <a target="_blank" rel="noopener" href="https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_load_platform/">full example that implements this logic</a></li>
+</ul>
+<h2 id="获取数据fetching-data"><a class="markdownIt-Anchor" href="#获取数据fetching-data"></a> 获取数据（Fetching Data）</h2>
+<p>您的集成将需要从API获取数据，以便能够向Home Assistant提供这些数据。这个API可以通过web(本地或云)、插座、通过USB棒暴露的串行端口等方式提供。</p>
+<h3 id="push-vs-poll"><a class="markdownIt-Anchor" href="#push-vs-poll"></a> Push vs Poll</h3>
+<p>api有许多不同的shapes and forms，但其核心分为两类:push(推送)和poll（拉取）。</p>
+<p>通过push，我们订阅了一个API，当有新数据可用时，我们会得到API的通知。它把变化推给我们。推送api很棒，因为它们消耗的资源更少。当发生更改时，我们可以得到更改的通知，而不必重新获取所有数据并查找更改。因为实体可以被禁用，所以你应该确保你的实体在<code>async_added_to_hass</code>回调函数中订阅，并在删除时取消订阅。</p>
+<p>通过poll,我们将以指定的时间间隔从API获取最新的数据。然后，您的集成会将该数据提供给它的实体，该实体将被写入Home Assistant。</p>
+<p>由于poll常见，Home Assistant默认假设您的实体基于poll，如果不是这样，从<code>Engity.should_poll</code>返回<code>False</code>。当您禁用poll时，您的集成将负责调用其中一个方法，以指示Home Assistant是时候将实体状态写入Home Assistant了:</p>
+<ul>
+<li>如果你在一个异步函数中执行，并且不需要调用你的实体更新方法，调用<code>Entity.async_write_ha_state()</code>。这是一个异步回调函数，它将把状态写入事件循环中的状态机。</li>
+<li><code>Entity.schedule_update_ha_state(force_refresh=False)</code>/<code>Entity.async_schedule_update_ha_state(force_refresh=False)</code>会安排实体的更新。如果<code>force_refresh</code>设置为<code>True</code>, Home Assistant将在写入状态之前调用你的实体更新方法(<code>update()/async_update()</code>)。</li>
+</ul>
+<h3 id="polling-api-endpoints"><a class="markdownIt-Anchor" href="#polling-api-endpoints"></a> Polling API endpoints</h3>
+<p>我们将在这里解释几种不同的API类型，以及在Home Assistant中集成它们的最佳方法。请注意，一些集成将遇到以下几种集成的组合</p>
+<h4 id="coordinated-single-api-poll-for-data-for-all-entities"><a class="markdownIt-Anchor" href="#coordinated-single-api-poll-for-data-for-all-entities"></a> Coordinated, single API poll for data for all entities</h4>
+<p>这个API将有一个单一的方法来获取您在Home Assistant中拥有的所有实体的数据。在本例中，我们希望在这个端点上进行单个周期轮询，然后让实体在有新数据可用时立即知道。</p>
+<p>Home Assistant提供了一个dataupdatcoordinator类，以帮助您尽可能有效地管理这个问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;Example integration using DataUpdateCoordinator.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> async_timeout</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> homeassistant.components.light <span class="keyword">import</span> LightEntity</span><br><span class="line"><span class="keyword">from</span> homeassistant.exceptions <span class="keyword">import</span> ConfigEntryAuthFailed</span><br><span class="line"><span class="keyword">from</span> homeassistant.helpers.update_coordinator <span class="keyword">import</span> (</span><br><span class="line">    CoordinatorEntity,</span><br><span class="line">    DataUpdateCoordinator,</span><br><span class="line">    UpdateFailed,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> .const <span class="keyword">import</span> DOMAIN</span><br><span class="line"></span><br><span class="line">_LOGGER = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_setup_entry</span>(<span class="params">hass, entry, async_add_entities</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Config entry example.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># assuming API object stored here by __init__.py</span></span><br><span class="line">    api = hass.data[DOMAIN][entry.entry_id]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_update_data</span>():</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Fetch data from API endpoint.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        This is the place to pre-process the data to lookup tables</span></span><br><span class="line"><span class="string">        so entities can quickly look up their data.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># Note: asyncio.TimeoutError and aiohttp.ClientError are already</span></span><br><span class="line">            <span class="comment"># handled by the data update coordinator.</span></span><br><span class="line">            <span class="keyword">async</span> <span class="keyword">with</span> async_timeout.timeout(<span class="number">10</span>):</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">await</span> api.fetch_data()</span><br><span class="line">        <span class="keyword">except</span> ApiAuthError <span class="keyword">as</span> err:</span><br><span class="line">            <span class="comment"># Raising ConfigEntryAuthFailed will cancel future updates</span></span><br><span class="line">            <span class="comment"># and start a config flow with SOURCE_REAUTH (async_step_reauth)</span></span><br><span class="line">            <span class="keyword">raise</span> ConfigEntryAuthFailed <span class="keyword">from</span> err</span><br><span class="line">        <span class="keyword">except</span> ApiError <span class="keyword">as</span> err:</span><br><span class="line">            <span class="keyword">raise</span> UpdateFailed(<span class="string">f&quot;Error communicating with API: <span class="subst">&#123;err&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    coordinator = DataUpdateCoordinator(</span><br><span class="line">        hass,</span><br><span class="line">        _LOGGER,</span><br><span class="line">        <span class="comment"># Name of the data. For logging purposes.</span></span><br><span class="line">        name=<span class="string">&quot;sensor&quot;</span>,</span><br><span class="line">        update_method=async_update_data,</span><br><span class="line">        <span class="comment"># Polling interval. Will only be polled if there are subscribers.</span></span><br><span class="line">        update_interval=timedelta(seconds=<span class="number">30</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># Fetch initial data so we have data when entities subscribe</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># If the refresh fails, async_config_entry_first_refresh will</span></span><br><span class="line">    <span class="comment"># raise ConfigEntryNotReady and setup will try again later</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># If you do not want to retry setup on failure, use</span></span><br><span class="line">    <span class="comment"># coordinator.async_refresh() instead</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="keyword">await</span> coordinator.async_config_entry_first_refresh()</span><br><span class="line"></span><br><span class="line">    async_add_entities(</span><br><span class="line">        MyEntity(coordinator, idx) <span class="keyword">for</span> idx, ent <span class="keyword">in</span> <span class="built_in">enumerate</span>(coordinator.data)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEntity</span>(<span class="params">CoordinatorEntity, LightEntity</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;An entity using CoordinatorEntity.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The CoordinatorEntity class provides:</span></span><br><span class="line"><span class="string">      should_poll</span></span><br><span class="line"><span class="string">      async_update</span></span><br><span class="line"><span class="string">      async_added_to_hass</span></span><br><span class="line"><span class="string">      available</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, coordinator, idx</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Pass coordinator to CoordinatorEntity.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(coordinator)</span><br><span class="line">        self.idx = idx</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_on</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Return entity state.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Example to show how we fetch data from coordinator.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.coordinator.data[self.idx][<span class="string">&quot;state&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_turn_on</span>(<span class="params">self, **kwargs</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Turn the light on.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Example method how to request data updates.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># Do the turning on.</span></span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update the data</span></span><br><span class="line">        <span class="keyword">await</span> self.coordinator.async_request_refresh()</span><br></pre></td></tr></table></figure>
+<h4 id="separate-polling-for-each-individual-entity"><a class="markdownIt-Anchor" href="#separate-polling-for-each-individual-entity"></a> Separate polling for each individual entity</h4>
+<p>有些api将为每个设备提供一个端点。有时不可能将一个设备从你的API映射到一个单独的实体。如果您从一个API设备端点创建多个实体，请参阅前一节。</p>
+<p>如果可以将一个设备端点映射到单个实体，则可以在<code>update()/async_update()</code>方法中获取该实体的数据。确保polling被设置为<code>True</code>，并且Home Assistant将定期调用此方法。</p>
+<p>如果你的实体需要在第一次写入Home Assistant之前获取数据，传递<code>True</code>给<code>add_entities</code>方法:<code>add_entities([MyEntity()]， True)</code>。</p>
+<p>您可以通过在平台中定义<code>SCAN_INTERVAL</code>常量来控制集成的轮询间隔。小心设置太低。它将占用HA的资源，可能会使托管API的设备不堪重负，或者会阻止你使用云API。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line">SCAN_INTERVAL = timedelta(seconds=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="request-parallelism并行性"><a class="markdownIt-Anchor" href="#request-parallelism并行性"></a> Request Parallelism(并行性)</h3>
+<blockquote>
+<p>这是一个高级话题</p>
+</blockquote>
+<p>Home Assistant有内置的逻辑，以确保集成不会破坏APIs同时还可以利用Home Assistant中的所有可用资源。这种逻辑是围绕限制并行请求的数量而构建的。此逻辑在服务调用和实体更新期间自动使用。</p>
+<p>Home Assistant通过维护每个集成的信号量（<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore">semaphore</a>）来控制并行更新(对<code>update()</code>的调用)的数量。例如，如果信号量允许1个并行连接，更新和服务调用将等待一个正在进行的连接。如果值为0，则集成本身负责在必要时限制并行请求的数量。</p>
+<p>平台的并行请求的默认值是根据添加到Home Assistant的第一个实体决定的。如果实体定义了<code>async_update</code>方法，则为0，否则为1。(这是遗留问题的决定)</p>
+<p>平台可以通过在其平台中定义<code>PARALLEL_UPDATES</code>常量(比如<code>rflink/light.py</code>)来覆盖默认值。</p>
+<h2 id="触发事件firing-event"><a class="markdownIt-Anchor" href="#触发事件firing-event"></a> 触发事件（Firing event）</h2>
+<p>有些集成代表有事件的设备或服务，比如检测到移动或瞬间按钮被按下。通过在Home Assistant中将它们作为事件触发，集成可以使它们对用户可用。</p>
+<p>您的集成应该触发类型为<code>&lt;domain&gt;_event</code>的事件。例如，ZHA集成会触发<code>zha_event</code>事件。</p>
+<p>如果该事件与特定的设备/服务相关，则应正确定位。通过向包含设备注册表中的设备标识符的事件数据添加<code>device_id</code>属性来实现这一点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">event_data = &#123;</span><br><span class="line">    <span class="string">&quot;device_id&quot;</span>: <span class="string">&quot;my-device-id&quot;</span>,</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;motion_detected&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">hass.bus.async_fire(<span class="string">&quot;mydomain_event&quot;</span>, event_data)</span><br></pre></td></tr></table></figure>
+<p>If a device or service only fires events, you need to <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/device_registry_index#manual-registration">manually register it in the device registry</a>.</p>
+<h3 id="making-events-accessible-to-users"><a class="markdownIt-Anchor" href="#making-events-accessible-to-users"></a> Making events accessible to users</h3>
+<p>可以根据payload,将<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/device_automation_trigger">Device trigger</a> 附加到特定的事件，并使用户可以访问该事件。有了设备触发器，用户将能够看到设备的所有可用事件，并在其自动化中使用它。</p>
+<h3 id="what-not-to-do"><a class="markdownIt-Anchor" href="#what-not-to-do"></a> What not to do</h3>
+<p>与事件相关的代码不应该是集成的实体逻辑的一部分。你想要启用从<code>__init__.py</code>中的<code>async_setup_entry</code>中转换集成事件到Home Assistant事件的逻辑。</p>
+<p>实体状态不应该表示事件。例如，您不希望二进制传感器在事件发生时打开30秒。</p>
+<h2 id="网络和发现networking-and-discovery"><a class="markdownIt-Anchor" href="#网络和发现networking-and-discovery"></a> 网络和发现（Networking and Discovery）</h2>
+<p>一些集成可能需要通过启用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Zero-configuration_networking">mDNS/Zeroconf</a>, <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP</a>或其他方法发现网络上的设备。主要的用例是寻找没有已知固定IP地址的设备，或者用于能够动态添加和删除任意数量的可发现设备的集成。</p>
+<p>HA有内置的助手来支持mDNS/Zeroconf和SSDP。如果您的集成使用了另一种发现方法，需要确定使用哪个网络接口来广播流量，那么<a target="_blank" rel="noopener" href="https://www.home-assistant.io/integrations/network/">Network</a>集成将提供一个帮助API来访问用户的界面首选项。</p>
+<h3 id="mdnszeroconf"><a class="markdownIt-Anchor" href="#mdnszeroconf"></a> mDNS/Zeroconf</h3>
+<p>Home Assistant使用<a target="_blank" rel="noopener" href="https://github.com/jstasiak/python-zeroconf">python-zeroconf</a>包来支持mDNS。由于不推荐在一台主机上运行多个mDNS实现，Home Assistant提供了内部帮助器api来访问正在运行的<code>Zeroconf</code>和<code>AsyncZeroconf</code>实例。</p>
+<p>在使用这些助手之前，请确保在集成的<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest"><code>manifest.json</code></a>中将<code>zeroconf</code>添加到<code>dependencies</code></p>
+<h4 id="obtaining-the-asynczeroconf-object"><a class="markdownIt-Anchor" href="#obtaining-the-asynczeroconf-object"></a> Obtaining the <code>AsyncZeroconf</code> object</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> zeroconf</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">aiozc = <span class="keyword">await</span> zeroconf.async_get_async_instance(hass)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="obtaining-the-zeroconf-object"><a class="markdownIt-Anchor" href="#obtaining-the-zeroconf-object"></a> Obtaining the <code>Zeroconf</code> object</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> zeroconf</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">zc = <span class="keyword">await</span> zeroconf.async_get_instance(hass)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="using-the-asynczeroconf-and-zeroconf-objects"><a class="markdownIt-Anchor" href="#using-the-asynczeroconf-and-zeroconf-objects"></a> Using the <code>AsyncZeroconf</code> and <code>Zeroconf</code> objects</h4>
+<p><code>python-zeroconf</code> provides examples on how to use both objects <a target="_blank" rel="noopener" href="https://github.com/jstasiak/python-zeroconf/tree/master/examples">examples</a>.</p>
+<h3 id="ssdp-2"><a class="markdownIt-Anchor" href="#ssdp-2"></a> SSDP</h3>
+<p>通过SSDP提供内置的发现功能</p>
+<p>Before using these helpers, be sure to add <code>ssdp</code> to <code>dependencies</code> in your integration’s <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest"><code>manifest.json</code></a></p>
+<h4 id="获取已发现设备列表"><a class="markdownIt-Anchor" href="#获取已发现设备列表"></a> 获取已发现设备列表</h4>
+<p>发现的SSDP设备列表可以通过以下内置的帮助api获取。SSDP集成提供了以下帮助api来从缓存查找现有的SSDP发现:<code>ssdp.async_get_discovery_info_by_udn_st</code>, <code>ssdp.async_get_discovery_info_by_st</code>, <code>ssdp.async_get_discovery_info_by_udn</code></p>
+<h4 id="查找指定设备"><a class="markdownIt-Anchor" href="#查找指定设备"></a> 查找指定设备</h4>
+<p>The <code>ssdp.async_get_discovery_info_by_udn_st</code> API returns a single <code>discovery_info</code> or <code>None</code> when provided an <code>SSDP</code>, <code>UDN</code> and <code>ST</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> ssdp</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">discovery_info = ssdp.async_get_discovery_info_by_udn_st(hass, udn, st)</span><br></pre></td></tr></table></figure>
+<h4 id="通过-st查找设备"><a class="markdownIt-Anchor" href="#通过-st查找设备"></a> 通过 <code>ST</code>查找设备</h4>
+<p>如果您想查找所发现的设备的特定类型，请调用<code>ssdp.async_get_discovery_info_by_st</code>将返回匹配<code>SSDP st</code>的所有已发现设备的列表。下面的例子返回网络上发现的每个Sonos播放器的发现信息列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> ssdp</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">discovery_infos = ssdp.async_get_discovery_info_by_st(hass, <span class="string">&quot;urn:schemas-upnp-org:device:ZonePlayer:1&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> discovery_info <span class="keyword">in</span> discovery_infos:</span><br><span class="line">  ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="通过udn查找设备"><a class="markdownIt-Anchor" href="#通过udn查找设备"></a> 通过<code>UDN</code>查找设备</h4>
+<p>如果希望查看特定<code>UDN</code>提供的服务的列表，请调用<code>ssdp.async_get_discovery_info_by_udn</code>将返回匹配<code>UPNP UDN</code>的所有已发现设备的列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> ssdp</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">discovery_infos = ssdp.async_get_discovery_info_by_udn(hass, udn)</span><br><span class="line"><span class="keyword">for</span> discovery_info <span class="keyword">in</span> discovery_infos:</span><br><span class="line">  ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="订阅ssdp发现"><a class="markdownIt-Anchor" href="#订阅ssdp发现"></a> 订阅SSDP发现</h4>
+<p>一些集成可能需要知道设备何时被立即发现。SSDP集成提供了一个注册API，用于在发现匹配特定键值的新设备时接收回调。在 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/creating_integration_manifest"><code>manifest.json</code></a>中使用相同的ssdp格式用于匹配。</p>
+<p>提供函数<code>ssdp.async_register_callback</code>来启用此功能。该函数返回一个回调函数，当调用时该函数将取消注册。</p>
+<p>下面的例子展示了在网络上看到Sonos播放器时如何注册以获得回调。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> ssdp</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">entry.async_on_unload(</span><br><span class="line">    ssdp.async_register_callback(</span><br><span class="line">        hass, _async_discovered_player, &#123;<span class="string">&quot;st&quot;</span>: <span class="string">&quot;urn:schemas-upnp-org:device:ZonePlayer:1&quot;</span>&#125;</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>下面的例子展示了当<code>x-rincon-bootseq</code>报头出现时如何注册以获得回调。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> ssdp</span><br><span class="line"><span class="keyword">from</span> homeassistant.const <span class="keyword">import</span> MATCH_ALL</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">entry.async_on_unload(</span><br><span class="line">    ssdp.async_register_callback(</span><br><span class="line">        hass, _async_discovered_player, &#123;<span class="string">&quot;x-rincon-bootseq&quot;</span>: MATCH_ALL&#125;</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="network"><a class="markdownIt-Anchor" href="#network"></a> Network</h3>
+<p>对于使用非内置的发现方法并需要访问用户的网络适配器配置的集成，应该使用以下帮助器API。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">adapters = <span class="keyword">await</span> network.async_get_adapters(hass)</span><br></pre></td></tr></table></figure>
+<h4 id="example-async_get_adapters-data-structure"><a class="markdownIt-Anchor" href="#example-async_get_adapters-data-structure"></a> Example <code>async_get_adapters</code> data structure</h4>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="attr">&quot;auto&quot;</span>: True,</span><br><span class="line">        <span class="attr">&quot;default&quot;</span>: False,</span><br><span class="line">        <span class="attr">&quot;enabled&quot;</span>: True,</span><br><span class="line">        <span class="attr">&quot;ipv4&quot;</span>: [],</span><br><span class="line">        <span class="attr">&quot;ipv6&quot;</span>: [</span><br><span class="line">            &#123;   </span><br><span class="line">                <span class="attr">&quot;address&quot;</span>: <span class="string">&quot;2001:db8::&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;network_prefix&quot;</span>: <span class="number">8</span>,</span><br><span class="line">                <span class="attr">&quot;flowinfo&quot;</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">&quot;scope_id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;eth0&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;auto&quot;</span>: True,</span><br><span class="line">        <span class="attr">&quot;default&quot;</span>: False,</span><br><span class="line">        <span class="attr">&quot;enabled&quot;</span>: True,</span><br><span class="line">        <span class="attr">&quot;ipv4&quot;</span>: [&#123;<span class="attr">&quot;address&quot;</span>: <span class="string">&quot;192.168.1.5&quot;</span>, <span class="attr">&quot;network_prefix&quot;</span>: <span class="number">23</span>&#125;],</span><br><span class="line">        <span class="attr">&quot;ipv6&quot;</span>: [],</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;eth1&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;auto&quot;</span>: False,</span><br><span class="line">        <span class="attr">&quot;default&quot;</span>: False,</span><br><span class="line">        <span class="attr">&quot;enabled&quot;</span>: False,</span><br><span class="line">        <span class="attr">&quot;ipv4&quot;</span>: [&#123;<span class="attr">&quot;address&quot;</span>: <span class="string">&quot;169.254.3.2&quot;</span>, <span class="attr">&quot;network_prefix&quot;</span>: <span class="number">16</span>&#125;],</span><br><span class="line">        <span class="attr">&quot;ipv6&quot;</span>: [],</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;vtun0&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="obtaining-the-ip-network-from-an-adapter"><a class="markdownIt-Anchor" href="#obtaining-the-ip-network-from-an-adapter"></a> Obtaining the IP Network from an adapter</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ipaddress <span class="keyword">import</span> ip_network</span><br><span class="line"><span class="keyword">from</span> homeassistant.components <span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">adapters = <span class="keyword">await</span> network.async_get_adapters(hass)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> adapter <span class="keyword">in</span> adapters:</span><br><span class="line">    <span class="keyword">for</span> ip_info <span class="keyword">in</span> adapater[<span class="string">&quot;ipv4&quot;</span>]:</span><br><span class="line">        local_ip = ip_info[<span class="string">&quot;address&quot;</span>]</span><br><span class="line">        network_prefix = ip_info[<span class="string">&quot;network_prefix&quot;</span>]</span><br><span class="line">        ip_net = ip_network(<span class="string">f&quot;<span class="subst">&#123;local_ip&#125;</span>/<span class="subst">&#123;network_prefix&#125;</span>&quot;</span>, <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20211230-59cdbec3.html" rel="prev" title="介绍">
+      <i class="fa fa-chevron-left"></i> 介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20211231-e68c7f67.html" rel="next" title="建造实体集成">
+      建造实体集成 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%9B%86%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text"> 创建第一个集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-minimum"><span class="nav-number">1.1.</span> <span class="nav-text"> The minimum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scaffold%E6%8F%90%E4%BE%9B%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text"> scaffold提供什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text"> 文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E8%AE%BE%E5%A4%87lightpyswitchpy%E7%AD%89"><span class="nav-number">2.1.</span> <span class="nav-text"> 集成设备，light.py,switch.py等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E6%9C%8D%E5%8A%A1servicesyaml"><span class="nav-number">2.2.</span> <span class="nav-text"> 集成服务，services.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ha%E5%9C%A8%E5%93%AA%E9%87%8C%E6%9F%A5%E6%89%BE%E9%9B%86%E6%88%90"><span class="nav-number">2.3.</span> <span class="nav-text"> HA在哪里查找集成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manifest%E6%B8%85%E5%8D%95"><span class="nav-number">3.</span> <span class="nav-text"> Manifest(清单)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#domain"><span class="nav-number">3.1.</span> <span class="nav-text"> domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name"><span class="nav-number">3.2.</span> <span class="nav-text"> name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#version"><span class="nav-number">3.3.</span> <span class="nav-text"> version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#documention"><span class="nav-number">3.4.</span> <span class="nav-text"> documention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#issue-tracker"><span class="nav-number">3.5.</span> <span class="nav-text"> issue tracker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dependencies"><span class="nav-number">3.6.</span> <span class="nav-text"> dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#after-dependencies"><span class="nav-number">3.7.</span> <span class="nav-text"> after dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-owners"><span class="nav-number">3.8.</span> <span class="nav-text"> code owners</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config-flow"><span class="nav-number">3.9.</span> <span class="nav-text"> config flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requirements"><span class="nav-number">3.10.</span> <span class="nav-text"> requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-requirements-during-development-testing"><span class="nav-number">3.11.</span> <span class="nav-text"> Custom requirements during development &amp; testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-integration-requirements"><span class="nav-number">3.12.</span> <span class="nav-text"> Custom integration requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zeroconf"><span class="nav-number">3.13.</span> <span class="nav-text"> Zeroconf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssdp"><span class="nav-number">3.14.</span> <span class="nav-text"> ssdp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#homekit"><span class="nav-number">3.15.</span> <span class="nav-text"> homekit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mqtt"><span class="nav-number">3.16.</span> <span class="nav-text"> mqtt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dhcp"><span class="nav-number">3.17.</span> <span class="nav-text"> dhcp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usb"><span class="nav-number">3.18.</span> <span class="nav-text"> usb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#integration-quality-scale"><span class="nav-number">3.19.</span> <span class="nav-text"> Integration Quality Scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iot-class"><span class="nav-number">3.20.</span> <span class="nav-text"> iot class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configuration"><span class="nav-number">4.</span> <span class="nav-text"> Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0manifest"><span class="nav-number">4.1.</span> <span class="nav-text"> 更新manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%B5%81"><span class="nav-number">4.2.</span> <span class="nav-text"> 定义一个配置流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%AD%A5%E9%AA%A4steps"><span class="nav-number">4.3.</span> <span class="nav-text"> 定义步骤（steps）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique-ids"><span class="nav-number">4.4.</span> <span class="nav-text"> Unique IDs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#unique-id%E9%9C%80%E6%B1%82"><span class="nav-number">4.4.1.</span> <span class="nav-text"> Unique ID需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unignoring"><span class="nav-number">4.4.2.</span> <span class="nav-text"> Unignoring</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decovery-steps"><span class="nav-number">4.5.</span> <span class="nav-text"> decovery steps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8F%AF%E5%8F%91%E7%8E%B0%E9%9B%86%E6%88%90"><span class="nav-number">4.6.</span> <span class="nav-text"> 不需要身份验证的可发现集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87oauth2%E9%85%8D%E7%BD%AE"><span class="nav-number">4.7.</span> <span class="nav-text"> 通过OAuth2配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91"><span class="nav-number">4.8.</span> <span class="nav-text"> 翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config-entry-migration"><span class="nav-number">4.9.</span> <span class="nav-text"> Config Entry Migration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reauthentication"><span class="nav-number">4.10.</span> <span class="nav-text"> Reauthentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE%E6%B5%81"><span class="nav-number">4.11.</span> <span class="nav-text"> 测试配置流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text"> 配置选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E9%A1%B9%E6%94%AF%E6%8C%81"><span class="nav-number">5.1.</span> <span class="nav-text"> 选项支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flow-handler"><span class="nav-number">5.2.</span> <span class="nav-text"> Flow handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#signal-updates"><span class="nav-number">5.3.</span> <span class="nav-text"> Signal updates</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87yaml%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text"> 通过yaml配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-processing"><span class="nav-number">6.1.</span> <span class="nav-text"> Pre-processing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#config_schema"><span class="nav-number">6.1.1.</span> <span class="nav-text"> CONFIG_SCHEMA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#platform_schema"><span class="nav-number">6.2.</span> <span class="nav-text"> PLATFORM_SCHEMA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9C%8D%E5%8A%A1"><span class="nav-number">7.</span> <span class="nav-text"> 自定义服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">7.1.</span> <span class="nav-text"> 服务描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">7.2.</span> <span class="nav-text"> 实体服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0platforms"><span class="nav-number">8.</span> <span class="nav-text"> 平台（Platforms）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#interfacing-with-devices"><span class="nav-number">8.1.</span> <span class="nav-text"> Interfacing with devices</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiple-platforms"><span class="nav-number">9.</span> <span class="nav-text"> Multiple Platforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#loading-platforms-when-configured-via-a-config-entry"><span class="nav-number">9.1.</span> <span class="nav-text"> Loading platforms when configured via a config entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loading-platforms-when-configured-via-configurationyaml"><span class="nav-number">9.2.</span> <span class="nav-text"> Loading platforms when configured via configuration.yaml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AEfetching-data"><span class="nav-number">10.</span> <span class="nav-text"> 获取数据（Fetching Data）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#push-vs-poll"><span class="nav-number">10.1.</span> <span class="nav-text"> Push vs Poll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#polling-api-endpoints"><span class="nav-number">10.2.</span> <span class="nav-text"> Polling API endpoints</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#coordinated-single-api-poll-for-data-for-all-entities"><span class="nav-number">10.2.1.</span> <span class="nav-text"> Coordinated, single API poll for data for all entities</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#separate-polling-for-each-individual-entity"><span class="nav-number">10.2.2.</span> <span class="nav-text"> Separate polling for each individual entity</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request-parallelism%E5%B9%B6%E8%A1%8C%E6%80%A7"><span class="nav-number">10.3.</span> <span class="nav-text"> Request Parallelism(并行性)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6firing-event"><span class="nav-number">11.</span> <span class="nav-text"> 触发事件（Firing event）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#making-events-accessible-to-users"><span class="nav-number">11.1.</span> <span class="nav-text"> Making events accessible to users</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-not-to-do"><span class="nav-number">11.2.</span> <span class="nav-text"> What not to do</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%92%8C%E5%8F%91%E7%8E%B0networking-and-discovery"><span class="nav-number">12.</span> <span class="nav-text"> 网络和发现（Networking and Discovery）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mdnszeroconf"><span class="nav-number">12.1.</span> <span class="nav-text"> mDNS&#x2F;Zeroconf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#obtaining-the-asynczeroconf-object"><span class="nav-number">12.1.1.</span> <span class="nav-text"> Obtaining the AsyncZeroconf object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#obtaining-the-zeroconf-object"><span class="nav-number">12.1.2.</span> <span class="nav-text"> Obtaining the Zeroconf object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#using-the-asynczeroconf-and-zeroconf-objects"><span class="nav-number">12.1.3.</span> <span class="nav-text"> Using the AsyncZeroconf and Zeroconf objects</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssdp-2"><span class="nav-number">12.2.</span> <span class="nav-text"> SSDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B7%B2%E5%8F%91%E7%8E%B0%E8%AE%BE%E5%A4%87%E5%88%97%E8%A1%A8"><span class="nav-number">12.2.1.</span> <span class="nav-text"> 获取已发现设备列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%8C%87%E5%AE%9A%E8%AE%BE%E5%A4%87"><span class="nav-number">12.2.2.</span> <span class="nav-text"> 查找指定设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-st%E6%9F%A5%E6%89%BE%E8%AE%BE%E5%A4%87"><span class="nav-number">12.2.3.</span> <span class="nav-text"> 通过 ST查找设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87udn%E6%9F%A5%E6%89%BE%E8%AE%BE%E5%A4%87"><span class="nav-number">12.2.4.</span> <span class="nav-text"> 通过UDN查找设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A2%E9%98%85ssdp%E5%8F%91%E7%8E%B0"><span class="nav-number">12.2.5.</span> <span class="nav-text"> 订阅SSDP发现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#network"><span class="nav-number">12.3.</span> <span class="nav-text"> Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-async_get_adapters-data-structure"><span class="nav-number">12.3.1.</span> <span class="nav-text"> Example async_get_adapters data structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#obtaining-the-ip-network-from-an-adapter"><span class="nav-number">12.3.2.</span> <span class="nav-text"> Obtaining the IP Network from an adapter</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
