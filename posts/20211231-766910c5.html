@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="设备自动化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设备自动化">
+<meta property="og:url" content="http://example.com/posts/20211231-766910c5.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="设备自动化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-31T06:54:15.000Z">
+<meta property="article:modified_time" content="2021-12-31T07:16:14.781Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20211231-766910c5.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>设备自动化 | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20211231-766910c5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设备自动化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-31 14:54:15 / 修改时间：15:16:14" itemprop="dateCreated datePublished" datetime="2021-12-31T14:54:15+08:00">2021-12-31</time>
+            </span>
+
+          
+            <div class="post-description">设备自动化</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<p>Device automation在HA的核心概念之上为用户提供了一个以设备为中心的层。在创建自动化时，用户不再需要处理像状态和事件这样的核心概念。相反，他们将能够选择一个设备，然后从一个预定义的触发器、条件和操作列表中选择。</p>
+<p>集成可以通过公开函数来生成预定义的触发器、条件和操作，并拥有能够侦听触发器、检查条件和执行操作的函数来与这个系统挂钩。</p>
+<p>设备自动化并没有暴露额外的功能，而是为用户提供了一种不必学习新概念的方式。设备自动化在底层使用事件、状态和服务帮助器。</p>
+<h2 id="触发器"><a class="markdownIt-Anchor" href="#触发器"></a> 触发器</h2>
+<p>设备触发器是绑定到特定设备和事件或状态更改的自动化触发器。例如“灯亮了”或“检测到水”。</p>
+<p>设备触发器可以由提供设备的集成(如ZHA, deCONZ)或设备具有实体的实体集成(如灯，开关)提供。前者的例子是不绑定于实体的事件，如远程控制或触摸面板上的按键，而后者的例子则是灯亮了。</p>
+<p>要添加对设备触发器的支持，集成需要有<code>device_trigger.py</code>和</p>
+<ul>
+<li>定义一个<code>TRIGGER_SCHEMA</code>:一个表示触发器的字典，比如一个设备和一个事件类型</li>
+<li>创建触发器:创建包含设备或实体和支持的事件或状态更改的字典，如模式所定义的。</li>
+<li>附加触发器:将触发器配置与事件或状态更改相关联，例如在事件总线上触发的消息。</li>
+<li>添加文本和翻译:给每个触发器一个可读的名称。</li>
+</ul>
+<p>不要手动应用静态模式。如果触发器模式被定义为集成的<code>device_trigger.py</code>模块中的常量，则Core将应用该模式。</p>
+<p>如果触发器需要静态<code>TRIGGER_SCHEMA</code>不能提供的动态验证，则可以实现一个<code>async_validate_trigger_config</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_validate_trigger_config</span>(<span class="params">hass: HomeAssistant, config: ConfigType</span>) -&gt; ConfigType:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Validate config.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>包括一个用于开始使用设备触发器的模板。首先，在一个开发环境运行<code>python3 -m script.scaffold device_trigger</code></p>
+<p>模板将在集成文件夹中创建一个新文件<code>device_trigger.py</code>和一个匹配的测试文件。该文件包含以下函数和常量:</p>
+<h3 id="定义一个trigger_schema"><a class="markdownIt-Anchor" href="#定义一个trigger_schema"></a> 定义一个<code>TRIGGER_SCHEMA</code></h3>
+<p>设备触发器被定义为字典。这些字典由集成创建，并由集成使用以附加触发器。</p>
+<p>这是一种复杂的模式，它验证特定的触发器字典是否代表集成可以处理的配置。这应该是<code>device_automation/__init__.py中的TRIGGER_BASE_SCHEMA</code>的扩展。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.const <span class="keyword">import</span> (</span><br><span class="line">    CONF_ENTITY_ID,</span><br><span class="line">    CONF_TYPE,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">TRIGGER_TYPES = &#123;<span class="string">&quot;water_detected&quot;</span>, <span class="string">&quot;noise_detected&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">TRIGGER_SCHEMA = TRIGGER_BASE_SCHEMA.extend(</span><br><span class="line">    &#123;</span><br><span class="line">        vol.Required(CONF_TYPE): vol.In(TRIGGER_TYPES),</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>此示例只有一个<code>type</code>字段，指示支持的事件类型</p>
+<h3 id="创建触发器"><a class="markdownIt-Anchor" href="#创建触发器"></a> 创建触发器</h3>
+<p><code>async_get_triggers</code>方法返回设备或任何相关实体支持的触发器列表。这些是向用户公开的用于创建自动化的触发器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> homeassistant.const <span class="keyword">import</span> (</span><br><span class="line">    CONF_DEVICE_ID,</span><br><span class="line">    CONF_DOMAIN,</span><br><span class="line">    CONF_PLATFORM,</span><br><span class="line">    CONF_TYPE,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_get_triggers</span>(<span class="params">hass, device_id</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a list of triggers.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    device_registry = <span class="keyword">await</span> hass.helpers.device_registry.async_get_registry()</span><br><span class="line">    device = device_registry.async_get(device_id)</span><br><span class="line"></span><br><span class="line">    triggers = []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Determine which triggers are supported by this device_id ...</span></span><br><span class="line"></span><br><span class="line">    triggers.append(&#123;</span><br><span class="line">        <span class="comment"># Required fields of TRIGGER_BASE_SCHEMA</span></span><br><span class="line">        CONF_PLATFORM: <span class="string">&quot;device&quot;</span>,</span><br><span class="line">        CONF_DOMAIN: <span class="string">&quot;mydomain&quot;</span>,</span><br><span class="line">        CONF_DEVICE_ID: device_id,</span><br><span class="line">        <span class="comment"># Required fields of TRIGGER_SCHEMA</span></span><br><span class="line">        CONF_TYPE: <span class="string">&quot;water_detected&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> triggers</span><br></pre></td></tr></table></figure>
+<h3 id="绑定触发器"><a class="markdownIt-Anchor" href="#绑定触发器"></a> 绑定触发器</h3>
+<p>要将其连接起来:给定一个<code>TRIGGER_SCHEMA</code>配置，确保在触发触发器时调用该<code>action</code>。</p>
+<p>例如，您可以将触发器和操作附加到由您的集成在事件总线上 <a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/integration_events">Events fired</a> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_attach_trigger</span>(<span class="params">hass, config, action, automation_info</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Attach a trigger.&quot;&quot;&quot;</span></span><br><span class="line">    event_config = event_trigger.TRIGGER_SCHEMA(&#123;</span><br><span class="line">        event_trigger.CONF_PLATFORM: <span class="string">&quot;event&quot;</span>,</span><br><span class="line">        event_trigger.CONF_EVENT_TYPE: <span class="string">&quot;mydomain_event&quot;</span>,</span><br><span class="line">        event_trigger.CONF_EVENT_DATA: &#123;</span><br><span class="line">            CONF_DEVICE_ID: config[CONF_DEVICE_ID],</span><br><span class="line">            CONF_TYPE: config[CONF_TYPE],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> event_trigger.async_attach_trigger(</span><br><span class="line">        hass, event_config, action, automation_info, platform_type=<span class="string">&quot;device&quot;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>返回值是一个解绑触发器的函数。</p>
+<h3 id="增加文本和翻译"><a class="markdownIt-Anchor" href="#增加文本和翻译"></a> 增加文本和翻译</h3>
+<p>自动化用户界面将在映射到事件类型的设备自动化中显示人类可读的字符串。使用您支持的触发器类型和子类型更新<code>string.json</code>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">&quot;device_automation&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;trigger_type&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;water_detected&quot;</span>: <span class="string">&quot;Water detected&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;noise_detected&quot;</span>: <span class="string">&quot;Noise detected&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了在开发过程中测试你的翻译，<code>python3 -m script.translations develop</code></p>
+<h2 id="条件"><a class="markdownIt-Anchor" href="#条件"></a> 条件</h2>
+<p>设备条件允许用户检查是否满足某个条件。例如是灯亮着还是地板湿了。</p>
+<p>设备条件被定义为字典。这些字典是由集成创建的，并传递给集成来创建一个检查条件的函数。</p>
+<p>设备条件可以由提供设备的集成(如ZHA、deCONZ)或设备具有实体的实体集成(如光、湿度传感器)提供。后者的一个例子可能是检查灯是否开着或地板是湿的。</p>
+<p>如果条件需要静态<code>CONDITION_SCHEMA</code>不能提供的动态验证，则可以实现<code>async_validate_condition_config</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_validate_condition_config</span>(<span class="params">hass: HomeAssistant, config: ConfigType</span>) -&gt; ConfigType:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Validate config.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>HA包括一个用于开始设备条件的模板,执行<code>python3 -m script.scaffold device_condition</code></p>
+<p>模板将在集成文件夹中创建一个新文件<code>device_condition.py</code>和一个匹配的测试文件。该文件包含以下函数和常量:</p>
+<h3 id="condition_schema"><a class="markdownIt-Anchor" href="#condition_schema"></a> <code>CONDITION_SCHEMA</code></h3>
+<p>这是条件的模式。基本模式应该从<code>homeassistant.helpers.config_validation.DEVICE_CONDITION_BASE_SCHEMA</code>扩展。</p>
+<h3 id="async_get_conditions"><a class="markdownIt-Anchor" href="#async_get_conditions"></a> <code>async_get_conditions</code></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_get_conditions</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    hass: HomeAssistant, device_id: <span class="built_in">str</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">dict</span>[<span class="built_in">str</span>, <span class="built_in">str</span>]]:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;List device conditions for devices.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>返回此设备支持的条件列表。</p>
+<h3 id="async_condition_from_config"><a class="markdownIt-Anchor" href="#async_condition_from_config"></a> <code>async_condition_from_config</code></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@callback</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_condition_from_config</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    config: ConfigType, config_validation: <span class="built_in">bool</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) -&gt; condition.ConditionCheckerType:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Create a function to test a device condition.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>从函数中创建条件函数。条件函数应该是一个对异步友好（即很好的支持异步）的回调函数，它计算条件并返回bool值。</p>
+<p><code>config_validation</code>参数将被核心用来有条件地对已定义的<code>CONDITION_SCHEMA</code>应用配置验证。</p>
+<h2 id="动作-行为actions"><a class="markdownIt-Anchor" href="#动作-行为actions"></a> 动作、行为（Actions）</h2>
+<p>设备动作允许用户让设备做一些事情。例如开灯或开门。</p>
+<p>设备动作被定义为字典。这些字典由集成创建，并传递给集成以创建执行操作的函数。</p>
+<p>设备动作可以由提供设备的集成(如ZHA, deCONZ)或设备具有实体的实体集成(如灯，开关)提供。前者的一个例子是重启设备，而后者的一个例子是打开灯。</p>
+<p>如果动作需要静态<code>ACTION_SCHEMA</code>不能提供的动态验证，则可以实现一个<code>async_validate_action_config</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_validate_action_config</span>(<span class="params">hass: HomeAssistant, config: ConfigType</span>) -&gt; ConfigType:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Validate config.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>HA包括一个用于开始设备操作的模板,运行<code>python3 -m script.scaffold device_action</code></p>
+<p>模板将在集成文件夹中创建一个新文件<code>device_action.py</code>和一个匹配的测试文件。该文件包含以下函数和常量:</p>
+<h3 id="action_schema"><a class="markdownIt-Anchor" href="#action_schema"></a> <code>ACTION_SCHEMA</code></h3>
+<p>这是操作的模式。基本模式应该从<code>homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA</code>扩展。</p>
+<p>不要手动应用模式。如果操作模式在集成的<code>device_action.py</code>模块中定义为常量，则核心将应用该模式。</p>
+<h3 id="async_get_actions"><a class="markdownIt-Anchor" href="#async_get_actions"></a> <code>async_get_actions</code></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_get_actions</span>(<span class="params">hass: HomeAssistant, device_id: <span class="built_in">str</span></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">dict</span>]:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;List device actions for devices.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>返回此设备支持的操作列表。</p>
+<h3 id="async_call_action_from_config"><a class="markdownIt-Anchor" href="#async_call_action_from_config"></a> <code>async_call_action_from_config</code></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">async_call_action_from_config</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    hass: HomeAssistant, config: <span class="built_in">dict</span>, variables: <span class="built_in">dict</span>, context: Context | <span class="literal">None</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Execute a device action.&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>执行传入的动作。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20211231-f345f685.html" rel="prev" title="实体">
+      <i class="fa fa-chevron-left"></i> 实体
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20211231-bc8ba982.html" rel="next" title="杂项">
+      杂项 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text"> 触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAtrigger_schema"><span class="nav-number">2.1.</span> <span class="nav-text"> 定义一个TRIGGER_SCHEMA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text"> 创建触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text"> 绑定触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E6%96%87%E6%9C%AC%E5%92%8C%E7%BF%BB%E8%AF%91"><span class="nav-number">2.4.</span> <span class="nav-text"> 增加文本和翻译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text"> 条件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#condition_schema"><span class="nav-number">3.1.</span> <span class="nav-text"> CONDITION_SCHEMA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async_get_conditions"><span class="nav-number">3.2.</span> <span class="nav-text"> async_get_conditions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async_condition_from_config"><span class="nav-number">3.3.</span> <span class="nav-text"> async_condition_from_config</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E4%BD%9C-%E8%A1%8C%E4%B8%BAactions"><span class="nav-number">4.</span> <span class="nav-text"> 动作、行为（Actions）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action_schema"><span class="nav-number">4.1.</span> <span class="nav-text"> ACTION_SCHEMA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async_get_actions"><span class="nav-number">4.2.</span> <span class="nav-text"> async_get_actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async_call_action_from_config"><span class="nav-number">4.3.</span> <span class="nav-text"> async_call_action_from_config</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

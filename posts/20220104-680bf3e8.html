@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-flying.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-flying.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="笔试-django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔试-django">
+<meta property="og:url" content="http://example.com/posts/20220104-680bf3e8.html">
+<meta property="og:site_name" content="FLY">
+<meta property="og:description" content="笔试-django">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-04T05:30:54.000Z">
+<meta property="article:modified_time" content="2022-01-04T05:44:55.035Z">
+<meta property="article:author" content="fengdy">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/20220104-680bf3e8.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>笔试-django | FLY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FLY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">i am fengdy.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/20220104-680bf3e8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar-flying.gif">
+      <meta itemprop="name" content="fengdy">
+      <meta itemprop="description" content="i believe i can fly.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FLY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          笔试-django
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-04 13:30:54 / 修改时间：13:44:55" itemprop="dateCreated datePublished" datetime="2022-01-04T13:30:54+08:00">2022-01-04</time>
+            </span>
+
+          
+            <div class="post-description">笔试-django</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- toc -->
+<h2 id="sql连表"><a class="markdownIt-Anchor" href="#sql连表"></a> sql连表</h2>
+<h3 id="内连接"><a class="markdownIt-Anchor" href="#内连接"></a> 内连接</h3>
+<p><code>inner join</code>或<code>join</code>,查找两个表中连接字段相同的记录</p>
+<h3 id="自身连接"><a class="markdownIt-Anchor" href="#自身连接"></a> 自身连接</h3>
+<p>与自己进行连接查询</p>
+<p><code>select A.name from student A JOIN student B on A.no=B.age</code></p>
+<h3 id="左连接"><a class="markdownIt-Anchor" href="#左连接"></a> 左连接</h3>
+<p><code>left join</code></p>
+<p>获取左表所有记录，右表不存在则为空<code>NULL</code></p>
+<h3 id="右连接"><a class="markdownIt-Anchor" href="#右连接"></a> 右连接</h3>
+<p><code>right join</code></p>
+<p>获取右表所有记录，左表不存在则为空<code>NULL</code></p>
+<h3 id="完全连接"><a class="markdownIt-Anchor" href="#完全连接"></a> 完全连接</h3>
+<p><code>full join</code></p>
+<p>表的并集</p>
+<h3 id="交叉连接"><a class="markdownIt-Anchor" href="#交叉连接"></a> 交叉连接</h3>
+<p><code>cross join</code></p>
+<p>结果是笛卡尔积，就是第一个表的行数乘以第二个表的行数</p>
+<p>即<code>select a.* b.* from a,b</code></p>
+<h2 id="django-信号"><a class="markdownIt-Anchor" href="#django-信号"></a> Django 信号</h2>
+<p>django的信号机制其实还是相当有用的，记得有次业务需求是要在数据库变动前后添加日志，很多人第一时间想到的是用装饰器，包括我也是，后来想想，其实设置信号就可以早早完事了。</p>
+<p>django中的信号也称signal，用于在框架执行操作时解耦。通俗点讲，就是框架发生一些动作之前或之后，可以自动根据我们提前设置好的signal去执行对应函数。熟悉数据库的小伙伴应该知道“触发器”吧？就是类似的功能。</p>
+<p>Django中提供了“信号调度”，用于在框架执行操作时解耦。通俗来讲，就是一些动作发生的时候，信号允许特定的发送者去提醒一些接受者。</p>
+<p>2.1 Django内置信号</p>
+<p>Model signals: (Model 信号)</p>
+<p>pre_init # django的modal执行其构造方法前，自动触发</p>
+<p>post_init # django的modal执行其构造方法后，自动触发</p>
+<p>pre_save # django的modal对象保存前，自动触发</p>
+<p>post_save # django的modal对象保存后，自动触发</p>
+<p>pre_delete # django的modal对象删除前，自动触发</p>
+<p>post_delete # django的modal对象删除后，自动触发</p>
+<p>m2m_changed (m2m指的是manytomany) # django的modal中使用m2m字段操作第三张表(add,remove,clear)前后，自动触发</p>
+<p>class_prepared # 程序启动时，检测已注册的app中modal类，对于每一个类，自动触发</p>
+<p>Management signals：(管理信号)</p>
+<p>pre_migrate # 执行migrate命令前，自动触发</p>
+<p>post_migrate # 执行migrate命令后，自动触发</p>
+<p>Request/response signals：(请求返回信号)</p>
+<p>request_started # 请求到来前，自动触发</p>
+<p>request_finished # 请求结束后，自动触发</p>
+<p>got_request_exception # 请求异常后，自动触发</p>
+<p>Test signals：(测试信号)</p>
+<p>setting_changed # 使用test测试修改配置文件时，自动触发</p>
+<p>template_rendered # 使用test测试渲染模板时，自动触发</p>
+<p>Database Wrappers：(数据库信号)</p>
+<p>connection_created # 创建数据库连接时，自动触发</p>
+<p>2.2 怎么用信号</p>
+<p>对于内置信号来说，只需要把想执行的函数注册到信号，那么当动作发生时对应的信号函数便会自动执行。这里给两个例子：</p>
+<p>2.2.1 全导入：</p>
+<p>from django.core.signals import request_finished</p>
+<p>from django.core.signals import request_started</p>
+<p>from django.core.signals import got_request_exception</p>
+<p>from django.db.models.signals import class_prepared</p>
+<p>from django.db.models.signals import pre_init, post_init</p>
+<p>from django.db.models.signals import pre_save, post_save</p>
+<p>from django.db.models.signals import pre_delete, post_delete</p>
+<p>from django.db.models.signals import m2m_changed</p>
+<p>from django.db.models.signals import pre_migrate, post_migrate</p>
+<p>from django.test.signals import setting_changed</p>
+<p>from django.test.signals import template_rendered</p>
+<p>from django.db.backends.signals import connection_created</p>
+<p>def test(sender, **kwargs):</p>
+<p>print(“it work”)</p>
+<p>#'sender’包含了这个动作发生时传入的参数</p>
+<p>request_finished.connect(test) #需要什么类型的信号，就信号.connect(函数名)</p>
+<p>在使用这种方式的时候，建议在项目根目录下创建个新的py文件把信号放进去，然后在项目的init里直接import py文件名，这样views.py就不必再做手脚了。</p>
+<p>2.2.2 局部导入：</p>
+<p>from django.core.signals import request_finished</p>
+<p>from django.dispatch import receiver</p>
+<p>@receiver(request_finished)</p>
+<p>def my_callback(sender, **kwargs):</p>
+<p>print(“Request finished!”)</p>
+<p>这种方法也是在init中修改</p>
+<p>2.3 自定义信号</p>
+<p>2.3.1 创建信号</p>
+<p>想要发送信号，必须先要创建一个信号，在django中，信号是django.dispatch.Signal类的实例，该类的构造函数接受一个名叫providing_args参数，该参数是参数名列表，举例如下：</p>
+<p>import django.dispatch</p>
+<p>game_start = django.dispatch.Signal(providing_args=[‘player’,‘level’])</p>
+<p>该段代码的意思是，生成一个信号，信号包含两个参数，游戏者，关卡．</p>
+<p>2.3.2 指定信号发送者</p>
+<p>有了信号，我们要确定信号是谁发送出去的，这个时候就要用到“`Signal.send(sender, **kwargs)方法了．代码示例以及解释如下：</p>
+<p>class Game(object):</p>
+<p>def start(self,user,level):</p>
+<p>game_start.send(sender=self.<strong>class</strong>,player=user,level=level)</p>
+<p>2.3.3 信号监听</p>
+<p>由于信号接受方不知道信号什么时候会传递过来，所以接收方一般是在做持续监听，收到信号就触发反应，没收到就一直待机．因此我们需要一个负责监听的方法．这个方法是Signal.connect(receiver, sender=None, weak=True, dispatch_uid=None)</p>
+<p>现在来解释一下最基本的参数：</p>
+<p>receiver: 信号接受者，回调函数</p>
+<p>sender: 信号发送者</p>
+<p>例如</p>
+<p>game_start.connect(game_logger)</p>
+<p>开启监听之后，就要去实现回调函数了</p>
+<p>def game_logger():</p>
+<h1 id="log-to-log-file"><a class="markdownIt-Anchor" href="#log-to-log-file"></a> log to log file</h1>
+<p>print ‘Done!’</p>
+<p>流程解释</p>
+<p>首先我们创建了一个在游戏开始是发出的信号</p>
+<p>在游戏开始时让指定的发送者发出信号</p>
+<p>接受端一直处于监听状态，收到信号，调用回调函数，将游戏者和关卡信息写入日志</p>
+<ol start="3">
+<li>python中的猴子补丁是什么，怎么用</li>
+</ol>
+<p>3.1 概念和来源</p>
+<p>所谓的猴子补丁，是指在运行时修改类或模块，而不去改变源码，达到hot patch的目的</p>
+<p>猴补丁(英语：Monkey patch)是一种很脏的编程技巧，用拼凑代码的方法修改程序逻辑。</p>
+<p>Monkey patching 只能在动态语言中实现。比如Python类的方法其实也只是一个属性，方便运行时修改，所以用Python做猴子补丁非常方便。</p>
+<p>这个词原来为Guerrilla Patch，杂牌军、游击队，说明这部分不是原装的，在英文里guerilla发音和gorllia(猩猩)相似，再后来就写了monkey(猴子)。</p>
+<p>还有一种解释是说由于这种方式将原来的代码弄乱了(messing with it)，在英文里叫monkeying about(顽皮的)，所以叫做Monkey Patch。</p>
+<p>3.2 使用方法</p>
+<p>利用猴子补丁，动态修改math标准库中Pi的默认值。(这里仅修改了attributes，也可以对某些method进行重写)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import math</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>math.pi</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>3.141592653589793</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>math.pi = 3 # 给标准库打补丁，即运行时修改math的pi属性</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>math.pi</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>3</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>================================ RESTART ================================</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import math</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>math.pi</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>3.141592653589793</p>
+<p>对方法打补丁</p>
+<p>class Foo(object):</p>
+<p>def bar(self):</p>
+<p>print ‘Foo.bar’</p>
+<p>def bar(self): # 这是补丁</p>
+<p>print ‘Modified bar’</p>
+<p>Foo().bar()</p>
+<p>Foo.bar = bar # 给Foo的bar方法打补丁，即运行时修改类的方法</p>
+<p>Foo().bar()</p>
+<p>由于Python中的名字空间是开放，通过dict来实现，所以很容易就可以达到patch的目的。</p>
+<p>3.3 实际应用案例</p>
+<p>3.3.1 Eventlet Patcher</p>
+<p>现在我们先来看一下eventlet中的Patcher的调用代码吧，这段代码对标准的ftplib做monkey patch，将eventlet的GreenSocket替换标准的socket。</p>
+<p>from eventlet import patcher</p>
+<h1 id="note-there-might-be-some-funny-business-with-the-socks-module"><a class="markdownIt-Anchor" href="#note-there-might-be-some-funny-business-with-the-socks-module"></a> *NOTE: there might be some funny business with the “SOCKS” module</h1>
+<h1 id="if-it-even-still-exists"><a class="markdownIt-Anchor" href="#if-it-even-still-exists"></a> if it even still exists</h1>
+<p>from eventlet.green import socket</p>
+<p>patcher.inject(‘ftplib’, globals(), (‘socket’, socket))</p>
+<p>del patcher</p>
+<p>3.3.2 从Gevent学习猴子补丁的设计</p>
+<p>异步协程工具Gevent是python上面最有名也支持面最广通用性最好的协程工具,它底层基于greenlet,而且可以通过使用猴子补丁将标准库中的同步模块自动的转换成异步.同时他也提供了方便的并发模型和常用的web服务器工具.</p>
+<p>gevent能够 修改标准库里面大部分的阻塞式系统调用，包括socket、ssl、threading和 select等模块，而变为协作式运行。</p>
+<p>用过gevent就会知道,会在最开头的地方gevent.monkey.patch_all();把标准库中的thread/socket等给替换掉.这样我们在后面使用socket的时候可以跟平常一样使用,无需修改任何代码,但是它变成非阻塞的了.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import socket</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>print(socket.socket) # monkey patch前</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote></blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from gevent import monkey # monkey patch后</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>monkey.patch_socket()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>print(socket.socket)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="改变了标准socket库"><a class="markdownIt-Anchor" href="#改变了标准socket库"></a> 改变了标准socket库</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import select # monkey patch前</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>print(select.select) # select()轮询的阻塞调用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote></blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>monkey.patch_select() # monkey patch后</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>print(select.select) # select()轮询的异步调用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>例如，Redis的python绑定一般使用常规的tcp socket来与redis-server实例通信。</p>
+<p>通过简单地调用gevent.monkey.patch_all()，可以使得redis的绑定协作式的调度 请求，与gevent栈的其它部分一起工作。</p>
+<p>除了socket外,gevent还可以为其他的模块打补丁,一起打补丁可以使用</p>
+<p>patch_all(socket=True, dns=True, time=True, select=True, thread=True, os=True, ssl=True, httplib=False,subprocess=True, sys=False, aggressive=True, Event=False, builtins=True, signal=True)</p>
+<p>我们可以看到像socket,dns,time,selectthread,os, ssl, httplib,subprocess, sys, aggressive, Event, builtins, signal模块都可以打上补丁,打上以后,他们就是非阻塞的了.</p>
+<p>核心协程模块greenlet</p>
+<p>import gevent</p>
+<p>def foo():</p>
+<p>print(‘Running in foo’)</p>
+<p>gevent.sleep(0) # 这行的作用是什么？</p>
+<p>print(‘Explicit context switch to foo again’)</p>
+<p>def bar():</p>
+<p>print(‘Explicit context to bar’)</p>
+<p>gevent.sleep(0) #</p>
+<p>print(‘Implicit context switch back to bar’)</p>
+<p>gevent.joinall([</p>
+<p>gevent.spawn(foo),</p>
+<p>gevent.spawn(bar),</p>
+<p>])</p>
+<p>输出</p>
+<p>Running in foo</p>
+<p>Explicit context to bar</p>
+<p>Explicit context switch to foo again</p>
+<p>Implicit context switch back to bar</p>
+<p>[, ]</p>
+<p>上述例子能看到，执行顺序是 foo–&gt;bar–foo–bar，来回切换。即gevent.sleep()并不会真正的阻塞整个线程，而是将cpu的控制权显式的交给未被gevent.sleep()阻塞的协程使用。</p>
+<p>协程是单线程程序(从上述例子来讲)，如果我们使用time.sleep()，那么整个线程都会被阻塞。</p>
+<p>gevent.sleep与time.sleep的区别</p>
+<p>gevent is a cooperative analog to the threading module. When using gevent.sleep it you would never use time.sleep. So no example is needed.</p>
+<p>time.sleep would suspend the entire process, blocking all greenlet threads. 来源。 以上说法针对的是协程(单线程程序)。而对于多线程，time.sleep仅仅阻塞当前线程，不阻塞其他线程</p>
+<ol start="4">
+<li>python3和2的区别</li>
+</ol>
+<p>4.1 print</p>
+<p>2中是语句，3中是函数</p>
+<p>4.2 编码</p>
+<p>2默认ascii，3默认UTF-8编码，以后不用文件开头写#coding=utf-8</p>
+<p>4.3 字符串</p>
+<p>2中字符串有两种，分别是unicode(表示文本字符串)和str(字节序列)，很混乱，容易编码错误</p>
+<p>3中字符串，str表示字符串，byte表示字节序列，任何需要写入文本或者网络传输的数据都只接收byte字节序列，这就从源头上阻止了编码错误的问题。</p>
+<p>4.4 True和False</p>
+<p>True 和 False 在 Python2 中是两个全局变量(名字)，在数值上分别对应 1 和 0，既然是变量，那么他们就可以指向其它对象，例如：</p>
+<h1 id="py2"><a class="markdownIt-Anchor" href="#py2"></a> py2</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>True = False</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>False</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>True is False</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>True</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>False = “x”</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>False</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>‘x’</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>if False:</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>… print(&quot;?&quot;)</p>
+<p>…</p>
+<p>?</p>
+<p>显然，上面的代码违背了 Python 的设计哲学 Explicit is better than implicit.。而 Python3 修正了这个缺陷，True 和 False 变为两个关键字，永远指向两个固定的对象，不允许再被重新赋值。</p>
+<h1 id="py3"><a class="markdownIt-Anchor" href="#py3"></a> py3</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>True = 1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>File “”, line 1</p>
+<p>SyntaxError: can’t assign to keyword</p>
+<p>4.5 迭代器</p>
+<p>在 Python2 中很多返回列表对象的内置函数和方法在 Python 3 都改成了返回类似于迭代器的对象，因为迭代器的惰性加载特性使得操作大数据更有效率。Python2 中的 range 和 xrange 函数合并成了 range，字典对象的 dict.keys()、dict.values() 方法都不再返回列表，而是以一个类似迭代器的 “view” 对象返回。高阶函数 map、filter、zip 返回的也都不是列表对象</p>
+<p>4.6 nonlocal</p>
+<p>我们都知道在Python2中可以在函数里面可以用关键字 global 声明某个变量为全局变量，但是在嵌套函数中，想要给一个变量声明为非局部变量是没法实现的，在Pyhon3，新增了关键字 nonlcoal，使得非局部变量成为可能。</p>
+<p>def func():</p>
+<p>c = 1</p>
+<p>def foo():</p>
+<p>c = 12</p>
+<p>foo()</p>
+<p>print©</p>
+<p>func() #1</p>
+<p>可以对比上面两段代码的输出结果</p>
+<p>def func():</p>
+<p>c = 1</p>
+<p>def foo():</p>
+<p>nonlocal c</p>
+<p>c = 12</p>
+<p>foo()</p>
+<p>print©</p>
+<p>func() # 12</p>
+<ol start="5">
+<li>http和https区别</li>
+</ol>
+<p>HTTP协议传输的数据都是未加密的，也就是明文的，因此使用HTTP协议传输隐私信息非常不安全，为了保证这些隐私数据能加密传输，于是网景公司设计了SSL(Secure Sockets Layer)协议用于对HTTP协议传输的数据进行加密，从而就诞生了HTTPS。简单来说，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全。</p>
+<p>5.1 HTTPS和HTTP的区别主要如下：</p>
+<p>1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。</p>
+<p>2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl加密传输协议。</p>
+<p>3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</p>
+<p>4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
+<p>5.2 HTTPS的工作原理</p>
+<p>我们都知道HTTPS能够加密信息，以免敏感信息被第三方获取，所以很多银行网站或电子邮箱等等安全级别较高的服务都会采用HTTPS协议。</p>
+<p>HTTP与HTTPS的区别-马海祥博客</p>
+<p>客户端在使用HTTPS方式与Web服务器通信时有以下几个步骤，如图所示。</p>
+<p>(1)客户使用https的URL访问Web服务器，要求与Web服务器建立SSL连接。</p>
+<p>(2)Web服务器收到客户端请求后，会将网站的证书信息(证书中包含公钥)传送一份给客户端。</p>
+<p>(3)客户端的浏览器与Web服务器开始协商SSL连接的安全等级，也就是信息加密的等级。</p>
+<p>(4)客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</p>
+<p>(5)Web服务器利用自己的私钥解密出会话密钥。</p>
+<p>(6)Web服务器利用会话密钥加密与客户端之间的通信。</p>
+<p>6.新浪短链接服务如何设计，缩短url,用什么hash算法，后端索引如何设计</p>
+<p>现在招聘面试题里面必考的一道，这一道题里面有很多可考的地方，能够相对综合的考察候选人的功力。</p>
+<p>最烂的回答 实现一个算法，将长地址转成短地址。实现长和短一一对应。然后再实现它的逆运算，将短地址还能换算回长地址。 这个回答看起来挺完美的，然后候选人也会说现在时间比较短，如果给我时间我去找这个算法就解决问题了。但是稍微有点计算机或者信息论常识的人就能发现，这个算法就跟永动机一样，是永远不可能找到的。即使我们定义短地址是100位。那么它的变化是62的100次方。62=10数字+26大写字母+26小写字母。无论这个数多么大，他也不可能大过世界上可能存在的长地址。所以实现一一对应，本身就是不可能的。 再换一个说法来反驳，如果真有这么一个算法和逆运算，那么基本上现在的压缩软件都可以歇菜了，而世界上所有的信息，都可以压缩到100个字符。这～可能吗。</p>
+<p>另一个很烂的回答 和上面一样，也找一个算法，把长地址转成短地址，但是不存在逆运算。我们需要把短对长的关系存到DB中，在通过短查长时，需要查DB。 怎么说呢，没有改变本质，如果真有这么一个算法，那必然是会出现碰撞的，也就是多个长地址转成了同一个短地址。因为我们无法预知会输入什么样的长地址到这个系统中，所以不可能实现这样一个绝对不碰撞的hash函数。</p>
+<p>比较烂的回答 那我们用一个hash算法，我承认它会碰撞，碰撞后我再在后面加1，2，3不就行了。 ok，这样的话，当通过这个hash算法算出来之后，可能我们会需要做btree式的大于小于或者like查找到能知道现在应该在后面加1，2，或3，这个也可能由于输入的长地址集的不确定性。导致生成短地址时间的不确定性。同样烂的回答还有随机生成一个短地址，去查找是否用过，用过就再随机，如此往复，直到随机到一个没用过的短地址。</p>
+<p>正确的原理 上面是几种典型的错误回答，下面咱们直接说正确的原理。 正确的原理就是通过发号策略，给每一个过来的长地址，发一个号即可，小型系统直接用mysql的自增索引就搞定了。如果是大型应用，可以考虑各种分布式key-value系统做发号器。不停的自增就行了。第一个使用这个服务的人得到的短地址是http://xx.xx/0 第二个是 <a target="_blank" rel="noopener" href="http://xx.xx/1">http://xx.xx/1</a> 第11个是 <a target="_blank" rel="noopener" href="http://xx.xx/a">http://xx.xx/a</a> 第依次往后，相当于实现了一个62进制的自增字段即可。</p>
+<p>几个子问题</p>
+<p>62进制如何用数据库或者KV存储来做？ 其实我们并不需要在存储中用62进制，用10进制就好了。比如第10000个长地址，我们给它的短地址对应的编号是9999，我们通过存储自增拿到9999后，再做一个10进制到62进制的转换，转成62进制数即可。这个10～62进制转换，你完全都可以自己实现。</p>
+<p>如何保证同一个长地址，每次转出来都是一样的短地址 上面的发号原理中，是不判断长地址是否已经转过的。也就是说用拿着百度首页地址来转，我给一个http://xx.xx/abc 过一段时间你再来转，我还会给你一个 <a target="_blank" rel="noopener" href="http://xx.xx/xyz%E3%80%82%E8%BF%99%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%8C%BA%E4%B8%8D%E5%A5%BD%E7%9A%84%EF%BC%8C%E4%BD%86%E6%98%AF%E4%B8%8D%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%E5%91%A2%EF%BC%9F%E4%B8%8D%E5%A5%BD%E5%9C%A8%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%80%E5%AF%B9%E5%BA%94%EF%BC%8C%E8%80%8C%E4%B8%80%E9%95%BF%E5%AF%B9%E5%A4%9A%E7%9F%AD%E3%80%82%E8%BF%99%E4%B8%8E%E6%88%91%E4%BB%AC%E5%AE%8C%E7%BE%8E%E4%B8%BB%E4%B9%89%E7%9A%84%E5%9F%BA%E5%9B%A0%E4%B8%8D%E7%AC%A6%E5%90%88%EF%BC%8C%E9%82%A3%E4%B9%88%E9%99%A4%E6%AD%A4%E4%BB%A5%E5%A4%96%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%AF%B9%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%9F">http://xx.xx/xyz。这看起来挺不好的，但是不好在哪里呢？不好在不是一一对应，而一长对多短。这与我们完美主义的基因不符合，那么除此以外还有什么不对的地方？</a> 有人说它浪费空间，这是对的。同一个长地址，产生多条短地址记录，这明显是浪费空间的。那么我们如何避免空间浪费，有人非常迅速的回答我，建立一个长对短的KV存储即可。嗯，听起来有理，但是。。。这个KV存储本身就是浪费大量空间。所以我们是在用空间换空间，而且貌似是在用大空间换小空间。真的划算吗？这个问题要考虑一下。当然，也不是没有办法解决，我们做不到真正的一一对应，那么打个折扣是不是可以搞定？这个问题的答案太多种，各有各招，我这就不说了。(由于实在太多人纠结这个问题，请见我最下方的更新)</p>
+<p>如何保证发号器的大并发高可用 上面设计看起来有一个单点，那就是发号器。如果做成分布式的，那么多节点要保持同步加1，多点同时写入，这个嘛，以CAP理论看，是不可能真正做到的。其实这个问题的解决非常简单，我们可以退一步考虑，我们是否可以实现两个发号器，一个发单号，一个发双号，这样就变单点为多点了？依次类推，我们可以实现1000个逻辑发号器，分别发尾号为0到999的号。每发一个号，每个发号器加1000，而不是加1。这些发号器独立工作，互不干扰即可。而且在实现上，也可以先是逻辑的，真的压力变大了，再拆分成独立的物理机器单元。1000个节点，估计对人类来说应该够用了。如果你真的还想更多，理论上也是可以的。</p>
+<p>具体存储如何选择 这个问题就不展开说了，各有各道，主要考察一下对存储的理解。对缓存原理的理解，和对市面上DB、Cache系统可用性，并发能力，一致性等方面的理解。</p>
+<p>跳转用301还是302 这也是一个有意思的话题。首先当然考察一个候选人对301和302的理解。浏览器缓存机制的理解。然后是考察他的业务经验。301是永久重定向，302是临时重定向。短地址一经生成就不会变化，所以用301是符合http语义的。同时对服务器压力也会有一定减少。 但是如果使用了301，我们就无法统计到短地址被点击的次数了。而这个点击次数是一个非常有意思的大数据分析数据源。能够分析出的东西非常非常多。所以选择302虽然会增加服务器压力，但是我想是一个更好的选择。</p>
+<p>大概就是这样。</p>
+<p>如何实现同一个长地址多次转换，出来还是同一个短地址。</p>
+<p>我上面其实讲到了，这个方案最简单的是建立一个长对短的hashtable，这样相当于用空间来换空间，同时换取一个设计上的优雅(真正的一对一)。</p>
+<p>实际情况是有很多性价比高的打折方案可以用，这个方案设计因人而异了。那我就说一下我的方案吧。</p>
+<p>我的方案是：用key-value存储，保存“最近”生成的长对短的一个对应关系。注意是“最近”，也就是说，我并不保存全量的长对短的关系，而只保存最近的。比如采用一小时过期的机制来实现LRU淘汰。</p>
+<p>这样的话，长转短的流程变成这样： 1 在这个“最近”表中查看一下，看长地址有没有对应的短地址 1.1 有就直接返回，并且将这个key-value对的过期时间再延长成一小时 1.2 如果没有，就通过发号器生成一个短地址，并且将这个“最近”表中，过期时间为1小时</p>
+<p>所以当一个地址被频繁使用，那么它会一直在这个key-value表中，总能返回当初生成那个短地址，不会出现重复的问题。如果它使用并不频繁，那么长对短的key会过期，LRU机制自动就会淘汰掉它。</p>
+<p>当然，这不能保证100%的同一个长地址一定能转出同一个短地址，比如你拿一个生僻的url，每间隔1小时来转一次，你会得到不同的短地址。但是这真的有关系吗？</p>
+<p>7.decimal模块如何进行浮点数计算？</p>
+<p>7.1 简介</p>
+<p>如果你从事科学或工程领域的大多数计算，那么使用普通的浮点类型是比较普遍的做法。因为在真实世界中很少会要求精确到17位精度的普通浮点数。因此，计算过程中的那么一点点的误差是被允许的。其次，原生的二进制浮点数计算要快的多-有时候你在执行大量运算的时候速度也是非常重要的。总的来说，decimal 模块主要用在涉及到金融的领域。在这类程序中，哪怕是一点小小的误差在计算过程中蔓延都是不允许的。因此，decimal 模块为解决这类精度问题提供了方法。decimal意思为十进制，这个模块提供了十进制浮点运算支持。我们在数据库处理金融数据的时候也会遇到 Decimal 对象。</p>
+<p>7.2 问题</p>
+<p>当你在编写科学计算或者金融程序的时候碰到这种情况会让人发狂：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = 4.2</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>b = 2.1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a + b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>6.300000000000001</p>
+<p>这就是机器进行二进制计算引入的误差，为了消除这样的误差，进行更加精确的浮点计算，就要是用到decimal模块。</p>
+<p>7.3 Decimal()函数</p>
+<p>from decimal import *</p>
+<p>我们直接导入decimal模块里的所有函数。现在我们可以通过Decimal函数构建十进制浮点数，并进行常规的数值计算。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = Decimal(‘4.2’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>b = Decimal(‘2.1’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a + b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘6.3’)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = Decimal(3)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>y = Decimal(1)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x + y</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘4’)</p>
+<p>注意，Decimal函数传入的浮点数必须加引号(”)，表示成字符串形式。传入整数时就不用加。Decimal函数的对象类型是decimal.Decimal，可以通过type()函数查看。</p>
+<p>7.4 浮点数据转换成Decimal</p>
+<p>Decimal函数并不建议传入浮点型数据，因为浮点型数据本身就是不精确的。可以通过两种方式传入浮点型数据：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Decimal(1.22)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘1.2199999999999999733546474089962430298328399658203125’)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Decimal.from_float(15.3333)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘15.3332999999999994855670593096874654293060302734375’)</p>
+<p>7.5 getcontext().prec 设定有效数字</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>getcontext().prec = 4</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Decimal(‘2.2’) / Decimal(‘1.3’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘1.692’)</p>
+<p>保留4位有效数字。</p>
+<p>7.6 设定小数位数</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Decimal(‘1.2346568355’).quantize(Decimal(‘0.00’))</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Decimal(‘1.23’)</p>
+<p>7.7 转为字符串，浮点数</p>
+<p>直接调用str()，float()函数：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>str(Decimal(‘1.2346568355’).quantize(Decimal(‘0.00’)))</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>‘1.23’</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>float(Decimal(‘1.2346568355’).quantize(Decimal(‘0.00’)))</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.23</p>
+<p>8.Django中url和path区别</p>
+<p>8.1 引用路径的区别：</p>
+<p>1.X: 使用的是django.conf.urls.url, django.conf.urls.include</p>
+<p>2.X: 使用的是django.urls.path, django.urls.include, django.urls.re_path</p>
+<p>8.2 引入正则的区别：</p>
+<p>1.X:</p>
+<p>下面的示例使用简单的正则表达式分组匹配(通过圆括号)来捕获URL中的值并以位置参数形式传递给视图</p>
+<p>在更高级的用法中，可以使用分组命名匹配的正则表达式组来捕获URL中的值并以关键字参数形式传递给视图。</p>
+<p>在Python的正则表达式中，分组命名正则表达式组的语法是(?Ppattern)，其中name是组的名称，pattern是要匹配的模式。</p>
+<p>urlpatterns = [</p>
+<p>url(‘index-(\d+)-(\d+).html’,views.index),</p>
+<p>url(‘index-(?P\d+)-(?P\d+).html’,views.index)</p>
+<p>]</p>
+<p>#url请求地址为：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/index-1-1.html">http://127.0.0.1:8000/index-1-1.html</a></p>
+<p>2.X:</p>
+<p>基本规则：</p>
+<p>使用尖括号(&lt;&gt;)从url中捕获值。</p>
+<p>捕获值中可以包含一个转化器类型(converter type)，比如使用 int:name 捕获一个整数变量。若果没 有转化器，将匹配任何字符串，当然也包括了 / 字符。</p>
+<p>无需添加前导斜杠。</p>
+<p>urlpatterns = [</p>
+<p>path(‘index–.html’,views.index),</p>
+<p>]</p>
+<p>#url请求地址为：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/index-1-1.html">http://127.0.0.1:8000/index-1-1.html</a></p>
+<p>在Python正则表达式中，命名式分组语法为 (?Ppattern) ，其中name为名称， pattern为待匹配的模式。这个与1.X的用法差不多，就是将1.X的url,改为re_path,</p>
+<p>例子：</p>
+<p>urlpatterns = [</p>
+<p>path(‘articles/2003/’, views.special_case_2003),</p>
+<p>re_path(‘articles/(?P[0-9]{4})/’, views.year_archive),</p>
+<p>re_path(‘articles/(?P[0-9]{4})/(?P[0-9]{2})/’, views.month_archive),</p>
+<p>re_path(‘articles/(?P[0-9]{4})/(?P[0-9]{2})/(?P[^/]+)/’, views.article_detail),</p>
+<p>]</p>
+<p>9.一个list，一边迭代一边处理行不行</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag"><i class="fa fa-tag"></i> 原创</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/20211231-59cdbec3.html" rel="prev" title="介绍">
+      <i class="fa fa-chevron-left"></i> 介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20220104-59cdbec3.html" rel="next" title="介绍">
+      介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E8%BF%9E%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text"> sql连表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text"> 内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%BA%AB%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text"> 自身连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.3.</span> <span class="nav-text"> 左连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.4.</span> <span class="nav-text"> 右连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.</span> <span class="nav-text"> 完全连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.6.</span> <span class="nav-text"> 交叉连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#django-%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text"> Django 信号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log-to-log-file"><span class="nav-number"></span> <span class="nav-text"> log to log file</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#note-there-might-be-some-funny-business-with-the-socks-module"><span class="nav-number"></span> <span class="nav-text"> *NOTE: there might be some funny business with the “SOCKS” module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-it-even-still-exists"><span class="nav-number"></span> <span class="nav-text"> if it even still exists</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E4%BA%86%E6%A0%87%E5%87%86socket%E5%BA%93"><span class="nav-number"></span> <span class="nav-text"> 改变了标准socket库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#py2"><span class="nav-number"></span> <span class="nav-text"> py2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#py3"><span class="nav-number"></span> <span class="nav-text"> py3</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fengdy"
+      src="/images/avatar-flying.gif">
+  <p class="site-author-name" itemprop="name">fengdy</p>
+  <div class="site-description" itemprop="description">i believe i can fly.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamfengdy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamfengdy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:iamfengdy@126.com" title="E-Mail → mailto:iamfengdy@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengdy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
